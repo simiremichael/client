@@ -158,10 +158,10 @@ function Agents() {
    let navigate = useNavigate();
  {/* @ts-ignore:next-line */}
     const compId = company?.result?._id;
-    const { data,  isLoading } = useGetAgentCompanyQuery(compId);
+    const { data,  isLoading } = useGetAgentCompanyQuery(compId, {refetchOnMountOrArgChange: true });
     {/* @ts-ignore:next-line */}
      const agentId = data?.filter((item: any) => item._id);
-    const { data: agentData, error} = useGetPropertiesByAgentQuery(agentId);
+    const { data: agentData, error} = useGetPropertiesByAgentQuery(agentId, {refetchOnMountOrArgChange: true });
     const [deleteAgent] = useDeleteAgentMutation();
   
   return (

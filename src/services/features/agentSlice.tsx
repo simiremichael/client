@@ -23,22 +23,19 @@ export const agentSlice = createSlice({
   name: 'AgentAuth',
   initialState,
   reducers: {
-    setAgents: (state, action: PayloadAction<{agent:  undefined | string | AgentModel | null, agentToken: string | undefined | null | {}, refreshToken: string | undefined | null  }>) => {
-      localStorage.setItem('agent', JSON.stringify({
+    setAgents: (state, action: PayloadAction<{agent:  undefined | string | AgentModel | null, agentToken: string | undefined | null | {} }>) => {
+      localStorage.setItem('my-property-finder-agent', JSON.stringify({
         agent: action.payload.agent,
         agentToken: action.payload.agentToken,
-        refreshToken: action.payload.refreshToken,
        })
        );
        state.agent = action.payload.agent;
        state.agentToken = action.payload.agentToken;
-       state.refreshToken = action.payload.refreshToken;
     },
     logout: (state) => {
-      localStorage.removeItem('agent');
+      localStorage.removeItem('my-property-finder-agent');
       state.agent = null;
       state.agentToken = null;
-      state.refreshToken = null;
     }
     }
 })

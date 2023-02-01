@@ -3,13 +3,11 @@ import { RootState } from '../../app/store';
 import  {PropertyModel} from '../models/index';
 
 
-interface  CompanyPropertyAuthState {
-  // agentProperty:  undefined | string | PropertyModel | null ;  
+interface  CompanyPropertyAuthState { 
   companyProperty:  undefined | null | PropertyModel ; 
 }
 
 const initialState:  CompanyPropertyAuthState = { 
-    // agentProperty: null, 
     companyProperty: null
 } 
 

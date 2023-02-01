@@ -4,12 +4,16 @@ import Grid from '@mui/material/Grid';
 import styled from '@emotion/styled'
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
 import { useCompanyPropertySearchQuery } from '../../services/api/propertyAPI';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { selectCurrentCompany } from '../../services/features/companySlice';
 import { selectCurrentCompanyProperty, setCompanyProperties } from '../../services/features/companyPropertySlice';
+import CompanyPropertyPaginate from '../components/companyPropertyPagination';
+import { Paper } from '@mui/material';
+import useDebounce from '../../debounce/useDebounce';
+//import debounce from 'lodash';
 
 const StyledBox = styled(Box)`
 width: 100%;
@@ -43,7 +47,7 @@ Font-size: 16px;
 const Span = styled.span`
 Font-family: Montserrat;
 Font-size: 16px;
-width: 120px;
+width: 40%;
 color: #494949;
 `
 const SearchSvg = styled.svg`
@@ -79,7 +83,6 @@ border-bottom: 2px solid rgba(0, 0, 0, 0.2);
 text-align: center;
 vertical-align: center;
 `
-
 const StyledAvatar = styled(Avatar)`
 width: 30px;
 height: 30px;
@@ -89,23 +92,64 @@ background-size: 100% 100%;
 const NavContainer = styled.div`
 margin-left: 22px;
 `
+const ClearSearchBtn = styled.button`
+outline: none;
+background-color: transparent;
+padding: 2px;
+border: none;
+cursor: pointer;
+`
 
 function PropertyList() {
 
+  const [search, setSearch] = useState('')
+  let [searchParams, setSearchParams] = useSearchParams('' );
   const dispatch = useAppDispatch();
+  const searchQuery = searchParams.get('search');
+  const page = searchParams.get('page') || 1;
    const {company} = useAppSelector(selectCurrentCompany);
+   console.log(company);
     {/* @ts-ignore:next-line */}
    const companyId = company?.result?._id;
    let navigate = useNavigate();
-   const { data} = useCompanyPropertySearchQuery(companyId);
+   //const debounceValue = debounce(search, 500);
+   //console.log(debounce)
+   const { data} = useCompanyPropertySearchQuery({companyId, searchQuery, page, search}, {refetchOnMountOrArgChange: true });
    useEffect(() => {
     if(data) {
   dispatch(setCompanyProperties({companyProperty: data}))
     }
    }, [data, dispatch, ])
    const {companyProperty} = useAppSelector(selectCurrentCompanyProperty);
-   //console.log(companyProperty)
+ 
+const debouncedSearch = useDebounce(search, 300);
 
+// useEffect(() => {
+//   return () => {
+   
+//     debouncedSearch.cancel;
+//   };
+// }, [debouncedSearch]);
+
+   const handleChange = (e: any) => {
+ e.preventDefault();
+  setSearch(e.target.value);
+ setSearchParams({'search': debouncedSearch})
+   }
+
+   useEffect(() => {
+  if(!search) {
+    setSearchParams({'search': ''})
+  }
+   }, [search])
+ 
+
+          {/* @ts-ignore:next-line */}
+        // let result1 = companyProperty?.companyPropertiesBySearch?.map((result: any) => result) 
+      {/* @ts-ignore:next-line */}
+     //let result2 = companyProperty?.companyProperties?.map((result: any) => result) 
+
+console.log(companyProperty)
   return (
    <StyledBox>
    <Grid container>
@@ -120,8 +164,9 @@ function PropertyList() {
       <Grid item  lg={6} md={6} sm={12} xs={12}>
       <SearchContainer>
        <SearchSvg  xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" fillRule="evenodd" d="m16.325 14.899l5.38 5.38a1.008 1.008 0 0 1-1.427 1.426l-5.38-5.38a8 8 0 1 1 1.426-1.426ZM10 16a6 6 0 1 0 0-12a6 6 0 0 0 0 12Z"/></SearchSvg>
-       <Span>Search here</Span>
-       <Input type='search' />
+       <Span>Search by location</Span>
+       <Input type='search' value={search} onChange={handleChange} />
+      
        </SearchContainer>
       </Grid>
       </Grid>
@@ -143,30 +188,36 @@ function PropertyList() {
         </Tr>
         </Thead>
         <Tbody>
-         {/* @ts-ignore:next-line */}
-         {companyProperty?.map((result: any) => (           
-        <Tr key={result?._id}>
+          {/* @ts-ignore:next-line */}
+        {companyProperty?.companyProperties.map((result: any) => (           
+        <Tr key={result._id}>
            <Td>
-           <StyledAvatar src={result.profilePicture} />
+           <StyledAvatar src={result?.profilePicture} />
            </Td>
-           <Td>{result.propertyGroup}</Td>
-           <Td>{result.propertyType}</Td>
-           <Td>{result.category}</Td>
-           <Td>{result.city}</Td>
-           <Td>{result.price}</Td>
-           <Td>{result.address1}</Td>
-           <Td>{result.name}</Td>
+           <Td>{result?.propertyGroup}</Td>
+           <Td>{result?.propertyType}</Td>
+           <Td>{result?.category}</Td>
+           <Td>{result?.city}</Td>
+           <Td>{result?.price}</Td>
+           <Td>{result?.address1}</Td>
+           <Td>{result?.name}</Td>
         </Tr>
-        ))}
+         ))
+        }
         </Tbody>
        </Tables>
        </Grid>
        <Grid item lg={0.5} md={0.5} sm={0} xs={0}></Grid>
        </Grid>
+       <Paper elevation={2} sx={{ background: 'inherit', width: '100%', marginTop: 2, marginBottom: 2, display: 'flex', justifyContent: 'center'}}>
+       <CompanyPropertyPaginate page={page} search={search} /> 
+     </Paper>
       </Grid>
-       </Grid>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+       </Grid>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
    </StyledBox>
   )
 }
 
 export default PropertyList
+
+

@@ -24,14 +24,14 @@ export const propertySlice = createSlice({
       //  );
        state.property = action.payload.property;
     },
-    logout: (state) => {
-      localStorage.removeItem('property');
-      state.property = null;
-    }
+    // logout: (state) => {
+    //   localStorage.removeItem('property');
+    //   state.property = null;
+    // }
     }
 })
 export const selectCurrentProperty = (state: RootState) => state.propertyState
-export const {setProperties, logout} = propertySlice.actions;
+export const {setProperties} = propertySlice.actions;
 export default propertySlice.reducer;
 
 

@@ -1,4 +1,4 @@
-import {  createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import {  createApi } from '@reduxjs/toolkit/query/react'
 import { AgentModel } from '../models/agentModel';
 import { UserModel } from '../models/userModel';
 import { CompanyModel } from '../models/companyModel';
@@ -80,6 +80,12 @@ tagTypes: ['Properties', 'Users', 'Agents', 'Companies'],
       }
        },
        invalidatesTags: [{type: 'Users', id: 'USER'}],
+     }),
+     userRefresh: builder.query({
+      query: () => ({
+        url: '/users/refresh',
+        method: 'GET',
+      })
      }),
      logoutUser:builder.mutation({
       query:(body) => ({
@@ -280,6 +286,12 @@ tagTypes: ['Properties', 'Users', 'Agents', 'Companies'],
                },
                 invalidatesTags: [{type: 'Companies', id: 'LIST'}],
              }),
+             companyRefresh: builder.query({
+              query: () => ({
+                url: '/companies/refresh',
+                method: 'GET',
+              })
+             }),
              logoutCompany:builder.mutation({
               query:(body) => ({
                 url: '/companies/logout',                       
@@ -340,7 +352,7 @@ tagTypes: ['Properties', 'Users', 'Agents', 'Companies'],
                }),
 
                getProperties: builder.query<PropertyModel[], void>({
-                query: (page)  => '/properties',
+                query: ()  => '/properties',
                   providesTags: (result) => result ? [...result.map(({ id }) => ({ type: 'Properties' as const, id: 'PROP' })),
                           { type: 'Properties', id: 'PROP' },
                         ] : [{ type: 'Properties', id: 'PROP' }],
@@ -355,21 +367,36 @@ tagTypes: ['Properties', 'Users', 'Agents', 'Companies'],
                 providesTags: (result, error, id: any) =>  [{ type:'Properties', id: 'PROP' }],  
               }),
               searchProperties: builder.query<PropertyModel, any>({
-                query: ({search, toggle, minPrice, maxPrice, type, page, selectBed, selectBath,duration})  => `/properties/search?search=${search || 'none'}&toggle=${toggle}&type=${type}&duration=${duration}&selectBath=${selectBath}&selectBed=${selectBed}&minPrice=${minPrice}&maxPrice=${maxPrice}&page=${page}`,
+                query: ({search, toggle, minPrice, maxPrice, type, page, selectBed, selectBath,duration})  => `/properties/search?search=${search || 'i'}&toggle=${toggle || 'rent'}&type=${type || 'apartment'}&duration=${duration || 'yearly'}&selectBath=${selectBath || '4'}&selectBed=${selectBed || '4'}&minPrice=${minPrice || '200000'}&maxPrice=${maxPrice || '4000000'}&page=${page}`,
                 providesTags: (result, error, id: any) =>  [{ type:'Properties', id: 'PROP' }],  
                 //search, toggle, minPrice, maxPrice, type, selectBed, selectBath,duration
               }),
               searchPropertiesByBuy: builder.query<PropertyModel, any>({
-                query: ({searchQuery, search, category, sort, bed,bath, minPrice, maxPrice, type, page})  => `/properties/buy?search=${search || 'none'}&category=${category}&type=${type}&sort=${sort}&bath=${bath}&bed=${bed}&minPrice=${minPrice}&maxPrice=${maxPrice}&page=${page}`,
+                query: ({searchQuery, search, category, sort, bed,bath, minPrice, maxPrice, type, page})  => `/properties/buy?search=${search || 'i'}&category=${category || 'sale'}&type=${type || 'apartment'}&sort=${sort}&bath=${bath || '4'}&bed=${bed || '4'}&minPrice=${minPrice || '2000000'}&maxPrice=${maxPrice || '500000000'}&page=${page}`,
                 //transformResponse: (response: any) => response.reverse(),
                 providesTags: (result, error, id: any) =>  [{ type:'Properties', id: 'PROP' }],  
                 //search, category, sort, bed, bath, minPrice, maxPrice, type, page
               }),
               searchPropertiesByRent: builder.query<PropertyModel, any>({
-                query: ({searchQuery, search, category, sort, bed,bath, minPrice, maxPrice, type, page})  => `/properties/rent?search=${search || 'none'}&category=${category}&type=${type}&sort=${sort}&bath=${bath}&bed=${bed}&minPrice=${minPrice}&maxPrice=${maxPrice}&page=${page}`,
+                query: ({searchQuery, search, category, sort, bed,bath, minPrice, maxPrice, type, page})  => `/properties/rent?search=${search || 'i'}&category=${category || 'rent'}&type=${type || 'apartment'}&sort=${sort}&bath=${bath || '4'}&bed=${bed || '4'}&minPrice=${minPrice || '2000000'}&maxPrice=${maxPrice || '500000000'}&page=${page}`,
                // transformResponse: (response: any) => response.sort((a: any, b: any) => b - a),
                 providesTags: (result, error, id: any) =>  [{ type:'Properties', id: 'PROP' }],  
                 //search, category, sort, bed, bath, minPrice, maxPrice, type, page
+              }),
+              moreProperty: builder.query<PropertyModel, any>({
+                query: ({location, price, propertyType, bedroom, category})  => `/properties/more?location=${location}&price=${price}&propertyType=${propertyType}&bedroom=${bedroom}&category=${category}`,
+                transformResponse: (response: any) => response.sort((a: any, b: any) => b - a),
+                providesTags: (result, error, id: any) =>  [{ type:'Properties', id: 'PROP' }],  
+              }),
+              newProject: builder.query<PropertyModel, any>({
+                query: ({ search, sort, possession, minBed, maxBed, minPrice, maxPrice, type, propertyGroup, page})  => `/properties/newProject?search=${search || 'i'}&type=${type || 'apartment'}&sort=${sort}&minBed=${minBed || '1'}&maxBed=${maxBed || '4'}&minPrice=${minPrice || '200000'}&maxPrice=${maxPrice || '500000000'}&page=${page}&possession=${possession || 2022 }&propertyGroup=${propertyGroup}`,
+                //transformResponse: (response: any) => response.reverse(),
+                providesTags: (result, error, id: any) =>  [{ type:'Properties', id: 'PROP' }],  
+              }),
+              offplan: builder.query<PropertyModel, any>({
+                query: ({search, sort, minBed, maxBed, minPrice, possession, maxPrice, type, propertyGroup, page})  => `/properties/offplan?search=${search || 'i'}&type=${type || 'apartment'}&sort=${sort}&minBed=${minBed || '1'}&maxBed=${maxBed || '4'}&minPrice=${minPrice || '200000'}&maxPrice=${maxPrice || '500000000'}&page=${page}&possession=${possession || 2022}&propertyGroup=${propertyGroup}`,
+                //transformResponse: (response: any) => response.reverse(),
+                providesTags: (result, error, id: any) =>  [{ type:'Properties', id: 'PROP' }],  
               }),
                  addProperty: builder.mutation<PropertyModel, Partial<PropertyModel>>({
                   query(body) {
@@ -386,7 +413,6 @@ tagTypes: ['Properties', 'Users', 'Agents', 'Companies'],
                     url: `/properties/${id}`,
                     method: 'PATCH',
                     body: patch,  
-                    
                    }),
                      transformResponse: (response: { data: PropertyModel }, meta, arg) => response.data,
                      transformErrorResponse: (
@@ -399,7 +425,6 @@ tagTypes: ['Properties', 'Users', 'Agents', 'Companies'],
                       arg,
                       { dispatch, getState, queryFulfilled, requestId, extra, getCacheEntry }
                     ) {},
-
                  }),
           
                  deleteProperty: builder.mutation<{ success: boolean; id: number | string }, number | string>({
@@ -412,12 +437,10 @@ tagTypes: ['Properties', 'Users', 'Agents', 'Companies'],
                  invalidatesTags: (result, error, id) => [{ type: 'Properties', id: 'PROP' }],
                    }),
                    companyPropertySearch: builder.query<PropertyModel, any>({
-                    query: (companyId)  => `/properties/companyProperties/${companyId}`,
+                    query: ({companyId, searchQuery, page, search})  => `/properties/adminHomepage/propertyList/${companyId}?searchQuery=${searchQuery || 'i'}&page=${page}`,
                     providesTags: (result, error, id: any) =>  [{ type:'Properties', id: 'PROP' }],  
-                  }),
-                  
-       }),
-     
+                  }),       
+       }), 
 })
 
 export const { 
@@ -425,6 +448,7 @@ export const {
     useGetUserQuery, 
     useSigninUserMutation, 
     useSignupUserMutation, 
+    useUserRefreshQuery,
     useLogoutUserMutation,
     useUpdateUserMutation,
     useDeleteUserMutation,
@@ -432,6 +456,7 @@ export const {
     useGetCompanyQuery, 
     useAddCompanyMutation, 
     useSigninCompanyMutation,
+    useCompanyRefreshQuery,
     useLogoutCompanyMutation,
     useUpdateCompanyMutation,
     useDeleteCompanyMutation,
@@ -445,7 +470,10 @@ export const {
     useUpdateAgentMutation,
     useDeleteAgentMutation,
     useGetPropertiesQuery,
-    useGetPropertyQuery, 
+    useGetPropertyQuery,
+    useNewProjectQuery,
+    useOffplanQuery,
+    useMorePropertyQuery, 
     useAddPropertyMutation, 
     useUpdatePropertyMutation,
     useDeletePropertyMutation,

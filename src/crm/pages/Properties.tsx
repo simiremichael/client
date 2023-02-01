@@ -482,12 +482,9 @@ function Properties() {
     {/* @ts-ignore:next-line */}
     const agentId = agent?.result?._id;
     const {agentProperty} = useAppSelector(selectCurrentAgentProperty);
-    const { data, error, isLoading } = useGetPropertiesByAgentQuery({agentId, page})
+    const { data, error, isLoading } = useGetPropertiesByAgentQuery({agentId, page}, {refetchOnMountOrArgChange: true })
     const [deleteProperty ] = useDeletePropertyMutation();
     const [logoutAgent ] = useLogoutAgentMutation();
-  
-    console.log(agent)
-    //console.log(data);
 
       const handleLogout = () => {
         //dispatch(logout());
@@ -495,11 +492,7 @@ function Properties() {
         logoutAgent();
         navigate("/client-login");
         }
-      //  console.log(agent)                                      
-    
-     // const page = searchParams.get('page') || 1;
-                                                                        
-        console.log(agentProperty);
+
         const appDispatch = useAppDispatch();
         useEffect(() => {
           if(agentId){
@@ -739,7 +732,6 @@ function Properties() {
             <InnerActivityContainer>
             <PropertDetailContainer>
               <Activity>{result?.price.toLocaleString()}</Activity>
-              <StyledLink to={`/crmPropertyDetails/${result._id}`}></StyledLink>
             </PropertDetailContainer>
             </InnerActivityContainer> 
             </StyledLink>

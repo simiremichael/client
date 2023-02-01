@@ -383,13 +383,19 @@ font-size: 0.7rem;
 const Links = styled(Link)`
 text-decoration: none;
 `
+const StyledLink = styled(Link)`
+ text-decoration: none;
+  color: #494949;
+  width: 100%;
+  height: 100%;
+ `
 
 function Buy() {
 
    let [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate()
 
-  const initialize = {search: 'i', category: 'sale', type: 'apartment', bed: '4', bath: '4', minPrice: '1000000', maxPrice: '100000000', sort: ''}
+  const initialize = {search: '', category: '', type: '', bed: '', bath: '', minPrice: '', maxPrice: '', sort: ''}
 const [searchData, setSearchData] = useState(initialize)
 const search = searchData.search
 const category = searchData.category
@@ -403,9 +409,9 @@ const sort = searchData.sort
 const searchQuery = searchParams.get('searchQuery');
 const page = searchParams.get('page') || 1;
 
- const {data} = useSearchPropertiesByBuyQuery({searchQuery, search, category, sort, bed,bath, minPrice, maxPrice, type, page});
+ const {data} = useSearchPropertiesByBuyQuery({searchQuery, search, category, sort, bed,bath, minPrice, maxPrice, type, page}, {refetchOnMountOrArgChange: true });
  //search, category, sort, bed,bath, minPrice, maxPrice, type, page;
-
+console.log(data);
   const handleChange = (e: any) => {
   const name = e.target.name;
   const value = e.target.value;
@@ -425,7 +431,6 @@ useEffect(() => {
  }
  }, [dispatch, data]);
  const {buyProperty} = useAppSelector(selectCurrentBuyProperty);
- console.log(buyProperty);
 
   return (
     <>
@@ -670,7 +675,7 @@ useEffect(() => {
                 <Splide
                   options={{
                     perPage: 1,
-                    rewind: true,
+                    rewind: false,
                     gap: 0,
                     width: 'cover',
                   }}
@@ -682,12 +687,12 @@ useEffect(() => {
                     <Img src={item?.img} />
                   </SplideSlide>   
                    ))}
-                  <SplideSlide>
+                  {/* <SplideSlide>
                     <Img src="../images/pexels2.jpg" alt="Image 2" />
                   </SplideSlide>
                   <SplideSlide>
                     <Img src="../images/pexels3.jpg" alt="Image 3" />
-                  </SplideSlide>
+                  </SplideSlide> */}
                 </Splide>
                 <VerifyContainer>
                   <VerifySvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256zM371.8 211.8C382.7 200.9 382.7 183.1 371.8 172.2C360.9 161.3 343.1 161.3 332.2 172.2L224 280.4L179.8 236.2C168.9 225.3 151.1 225.3 140.2 236.2C129.3 247.1 129.3 264.9 140.2 275.8L204.2 339.8C215.1 350.7 232.9 350.7 243.8 339.8L371.8 211.8z" /></VerifySvg>
@@ -705,6 +710,7 @@ useEffect(() => {
                 </Tooltip>
               </CardImg>
               <CardDetails item lg={6} xs={12} md={6} sm={12}>
+              <StyledLink href={`/buydetailsPage/${result._id}`}>
                   <LeftContainers>
                     <Price>{result?.price?.toLocaleString()} NGN</Price>
                     <Para>{result?.propertyTitle}</Para>
@@ -719,6 +725,7 @@ useEffect(() => {
                       <Detail>{result?.address1}</Detail>
                     </DetailContainer>
                   </LeftContainers>
+                  </StyledLink>
                   <RightContainers>
                     <Featured>FEATURED</Featured>
                     <Premium>PREMIUM</Premium>

@@ -8,7 +8,7 @@ interface UserAuthState {
   user:  undefined | string | UserModel | null ;   
   // name: string | null;
   
-  token: string | null | undefined;
+  token: string | null | undefined | {};
   refreshToken: string | null | string | undefined | {} ;
 }
 
@@ -23,8 +23,8 @@ export const userSlice = createSlice({
   name: 'UserAuth',
   initialState,
   reducers: {
-    setUsers: (state, action: PayloadAction<{user:  undefined | string | UserModel | null, token: string | undefined | null, refreshToken: string | undefined | null  }>) => {
-      localStorage.setItem('user', JSON.stringify({
+    setUsers: (state, action: PayloadAction<{user:  undefined | string | UserModel | null, token: string | undefined | null | {}, refreshToken: string | undefined | null  }>) => {
+      localStorage.setItem('my-property-finder-user', JSON.stringify({
         user: action.payload.user,
         token: action.payload.token,
         refreshToken: action.payload.refreshToken,
@@ -35,7 +35,7 @@ export const userSlice = createSlice({
        state.refreshToken = action.payload.refreshToken;
     },
     logoutUsers: (state) => {
-      localStorage.removeItem('user');
+      localStorage.removeItem('my-property-finder-user');
       state.user = null;
       state.token = null;
       state.refreshToken = null;

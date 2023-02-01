@@ -48,4 +48,11 @@ export interface PropertyModel {
  paymentType: string
  agentProperty: string | {} | []
  _id: string
+ name: string
+ companyName: string
+ profilePicture: string
+ longitude: number 
+ latitude: number 
+ phone: string
+ logo: string
 }

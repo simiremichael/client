@@ -213,13 +213,11 @@ function ClientLogin() {
       useEffect(() => {
           if(isSuccess2) {
             // localStorage.setItem('agent', JSON.stringify({...data2, }))
-            dispatch(setAgents({ agent: data2, agentToken: data2?.agentToken, refreshToken: data2?.refreshToken}));
-            console.log(data2);
+            dispatch(setAgents({ agent: data2, agentToken: data2?.agentToken }));
             setShowPassword(false);
             setIsSignup(false);
             }else {
-                dispatch(setCompanies({ company: data1, companyToken: data1?.companyToken , refreshToken: data1?.refreshToken}));
-                console.log(data1);
+                dispatch(setCompanies({ company: data1, companyToken: data1?.companyToken}));
               setShowPassword(false);
               setIsSignup(false);
               };

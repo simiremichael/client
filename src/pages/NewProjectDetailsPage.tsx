@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from '@emotion/styled';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -7,6 +7,9 @@ import Grid from '@mui/material/Grid';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useGetPropertyQuery } from '../services/api/propertyAPI';
+import Link from '@mui/material/Link';
 
 
 const StyledBox = styled(Box)`
@@ -85,6 +88,7 @@ cursor: pointer;
 `
 const CallButton = styled.button`
 height: 40px;
+width: 100%;
 margin: 10px 0;
 outline: none;
 border: none;
@@ -137,7 +141,7 @@ height: 100%;
 `
 const BackTo = styled.p`
 text-align: start;
-margin: 0 0 10px 0;
+margin: -8px 0 10px 0;
 color: #4169E1;
 border: 1px solid #4169E1;
 width: 110px;
@@ -147,7 +151,6 @@ cursor: pointer;
 const Developer = styled.h6`
 text-align: start;
 margin: 0;
-color: #383838;
 color: #4169E1;
 `
 const Property = styled.h2`
@@ -157,7 +160,9 @@ color: #383838;
 `
 const Amount = styled.p`
 text-align: start;
-margin: 0;
+margin: 5px 0;
+color: #ef5e4e;
+font-weight: bold;
 `
 const AboutContainer = styled.div`
 
@@ -165,6 +170,7 @@ const AboutContainer = styled.div`
 const Title = styled.h2`
 text-align: start;
 color: #383838;
+margin: 15px 0 25px 0;
 `
 const AboutTopContainer = styled.div`
 display: flex;
@@ -179,11 +185,12 @@ const AboutPriceContainer = styled.div`
 const AboutPriceNaration = styled.p`
 text-align: start;
 margin: 0;
+color: #383838;
 `
 const AboutPrice = styled.h4`
 text-align: start;
-margin: 0;
-color: #383838;
+margin: 5px 0;
+color: #7a858c;
 `
 const AboutDeliveryContainer = styled.div`
 
@@ -191,11 +198,12 @@ const AboutDeliveryContainer = styled.div`
 const AboutDeliveryNaration = styled.p`
 text-align: start;
 margin: 0;
+color: #383838 ;
 `
 const AboutDelivery = styled.h4`
 text-align: start;
-margin: 0;
-color: #383838;
+margin:  5px 0;
+color: #7a858c;
 `
 const AboutUnitContainer = styled.div`
 
@@ -203,11 +211,12 @@ const AboutUnitContainer = styled.div`
 const AboutUnitNaration = styled.p`
 text-align: start;
 margin: 0;
+color: #383838;
 `
 const AboutUnit = styled.h4`
 text-align: start;
-margin: 0;
-color: #383838;
+margin: 5px 0;
+color: #7a858c;
 `
 const AboutStatusContainer = styled.div`
 
@@ -215,11 +224,12 @@ const AboutStatusContainer = styled.div`
 const AboutStatusNaration = styled.p`
 text-align: start;
 margin: 0;
+color: #383838;
 `
 const AboutStatus = styled.h4`
 text-align: start;
-margin: 0;
-color: #383838;
+margin: 5px 0;
+color: #7a858c;
 `
 const AboutSqftContainer = styled.div`
 
@@ -227,11 +237,12 @@ const AboutSqftContainer = styled.div`
 const AboutSqftNaration = styled.p`
 text-align: start;
 margin: 0;
+color: #383838;
 `
 const AboutSqft = styled.h4`
 text-align: start;
-margin: 0;
-color: #383838;
+margin: 5px 0;
+color: #7a858c;
 `
 const AboutBedContainer = styled.div`
 
@@ -239,11 +250,12 @@ const AboutBedContainer = styled.div`
 const AboutBedNaration = styled.p`
 text-align: start;
 margin: 0;
+color: #383838;
 `
 const AboutBed = styled.h4`
 text-align: start;
-margin: 0;
-color: #383838;
+margin: 5px 0;
+color: #7a858c;
 `
 const Address = styled.address`
 text-align: start;
@@ -260,32 +272,67 @@ const DecriptionContainer = styled.div`
 `
 const DescriptionTitle = styled.h4`
 text-align: start;
-margin-bottom: 10px;
+margin: 20px 0 5px 0;
+color: #383838;
+font-size: 0.9rem;
 `
 const Description = styled.p`
 text-align: start;
+color: #7a858c;
 `
 const AmenitiesContainer = styled.div`
 display: flex;
+flex-wrap: wrap;
+`
+const AmenitiesTitle = styled.h4`
+text-align: start;
+margin: 20px 0 2px 0;
+color: #383838;
+font-size: 0.9rem;
 `
 const Amenities = styled.p`
 text-align: start;
-margin-right: 20px;
+margin: 10px 20px 5px 0;
+color: #7a858c;
 `
 const AmenitiesSvg = styled.svg`
 width: 10px;
 fill: green;
 margin-right: 5px;
 `
-
+const StyledLink = styled(Link)`
+text-decoration: none;
+ `
+ const PropertyStatus = styled.li`
+text-align: start;
+margin: 18px 0 0 0;
+font-size: 12px;
+color: #4169E1;
+font-weight: bold;
+list-style-position: inside;
+margin: 0 0 0 10px;
+padding: 0;
+`
+const DeveloperContainer = styled.div`
+display: flex;
+align-items: end;
+margin: 5px 0;
+`
+ 
 function NewProjectDetailsPage() {
 
-
  const [show, setShow] = useState(false);
+ let { projId } = useParams();
+  const { data} = useGetPropertyQuery(projId, {refetchOnMountOrArgChange: true }); 
  
- 
+ const navigate = useNavigate();
+
  const handleShow = () => {
   setShow(!show);
+ }
+
+ const handleSubmit = () => {
+
  }
   return (
     <StyledBox>
@@ -293,67 +340,62 @@ function NewProjectDetailsPage() {
       <StyledContainer>
         <SlideContainer>
       <Splide aria-label="My Favorite Images">
-  <SplideSlide>
-    <Slideimg src="../images/pexels9.jpg" alt="Image 1"/>
+         {/* @ts-ignore:next-line */}
+        {data?.images.map((image: any, index: any) => ( 
+  <SplideSlide key={index}>
+    <Slideimg src={image.img} alt="Image"/>
   </SplideSlide>
-  <SplideSlide>
-    <Slideimg src="../images/pexels8.jpg" alt="Image 2"/>
-  </SplideSlide>
-  <SplideSlide>
-    <Slideimg src="../images/pexels4.jpg" alt="Image 2"/>
-  </SplideSlide>
-  <SplideSlide>
-    <Slideimg src="../images/pexels2.jpg" alt="Image 2"/>
-  </SplideSlide>
-  <SplideSlide>
-    <Slideimg src="../images/pexels5.jpg" alt="Image 2"/>
-  </SplideSlide>
+  ))}
    </Splide>
    
   <ContactContainer>
-      <ContactCompany>Contact Anton Properties</ContactCompany>
-      <ContactForm1>
-        
+      <ContactCompany>Contact {data?.companyName[0].toUpperCase()}{data?.companyName.slice(1)}</ContactCompany>
+      <ContactForm1 onSubmit={handleSubmit}>
         <StyledInput  type='text' required label="name" variant='outlined' size='small'/>
-        
         <StyledInput type='email' required label="email" variant='outlined' size='small' />
         <StyledInput type='number' required label="number" variant='outlined' size='small' />
-        <RequestButoon>Send</RequestButoon>
-        <CallButton>Call Now</CallButton>
+        <RequestButoon type='submit'>Send</RequestButoon>
+        <StyledLink href={`tel:${data?.phone}`}>
+      <CallButton type='button'>Call Now</CallButton>
+      </StyledLink>
       </ContactForm1>
     </ContactContainer>
    </SlideContainer>
-
    <ContactContainer1> 
       { show && (
         <>
         <ClickMoreButton1Container>
         <ClickMoreButton1 onClick={handleShow}> Close</ClickMoreButton1>
         </ClickMoreButton1Container>
-        <ContactCompany>Contact Anton Properties</ContactCompany>
-      <ContactForm>
+        <ContactCompany>Contact {data?.companyName[0].toUpperCase()}{data?.companyName.slice(1)}</ContactCompany>
+      <ContactForm onSubmit={handleSubmit}>
         <StyledInput  type='text' required label="name" variant='outlined' size='small'/>
         <StyledInput type='email' required label="email" variant='outlined' size='small' />
         <StyledInput type='number' required label="number" variant='outlined' size='small' />
-        <RequestButoon>Send</RequestButoon>
-        <CallButton>Call Now</CallButton>
+        <RequestButoon type='submit'>Send</RequestButoon>
+        <StyledLink href={`tel:${data?.phone}`}>
+      <CallButton type='button'>Call Now</CallButton>
+      </StyledLink>
       </ContactForm>
       </>
       )}
       <ClickMoreButton onClick={handleShow}>Contact us<RequestSvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M352 352c-8.188 0-16.38-3.125-22.62-9.375L192 205.3l-137.4 137.4c-12.5 12.5-32.75 12.5-45.25 0s-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0l160 160c12.5 12.5 12.5 32.75 0 45.25C368.4 348.9 360.2 352 352 352z"/></RequestSvg></ClickMoreButton>
     </ContactContainer1>
       <AddressContainer>
-      <Title>About Xella Homes</Title>
+      <Title>About This Project</Title>
       <Grid container rowSpacing={2}>
         <Grid item lg={2} md={2} sm={6}  xs={6}>
-          <Logo><Reallogo src='../images/reallogo5.png'/></Logo>
+          <Logo><Reallogo src={data?.logo}/></Logo>
           </Grid>
           <Grid item lg={3} md={3} sm={6}  xs={6}>
           <RightContainer>
-           <BackTo>Back to project</BackTo>
-           <Developer>BY ANTON PROPERT <strong>. COMPLETED</strong></Developer>
+           <BackTo onClick={() => navigate('/newProject')}>Back to project</BackTo>
+           <DeveloperContainer>
+            {/* @ts-ignore:next-line */}
+           <Developer>BY {data?.companyName.toUpperCase()}</Developer><PropertyStatus>{data?.buildingYear <= new Date() ? 'Completed'.toUpperCase() : 'Under Construction'.toUpperCase() }</PropertyStatus>
+           </DeveloperContainer>
            <Property>Zella Homes</Property>
-           <Amount>From 5,000,000 NGN</Amount>
+           <Amount>From {data?.price.toLocaleString()} NGN</Amount>
           </RightContainer>
           </Grid>
           <Grid item lg={7} md={7} sm={13}  xs={12}>
@@ -365,7 +407,7 @@ function NewProjectDetailsPage() {
         <Grid item lg={3} md={3} sm={4}  xs={4}>
           <AboutPriceContainer>
             <AboutPriceNaration>Price From</AboutPriceNaration>
-            <AboutPrice>5,000,000 NGN</AboutPrice>
+            <AboutPrice>{data?.price.toLocaleString()} NGN</AboutPrice>
           </AboutPriceContainer>
           </Grid>
           <Grid item lg={3} md={3} sm={4}  xs={4}>
@@ -377,7 +419,8 @@ function NewProjectDetailsPage() {
           <Grid item lg={3} md={3} sm={4}  xs={4}>
           <AboutStatusContainer>
             <AboutStatusNaration>Status</AboutStatusNaration>
-            <AboutStatus>Completed</AboutStatus>
+           {/* @ts-ignore:next-line */}
+            <AboutStatus>{data?.buildingYear <= new Date() ? 'Completed' : 'Under Construction'}</AboutStatus>
           </AboutStatusContainer>
           </Grid>
           </Grid>
@@ -387,7 +430,7 @@ function NewProjectDetailsPage() {
            <Grid item lg={3} md={3} sm={4}  xs={4}>
            <AboutDeliveryContainer>
             <AboutDeliveryNaration>Deliver Date</AboutDeliveryNaration>
-            <AboutDelivery>Q3 2021</AboutDelivery>
+            <AboutDelivery>{data?.buildingYear}</AboutDelivery>
           </AboutDeliveryContainer>
           </Grid>
           <Grid item lg={3} md={3} sm={4}  xs={4}>
@@ -399,7 +442,7 @@ function NewProjectDetailsPage() {
           <Grid item lg={3} md={3} sm={4}  xs={4}>
           <AboutBedContainer>
           <AboutBedNaration>Bedrooms</AboutBedNaration>
-            <AboutBed>1 to 4</AboutBed>
+            <AboutBed>1 to {data?.bedroom}</AboutBed>
           </AboutBedContainer>
           </Grid>
           </Grid>
@@ -407,19 +450,27 @@ function NewProjectDetailsPage() {
           </AboutContainer>
           </Grid>
           </Grid>
-          <Address><Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M168.3 499.2C116.1 435 0 279.4 0 192C0 85.96 85.96 0 192 0C298 0 384 85.96 384 192C384 279.4 267 435 215.7 499.2C203.4 514.5 180.6 514.5 168.3 499.2H168.3zM192 256C227.3 256 256 227.3 256 192C256 156.7 227.3 128 192 128C156.7 128 128 156.7 128 192C128 227.3 156.7 256 192 256z" /></Svg>1220 Amadu Bello Way Vi</Address>
+          <Address><Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M168.3 499.2C116.1 435 0 279.4 0 192C0 85.96 85.96 0 192 0C298 0 384 85.96 384 192C384 279.4 267 435 215.7 499.2C203.4 514.5 180.6 514.5 168.3 499.2H168.3zM192 256C227.3 256 256 227.3 256 192C256 156.7 227.3 128 192 128C156.7 128 128 156.7 128 192C128 227.3 156.7 256 192 256z" /></Svg>{data?.address1}</Address>
       </AddressContainer>
       <DecriptionContainer>
-        <DescriptionTitle>Description</DescriptionTitle>
-        <Description>Azalea Villas by Emaar are inspired by contemporary Arabesque style villas that further complement the backdrops of the stunning Arabian Ranches. The development conspires of 108 residences that are intricately designed with elegantly warm hues both inside and out, perfectly merging in with the magnificent environment. The interiors of the villas are fitted out with superb wooden finishes, lavishly polished marble floors, architectural stone finishes, and much more.</Description>
+        <DescriptionTitle>DESCRIPTION</DescriptionTitle>
+        <Description>{data?.description}</Description>
       </DecriptionContainer>
+      <AmenitiesTitle>AMENITIES</AmenitiesTitle>
       <AmenitiesContainer>
-       <Amenities><AmenitiesSvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"/></AmenitiesSvg>Gym</Amenities>
-       <Amenities><AmenitiesSvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"/></AmenitiesSvg>Swimming pool</Amenities>
-       <Amenities><AmenitiesSvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"/></AmenitiesSvg>Children play ground</Amenities>
-       <Amenities><AmenitiesSvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"/></AmenitiesSvg>Sport center</Amenities>
-       <Amenities><AmenitiesSvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"/></AmenitiesSvg>Basket ball court</Amenities>
-      </AmenitiesContainer>
+      {data?.comfort.map((comfort: any, index: any) => ( 
+       <Amenities key={index}><AmenitiesSvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"/></AmenitiesSvg>{comfort}</Amenities>
+       ))}
+       {data?.hvac.map((hvac: any, index: any) => ( 
+       <Amenities key={index}><AmenitiesSvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"/></AmenitiesSvg>{hvac}</Amenities>
+       ))}
+       {data?.parking.map((parking: any, index: any) => ( 
+       <Amenities key={index}><AmenitiesSvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"/></AmenitiesSvg>{parking}</Amenities>
+       ))}
+       {data?.security.map((security: any, index: any) => ( 
+       <Amenities key={index}><AmenitiesSvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"/></AmenitiesSvg>{security}</Amenities>
+       ))}
+       </AmenitiesContainer>
       </StyledContainer>
       <Footer />
       </StyledBox>

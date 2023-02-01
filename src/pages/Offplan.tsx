@@ -12,6 +12,10 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Tooltip from '@mui/material/Tooltip/Tooltip';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { useOffplanQuery } from '../services/api/propertyAPI';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { selectCurrentOffplan } from '../services/features/offplanSlice';
 
 
 const StyledContainer = styled(Container)`
@@ -208,19 +212,46 @@ const Form = styled.form`
 
 function Offplan() {
  
-  const [searchData, setSearchData] = useState({search: '', category: '', type: '', bed: '', bath: '', minPrice: '', maxPrice: '', possession: ''})
+  let [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate()
+  const [searchData, setSearchData] = useState({search: '', propertyGroup: 'Offplan', type: '', minBed: '', maxBed: '', minPrice: '', maxPrice: '', possession: '', sort: ''})
+      
+    const search = searchData.search
+    const propertyGroup = searchData.propertyGroup
+    const type = searchData.type
+    const minBed = searchData.minBed
+    const maxBed = searchData.maxBed
+    const minPrice = searchData.minPrice
+    const maxPrice = searchData.maxPrice
+    const possession = searchData.possession
+    const sort = searchData.sort
 
-  const handleChange = (e: any) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setSearchData( values => ({...values, [name]: value}));
-    };
+    const searchQuery = searchParams.get('searchQuery');
+const page = searchParams.get('page') || 1;
+const dispatch = useAppDispatch();
+
+    const {data} = useOffplanQuery({search, minPrice, maxPrice, minBed, maxBed, type, propertyGroup, possession, sort, page}, {refetchOnMountOrArgChange: true })
   
-    const handleSearch = () => {
-    // e.preventDefault();
-  
-    }
-  console.log(searchData)
+    // useEffect(() => {
+    //   dispatch(setNewProjects({newProjects: data}))
+    //    },[dispatch, data])
+   
+       const {offplan} = useAppSelector(selectCurrentOffplan);
+   
+       console.log(offplan)
+   
+       const handleChange = (e: any) => {
+         const name = e.target.name;
+         const value = e.target.value;
+         setSearchData( values => ({...values, [name]: value}));
+         setSearchParams(searchData)
+         };
+   
+       const handleSearch = () => {
+         navigate(`/offplan?search=${search || 'none'}&type=${type}&minBed=${minBed}&maxBed=${maxBed}&minPrice=${minPrice}&maxPrice=${maxPrice}&sort=${sort}&possession=${possession}`)
+       }
+   
+  console.log(data)
 
   return (
     <div>
@@ -243,7 +274,7 @@ function Offplan() {
           autoWidth
           onChange={handleChange}
         >
-          <MenuItem value='Appartment'>Apartment</MenuItem>
+          <MenuItem value='apartment'>Apartment</MenuItem>
           <MenuItem value='office'>office</MenuItem>
           <MenuItem value='flat'>Flat</MenuItem>
           <MenuItem value='terraced'>Terraced</MenuItem>
@@ -265,7 +296,7 @@ function Offplan() {
           labelId="demo-simple-select-autowidth-label"
           id="demo-simple-select-autowidth"
           name='bed'
-          value={searchData.bed}
+          value={searchData.maxBed}
           label='Beds'
           autoWidth
           onChange={handleChange}
@@ -286,7 +317,7 @@ function Offplan() {
           labelId="demo-simple-select-autowidth-label"
           id="demo-simple-select-autowidth"
           name='bath'
-          value={searchData.bath}
+          value={searchData.minBed}
           label='Baths'
           autoWidth
           onChange={handleChange}

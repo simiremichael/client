@@ -12,6 +12,12 @@ import buyPropertyReducer from '../services/features/buyPropertySlice';
 import rentPropertyReducer from "../services/features/rentPropertySlice";
 import companyPropertyReducer from "../services/features/companyPropertySlice";
 import companyAgentReducer from "../services/features/companyAgentSlice";
+import propertyDetailReducer from "../services/features/propertyDetailSlice";
+import morePropertyReducer from "../services/features/morePropertySlice";
+import mapDataReducer from '../services/features/mapSlice'
+import newProjectsReducer from '../services/features/projectSlice';
+import offplanReducer from '../services/features/offplanSlice';
+import commercialReducer from "../services/features/commercialSlice";
 
 
 export const store = configureStore({
@@ -26,7 +32,13 @@ export const store = configureStore({
         buyPropertyState: buyPropertyReducer,
         rentPropertyState: rentPropertyReducer,
         companyPropertyState: companyPropertyReducer,
-        companyAgentState: companyAgentReducer
+        companyAgentState: companyAgentReducer,
+        propertyDetailState: propertyDetailReducer,
+        morePropertyState: morePropertyReducer,
+        mapDataState: mapDataReducer,
+        newProjectsState: newProjectsReducer,
+        offplanState: offplanReducer,
+        commercialState:commercialReducer
     },
     middleware: (getDefaultMiddleware) => 
     getDefaultMiddleware().concat(propertyAPI.middleware),

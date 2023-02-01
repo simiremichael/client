@@ -508,7 +508,7 @@ box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
 cursor: pointer;
 `
 
-function RentDetailsPage() {
+function BuyDetailsPage() {
 
   const render = (status: Status) => {
     return <h1>{status}</h1>;
@@ -517,8 +517,8 @@ function RentDetailsPage() {
   const [openMap, setOpenMap] = useState(false);
   const [more, setMore] = useState({ location: '', price: '', propertyType: '', bedroom: '', category: ''});
   const dispatch = useAppDispatch();
-  let { rentPropertyId } = useParams();
-  const { data} = useGetPropertyQuery(rentPropertyId, {refetchOnMountOrArgChange: true }); 
+  let { buyPropertyId } = useParams();
+  const { data} = useGetPropertyQuery(buyPropertyId); 
   const location = more.location
   const price = more.price
   const propertyType = more.propertyType
@@ -529,7 +529,11 @@ function RentDetailsPage() {
    dispatch(setPropertyDetail({propertyDetail: data}))
   }, [dispatch, data])
 
+ //, {refetchOnMountOrArgChange: true }
+
   const {propertyDetail} = useAppSelector(selectCurrentPropertyDetail);
+
+  console.log(propertyDetail)
    {/* @ts-ignore:next-line */}
   const img = propertyDetail?.images[0].img
 
@@ -543,13 +547,14 @@ function RentDetailsPage() {
   useEffect(() => {
     dispatch(setMoreProperty({moreProperty: moreProperty}))
   },[dispatch, moreProperty])
-  
-  let longitude = data?.longitude
-  let latitude =   data?.latitude
+   
 
-const initial = { longitude: data?.longitude,  latitude: data?.latitude, zoom: 14}
-const [viewState, setViewState] = useState(initial)
-console.log(propertyDetail)
+    let longitude = data?.longitude
+    let latitude =   data?.latitude
+
+  const initial = { longitude: data?.longitude,  latitude: data?.latitude, zoom: 14}
+  const [viewState, setViewState] = useState(initial)
+  console.log(latitude, longitude)
 
   return (
     <StyledBox>
@@ -605,7 +610,7 @@ console.log(propertyDetail)
         </ViewDiv>
         )}
       <StyledContainer>
-        <StyledPlink to='/rent'><Plink><Psvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path d="M192 448c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l137.4 137.4c12.5 12.5 12.5 32.75 0 45.25C208.4 444.9 200.2 448 192 448z" /></Psvg>Back</Plink></StyledPlink>
+        <StyledPlink to='/buy'><Plink><Psvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path d="M192 448c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l137.4 137.4c12.5 12.5 12.5 32.75 0 45.25C208.4 444.9 200.2 448 192 448z" /></Psvg>Back</Plink></StyledPlink>
         <StyledGrid container columnSpacing={0.5}>
           <Grid item lg={8} sm={8} md={8} xs={12}>
             <ListDiv1>
@@ -615,10 +620,12 @@ console.log(propertyDetail)
               <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M194.6 32H317.4C338.1 32 356.4 45.22 362.9 64.82L373.3 96H448C483.3 96 512 124.7 512 160V416C512 451.3 483.3 480 448 480H64C28.65 480 0 451.3 0 416V160C0 124.7 28.65 96 64 96H138.7L149.1 64.82C155.6 45.22 173.9 32 194.6 32H194.6zM256 384C309 384 352 341 352 288C352 234.1 309 192 256 192C202.1 192 160 234.1 160 288C160 341 202.1 384 256 384z" /></Svg>
               <Camera>Show {propertyDetail?.images.length} photos</Camera>
             </CameraContainer>
+            {/* <StyledLink to={`/map/${propertyDetail?._id}`}> */}
             <MapContainer onClick={() => setOpenMap(!openMap)}>
               <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M168.3 499.2C116.1 435 0 279.4 0 192C0 85.96 85.96 0 192 0C298 0 384 85.96 384 192C384 279.4 267 435 215.7 499.2C203.4 514.5 180.6 514.5 168.3 499.2H168.3zM192 256C227.3 256 256 227.3 256 192C256 156.7 227.3 128 192 128C156.7 128 128 156.7 128 192C128 227.3 156.7 256 192 256z" /></Svg>
               <Map>View on map</Map>
             </MapContainer>
+            {/* </StyledLink> */}
           </Grid>
           <SGrid item lg={4} sm={4} md={4} xs={12}>
             <Grid container spacing={1}>
@@ -820,6 +827,6 @@ console.log(propertyDetail)
   )
 }
 
-export default RentDetailsPage
+export default BuyDetailsPage
 
 

@@ -529,7 +529,7 @@ const handleChange = (e: any) => {
   };
   useEffect(() => {
     if(isSuccess) { 
-      navigate('/properties')
+      navigate('/agentproperties')
    toast.success('Updated successfully....')
    setEdit(initialValue)
     }
@@ -555,6 +555,8 @@ const handleChange = (e: any) => {
           <MenuItem value='Residential'>Residential</MenuItem>
           <MenuItem value='Commercial'>Commercial</MenuItem>
           <MenuItem value='Land'>Land</MenuItem>
+          <MenuItem value='New Projects'>New Projects</MenuItem>
+          <MenuItem value='Offplan'>Offplan</MenuItem>
         </Select>
       </FormControl>
       </Grid>
@@ -574,6 +576,8 @@ const handleChange = (e: any) => {
           <MenuItem value='Flat'>Flat</MenuItem>
           <MenuItem value='Office'>Office</MenuItem>
           <MenuItem value='Terraced'>Terraced</MenuItem>
+          <MenuItem value='Detatched'>Detached</MenuItem>
+          <MenuItem value='Semi detached'>Semi detached</MenuItem>
           <MenuItem value='Full floor'>Full floor</MenuItem>
           <MenuItem value='Hotel appartment'>Hotel appartment</MenuItem>
           <MenuItem value='Bungalow'>Bungalow</MenuItem>
@@ -585,8 +589,6 @@ const handleChange = (e: any) => {
           <MenuItem value='Land'>Land</MenuItem>                  
           <MenuItem value='Farm'>Farm</MenuItem>
           <MenuItem value='Others'>Other</MenuItem>
-          {/* <MenuItem value='Shop'>Shop</MenuItem>
-          <MenuItem value='Office'>Office</MenuItem> */}
         </Select>
       </FormControl>
             </Grid>                
@@ -626,8 +628,8 @@ const handleChange = (e: any) => {
           onChange={handleChange}
           size="small"
         >
-          <MenuItem value='For sale'>For sale</MenuItem>
-          <MenuItem value='For rent'>For rent</MenuItem>
+          <MenuItem value='sale'>For sale</MenuItem>
+          <MenuItem value='rent'>For rent</MenuItem>
         </Select>
       </FormControl>
            </Grid>

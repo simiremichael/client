@@ -13,8 +13,8 @@ import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { selectCurrentPropertyDetail, setPropertyDetail } from '../services/features/propertyDetailSlice';
 import { selectCurrentMoreProperty, setMoreProperty } from '../services/features/morePropertySlice';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
-import '@splidejs/splide/dist/css/splide.min.css';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import '@splidejs/splide/dist/css/splide.min.css';
 import MapDL, {Marker, Popup} from 'react-map-gl';
 import getCenter from 'geolib/es/getCenter';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -508,7 +508,7 @@ box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
 cursor: pointer;
 `
 
-function RentDetailsPage() {
+function DetailsPage() {
 
   const render = (status: Status) => {
     return <h1>{status}</h1>;
@@ -517,8 +517,8 @@ function RentDetailsPage() {
   const [openMap, setOpenMap] = useState(false);
   const [more, setMore] = useState({ location: '', price: '', propertyType: '', bedroom: '', category: ''});
   const dispatch = useAppDispatch();
-  let { rentPropertyId } = useParams();
-  const { data} = useGetPropertyQuery(rentPropertyId, {refetchOnMountOrArgChange: true }); 
+  let { propertyId } = useParams();
+  const { data} = useGetPropertyQuery(propertyId, {refetchOnMountOrArgChange: true }); 
   const location = more.location
   const price = more.price
   const propertyType = more.propertyType
@@ -545,11 +545,11 @@ function RentDetailsPage() {
   },[dispatch, moreProperty])
   
   let longitude = data?.longitude
-  let latitude =   data?.latitude
+    let latitude =   data?.latitude
 
-const initial = { longitude: data?.longitude,  latitude: data?.latitude, zoom: 14}
-const [viewState, setViewState] = useState(initial)
-console.log(propertyDetail)
+  const initial = { longitude: data?.longitude,  latitude: data?.latitude, zoom: 14}
+  const [viewState, setViewState] = useState(initial)
+  
 
   return (
     <StyledBox>
@@ -605,7 +605,7 @@ console.log(propertyDetail)
         </ViewDiv>
         )}
       <StyledContainer>
-        <StyledPlink to='/rent'><Plink><Psvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path d="M192 448c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l137.4 137.4c12.5 12.5 12.5 32.75 0 45.25C208.4 444.9 200.2 448 192 448z" /></Psvg>Back</Plink></StyledPlink>
+        <StyledPlink to='/'><Plink><Psvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path d="M192 448c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l137.4 137.4c12.5 12.5 12.5 32.75 0 45.25C208.4 444.9 200.2 448 192 448z" /></Psvg>Back to search</Plink></StyledPlink>
         <StyledGrid container columnSpacing={0.5}>
           <Grid item lg={8} sm={8} md={8} xs={12}>
             <ListDiv1>
@@ -820,6 +820,6 @@ console.log(propertyDetail)
   )
 }
 
-export default RentDetailsPage
+export default DetailsPage
 
 

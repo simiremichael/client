@@ -15,6 +15,7 @@ import Paper from '@mui/material/Paper';
 import { selectCurrentPropertySearch, setPropertySearch } from '../services/features/propertySearchSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 
+
 const StyledBox = styled(Box)`
 justify-content: center;
 background-image: url("../images/back1.jpg");
@@ -588,8 +589,12 @@ const WebImg = styled.img`
 width: 28px;
 z-index: 1;
 `
-
-
+const StyledLink = styled(Link)`
+ text-decoration: none;
+  color: #494949;
+  width: 100%;
+  height: 100%;
+ `
 const Featured = styled.h6`
 color: #4169E1;
 margin: 10px 5px 0 0;
@@ -697,7 +702,7 @@ const priceState = 'Prices'
  const minPrice = searchData.MinPrice
  const duration = searchData.duration
  const maxPrice = searchData.MaxPrice
-  const {data, isSuccess, isFetching} = useSearchPropertiesQuery({page, search, minPrice, maxPrice, toggle, type, selectBed, selectBath,duration});
+  const {data, isSuccess, isFetching} = useSearchPropertiesQuery({page, search, minPrice, maxPrice, toggle, type, selectBed, selectBath,duration}, {refetchOnMountOrArgChange: true });
   //, search, minPrice, maxPrice, toggle, type, selectBed, selectBath,duration
   useEffect(() => {
     if(data) {
@@ -1020,7 +1025,7 @@ const handleSearch = () => {
       </InnerContainer>
     </StyledBox>
  {/* @ts-ignore:next-line */}
-    { reveal === true ? ( 
+    { reveal ? ( 
        <>
        <Box style={{display: 'flex', justifyContent: 'center'}}>
       <SearchResultContainer>
@@ -1047,12 +1052,12 @@ const handleSearch = () => {
                     <Img src={item?.img} />
                   </SplideSlide>   
                    ))}
-                  <SplideSlide>
+                  {/* <SplideSlide>
                     <Img src="../images/pexels2.jpg" alt="Image 2" />
                   </SplideSlide>
                   <SplideSlide>
                     <Img src="../images/pexels3.jpg" alt="Image 3" />
-                  </SplideSlide>
+                  </SplideSlide> */}
                 </Splide>
                 <VerifyContainer>
                   <VerifySvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256zM371.8 211.8C382.7 200.9 382.7 183.1 371.8 172.2C360.9 161.3 343.1 161.3 332.2 172.2L224 280.4L179.8 236.2C168.9 225.3 151.1 225.3 140.2 236.2C129.3 247.1 129.3 264.9 140.2 275.8L204.2 339.8C215.1 350.7 232.9 350.7 243.8 339.8L371.8 211.8z" /></VerifySvg>
@@ -1068,7 +1073,9 @@ const handleSearch = () => {
                     <WebImg src='../images/icon-360.svg' />
                   </ImgContainer>
                 </Tooltip>
-              </CardImg><CardDetails item lg={6} xs={12} md={6} sm={12}>
+              </CardImg>
+              <CardDetails item lg={6} xs={12} md={6} sm={12}>
+              <StyledLink href={`/detailsPage/${result._id}`}>
                   <LeftContainer>
                     <Price>{result?.price?.toLocaleString()} NGN</Price>
                     <Para>{result?.propertyTitle}</Para>
@@ -1088,6 +1095,7 @@ const handleSearch = () => {
                     <Premium>PREMIUM</Premium>
                     <LogoImg src={result.logo} />
                   </RightContainer>
+                  </StyledLink>
                 </CardDetails>
                 <BottomContainer>
                 <Links href={`tel:${result?.phone}`}>

@@ -9,7 +9,7 @@ import NewProject from './pages/New-Project';
 import Offplan from './pages/Offplan';
 import FindAgent from './pages/FindAgent';
 import Join from './pages/Join';
-import DetailsPage from './pages/RentDetailsPage';
+import DetailsPage from './pages/DetailsPage';
 import NewProjectDetailsPage from './pages/NewProjectDetailsPage';
 import About from './pages/About';
 import TermsCondition from './pages/TermsCondition';
@@ -58,6 +58,9 @@ import CrmPropertyDetailsPage from './crm/pages/crmPropertyDetailsPage';
 import { useAgentRefreshQuery } from './services/api/propertyAPI';
 import PropertyEditPage from './crm/pages/PropertyEditPage';
 import EditAgent from './admin/pages/EditAgent';
+import BuyDetailsPage from './pages/buyDetailsPage';
+import RentDetailsPage from './pages/rentDetailsPage';
+import GeoMap from './map/Map';
 // import  AgentProtectedRoute  from './pages/proptectedAgentRoute';
 
 
@@ -78,12 +81,12 @@ function App() {
  }
 
  const dispatch = useAppDispatch();
- const agent = JSON.parse(localStorage.getItem('agent') || "false");
+ const agent = JSON.parse(localStorage.getItem('my-property-finder-agent') || "false");
  useEffect(() => {
   dispatch(setAgents(agent));
 }, []);
 
-const user = JSON.parse(localStorage.getItem('user') || "false");
+const user = JSON.parse(localStorage.getItem('my-property-finder-user') || "false");
 useEffect(() => {
  dispatch(setUsers(user));
 }, []);
@@ -92,7 +95,7 @@ useEffect(() => {
  dispatch(setAgentProperties(agentProperty));
 }, []);
 
-const company = JSON.parse(localStorage.getItem('company') || "false");
+const company = JSON.parse(localStorage.getItem('my-property-finder-company') || "false");
 useEffect(() => {
  dispatch(setCompanies(company));
 }, []);
@@ -128,15 +131,17 @@ useEffect(() => {
       } />
       <Route path='/mortgage-application' element={<MortgageApplication />} />
       <Route path='/mortgage-calculator' element={<Calculator />} />
-      <Route path='/detailsPage/:id' element={<DetailsPage />} />
+      <Route path='/detailsPage/:propertyId' element={<DetailsPage />} />
+      <Route path='/buydetailsPage/:buyPropertyId' element={<BuyDetailsPage />} />
+      <Route path='/rentdetailsPage/:rentPropertyId' element={<RentDetailsPage />} />
       <Route path='/agentDetailsPage/:id' element={<AgentDetailsPage />} />
-      <Route path='/newProjectDetailsPage' element={<CompanyDetailsPage />} />
+      {/* <Route path='/newProjectDetailsPage' element={<CompanyDetailsPage />} /> */}
       <Route path='/about' element={<About />} />
       <Route path='/mortgage' element={<Mortgage />} />
       <Route path='/propertyEditPage/:ptId' element={<PropertyEditPage />} />
       ///:ptId
       <Route path='/agent-hub' element={<AgentHub />} />
-      <Route path='/newProjectDetailsPage/:id' element={<NewProjectDetailsPage />} />
+      <Route path='/newProjectDetailsPage/:projId' element={<NewProjectDetailsPage />} />
       <Route path='/terms&condition' element={<TermsCondition />} />
       <Route path='/privacy-policy' element={<PrivacyPolicy />} />
       <Route path='/dashboard' element={
@@ -145,6 +150,7 @@ useEffect(() => {
       </AgentPrivateRoute>
       } /> 
       <Route path='/agentproperties' element={<Properties />} />
+      <Route path='/map/:propId' element={<GeoMap />} />
       <Route path='/contacts' element={<Contacts />} />
       <Route path='/contacts/contactform' element={<ContactForm />} />
       <Route path='/propertyScouting' element={<PropertyScouting  />} />

@@ -402,15 +402,15 @@ function NavBar() {
         if(isSuccess) {
           dispatch(setUsers({ user: data, token: data?.token , refreshToken: data?.refreshToken}));
           toast.success('Login successfully....')
-          console.log(data);
         setShowPassword(false);
         setIsSignup(false);
         navigate("/");
         setLogin(false);
         clear();
+        setAnchorElUser(null)
         };
         if(isSuccess1) {
-          localStorage.setItem('user', JSON.stringify({ user: data1, token: data1?.token , refreshToken: data1?.refreshToken }))
+          localStorage.setItem('my-property-finder-user', JSON.stringify({ user: data1, token: data1?.token , refreshToken: data1?.refreshToken }))
           setShowPassword(false);
           setIsSignup(false);
           toast.success('Login successfully....')
@@ -429,7 +429,7 @@ function NavBar() {
         if(isError) {
           console.log(error)
         }
-      }, [isSuccess, isSuccess1, isSuccess2])
+      }, [isSuccess, isSuccess1, isSuccess2,setLogin, setIsSignup, dispatch, error, isError, data, data1])
 
     //   useEffect(() => {
     //     setUser(JSON.parse(localStorage.getItem('user') || 'false'))
@@ -449,7 +449,7 @@ function NavBar() {
   
       const  handleSubmit = async (e: any) => {
         e.preventDefault();
-        console.log(userFormData);
+       // console.log(userFormData);
         if(isSignup) {
         await signupUser(userFormData).unwrap().then((payload: any) => console.log('fulfilled', payload)).catch((error: any) => console.error('rejected', error));
           } else {
@@ -498,39 +498,7 @@ function NavBar() {
         navigate("/");
      
       }
-      // const handleSeaker = () => { 
-      //   setSeaker(true);
-      //   setAdmin(false);
-      //   setAgent(false);
-      // }
-      // const handleAdmin = () => { 
-      //   setSeaker(false);
-      //   setAdmin(true);
-      //   setAgent(false);
-      // }
-      // const handleAgent = () => { 
-      //   setSeaker(false);
-      //   setAdmin(false);
-      //   setAgent(true);
-      // }
-// const handleCallbackResponse = (response: any) => {
-//  console.log('Encoded jwt ID token:' + response.credential)
-//  const userObject = jwt_decode(response.credential)
-//  console.log(userObject)
-// }
-// useEffect(() => {
-//   /*global google*/
-//   google.accounts.id.initialize({
-//     client_id: '771408852902-tgtge00svjkijjre2e3279b2pt7r2nfa.apps.googleusercontent.com',
-//     callback: handleCallbackResponse
-//   });
-
-//   google.accounts.id.renderButton(
-//     document.getElementById('signinDiv'),
-//     {theme: 'outline', size: 'large'}
-//   )
-// })
-
+  
 const handleUpload = async () => {
     
   for ( const file of picture) {
@@ -552,7 +520,8 @@ const handleUpload = async () => {
  
   }
   // const {user} = useAppSelector(selectCurrentUser);
-console.log(userFormData)
+//console.log(user)
+console.log(data)
 
 const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);

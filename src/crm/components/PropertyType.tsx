@@ -74,7 +74,7 @@ border: 1px solid #008080;
 border-radius: 5px;
 cursor: pointer;
 padding: 2px 10px 2px;
-width: 140px;
+width: 120px;
 font-weight: 700;
 margin-top: 10px;
 font-size: 0.8rem;
@@ -97,7 +97,7 @@ border: 1px solid #008080;
 border-radius: 5px;
 cursor: pointer;
 padding: 2px 10px 2px;
-width: 140px;
+width: 120px;
 margin-top: 10px;
 font-size: 0.8rem;
  `
@@ -160,6 +160,8 @@ function PropertyType(props: { updateProperty: any, property: any, setProperty: 
   const [select1, setSelect1] = useState(false);
   const [select2, setSelect2] = useState(false);
   const [select3, setSelect3] = useState(false);
+  const [select4, setSelect4] = useState(false);
+  const [select5, setSelect5] = useState(false);
   //const [input, setInput] = useState('');
   //const [isChecked, setIsCheck ] = useState(false);
  
@@ -176,13 +178,39 @@ function PropertyType(props: { updateProperty: any, property: any, setProperty: 
               
   const handleSelect1 = (state: boolean) => {
     setSelect1(!state)
+    setSelect2(false)
+    setSelect3(false)
+    setSelect4(false)
+    setSelect5(false)
   };
   const handleSelect2 = (state: boolean) => {
     setSelect2(!state)
+    setSelect1(false)
+    setSelect3(false)
+    setSelect4(false)
+    setSelect5(false)
   };
   const handleSelect3 = (state: boolean) => {
     setSelect3(!state)
+    setSelect2(false)
+    setSelect1(false)
+    setSelect4(false)
+    setSelect5(false)
     
+  };
+  const handleSelect4 = (state: boolean) => {
+    setSelect4(!state)
+    setSelect2(false)
+    setSelect3(false)
+    setSelect1(false)
+    setSelect5(false)
+  };
+  const handleSelect5 = (state: boolean) => {
+    setSelect5(!state)
+    setSelect2(false)
+    setSelect3(false)
+    setSelect4(false)
+    setSelect1(false)
   };
 /*
   const handleGroupChange = (e: any) => {
@@ -213,14 +241,12 @@ function PropertyType(props: { updateProperty: any, property: any, setProperty: 
       setSelect1(false)
       setSelect2(false)
       setSelect3(false)
-      console.log("i am active")
+      setSelect4(false)
+      setSelect5(false)
     }
   }
   window.addEventListener('click', closeDropDown, true)
 }, []);
-console.log(ref);
-//console.log(input);
-
   return (
     <div  ref={ref}>
 <StyledBox >
@@ -242,13 +268,9 @@ console.log(ref);
   </Grid>
   <Grid item lg={9} md={9} sm={12} xs={12}>
   <FormContainer ref={ref}>
-  
   <Form  onSubmit={handleSubmit(onSubmit)}>
-  <Grid container>
-  
-  
- <Grid item lg={4} md={4} sm={12} xs={12}>
-
+  <Grid container spacing={2}>
+ <Grid item lg={2.4} md={2.4} sm={2.4} xs={12}>
  <SelectPropertyTypeContainer>
   <SelectPropertyType type='radio' id='res' {...register('propertyGroup',{required: 'Property category is required....'})} name='propertyGroup'   value='residential'  />
   <SelectLabel htmlFor='res' onClick={(e) => handleSelect1(select1)}>Residential</SelectLabel>
@@ -265,7 +287,7 @@ console.log(ref);
   <Label htmlFor='4'>TERRACED</Label>
   <InputRadeo type='radio' id='5'  {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='full floor' />
   <Label htmlFor='5'>FULL FLOOR</Label>
-  {/* <InputRadeo type='radio' id='6'  {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='whole building' /> */}
+  <InputRadeo type='radio' id='6'  {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='whole building' />
   <Label htmlFor='6'>WHOLE BUILDING</Label>
   <InputRadeo type='radio' id='7'  {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='hotel appartment' />
   <Label htmlFor='7'>HOTEL APARTMENT</Label>
@@ -277,16 +299,15 @@ console.log(ref);
   <Label htmlFor='10'>MINI FLAT</Label>
   <InputRadeo type='radio' id='11' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='self contain' />
   <Label htmlFor='11'>SELF CONTAIN</Label>
-  {/* <InputRadeo type='radio' id='11' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='self contain' />
-  <Label htmlFor='11'>OFFPLAN</Label>
-  <InputRadeo type='radio' id='11' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='self contain' /> */}
-  {/* <Label htmlFor='11'>LAND</Label> */}
+  <InputRadeo type='radio' id='12' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='detached' />
+  <Label htmlFor='12'>DETACHED</Label>
+  <InputRadeo type='radio' id='13' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='semi detached' /> 
+  <Label htmlFor='13'>SEMI DETACHED</Label>
   </ResidentContainer>
   )}
   </Grid>
  
-  <Grid item lg={4} md={4} sm={12} xs={12}>
-  
+  <Grid item lg={2.4} md={2.4} sm={2.4} xs={12}>
   <SelectPropertyTypeContainer>
   <SelectPropertyType type='radio' id='com' {...register('propertyGroup',{required: 'Property category is required....'})} name='propertyGroup' value= 'commercial' />
   <SelectLabel htmlFor='com' onClick={(e) => handleSelect2(select2)}>Commercial</SelectLabel>
@@ -310,9 +331,110 @@ console.log(ref);
   </ComLandContainer>
   )}
   </Grid>
-  
-  <Grid item lg={4} md={4} sm={12} xs={12}>
- 
+
+  <Grid item lg={2.4} md={2.4} sm={2.4} xs={12}>
+ <SelectPropertyTypeContainer>
+  <SelectPropertyType type='radio' id='new' {...register('propertyGroup',{required: 'Property category is required....'})} name='propertyGroup' value='new projects'  />
+  <SelectLabel htmlFor='new' onClick={(e) => handleSelect4(select4)}>New Projects</SelectLabel>
+ </SelectPropertyTypeContainer>
+ { select4 && (
+  <ResidentContainer>
+  <InputRadeo type='radio' id='22' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType'  value='apartment' />
+  <Label htmlFor='22'>APARTMENT</Label>
+  <InputRadeo type='radio' id='23' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType'  value='flat' />
+  <Label htmlFor='23'>FLAT</Label>
+  <InputRadeo type='radio' id='24' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='office' />
+  <Label htmlFor='24'>STUDIO</Label>
+  <InputRadeo type='radio' id='25'  {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='terraced' />
+  <Label htmlFor='25'>TERRACED</Label>
+  <InputRadeo type='radio' id='26'  {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='full floor' />
+  <Label htmlFor='26'>FULL FLOOR</Label>
+  <InputRadeo type='radio' id='27'  {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='whole building' />
+  <Label htmlFor='27'>WHOLE BUILDING</Label>
+  <InputRadeo type='radio' id='28'  {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='hotel appartment' />
+  <Label htmlFor='28'>HOTEL APARTMENT</Label>
+  <InputRadeo type='radio' id='29'  {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='bungalow' />
+  <Label htmlFor='29'>BUNGALOW</Label>
+  <InputRadeo type='radio' id='30'  {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='room' />
+  <Label htmlFor='30'>ROOM</Label>
+  <InputRadeo type='radio' id='31' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='mini flat' />
+  <Label htmlFor='31'>MINI FLAT</Label>
+  <InputRadeo type='radio' id='32' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='self contain' />
+  <Label htmlFor='32'>SELF CONTAIN</Label>
+  <InputRadeo type='radio' id='33' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='detached' />
+  <Label htmlFor='33'>DETACHED</Label>
+  <InputRadeo type='radio' id='34' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='semi detached' /> 
+  <Label htmlFor='34'>SEMI DETACHED</Label>
+  <InputRadeo type='radio' id='35' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType'value='office' />
+  <Label htmlFor='35'>OFFICE</Label>
+  <InputRadeo type='radio' id='36' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='shop' />
+  <Label htmlFor='36'>SHOP</Label>
+  <InputRadeo type='radio' id='37' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='warehouse' />
+  <Label htmlFor='37'>WAREHOUSE</Label>
+  <InputRadeo type='radio' id='38' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='industrial' />
+  <Label htmlFor='38'>INDUSTRIAL</Label>
+  <InputRadeo type='radio' id='39' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='retail' />
+  <Label htmlFor='39'>RETAIL</Label>
+  <InputRadeo type='radio' id='40' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='land' />
+  <Label htmlFor='40'>LAND</Label>
+  <InputRadeo type='radio' id='41' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='others' />
+  <Label htmlFor='41'>OTHERS</Label>
+  </ResidentContainer>
+  )}
+  </Grid>
+
+  <Grid item lg={2.4} md={2.4} sm={2.4} xs={12}>
+ <SelectPropertyTypeContainer>
+  <SelectPropertyType type='radio' id='off' {...register('propertyGroup',{required: 'Property category is required....'})} name='propertyGroup'   value='offplan'  />
+  <SelectLabel htmlFor='off' onClick={(e) => handleSelect5(select5)}>Offplan</SelectLabel>
+ </SelectPropertyTypeContainer>
+ { select5 && (
+  <ResidentContainer>
+  <InputRadeo type='radio' id='42' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType'  value='apartment' />
+  <Label htmlFor='42'>APARTMENT</Label>
+  <InputRadeo type='radio' id='43' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType'  value='flat' />
+  <Label htmlFor='43'>FLAT</Label>
+  <InputRadeo type='radio' id='44' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='office' />
+  <Label htmlFor='44'>STUDIO</Label>
+  <InputRadeo type='radio' id='45'  {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='terraced' />
+  <Label htmlFor='45'>TERRACED</Label>
+  <InputRadeo type='radio' id='46'  {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='full floor' />
+  <Label htmlFor='46'>FULL FLOOR</Label>
+  <InputRadeo type='radio' id='47'  {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='whole building' />
+  <Label htmlFor='47'>WHOLE BUILDING</Label>
+  <InputRadeo type='radio' id='48'  {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='hotel appartment' />
+  <Label htmlFor='48'>HOTEL APARTMENT</Label>
+  <InputRadeo type='radio' id='49'  {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='bungalow' />
+  <Label htmlFor='49'>BUNGALOW</Label>
+  <InputRadeo type='radio' id='50'  {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='room' />
+  <Label htmlFor='50'>ROOM</Label>
+  <InputRadeo type='radio' id='51' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='mini flat' />
+  <Label htmlFor='51'>MINI FLAT</Label>
+  <InputRadeo type='radio' id='52' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='self contain' />
+  <Label htmlFor='52'>SELF CONTAIN</Label>
+  <InputRadeo type='radio' id='53' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='detached' />
+  <Label htmlFor='53'>DETACHED</Label>
+  <InputRadeo type='radio' id='54' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='semi detached' /> 
+  <Label htmlFor='54'>SEMI DETACHED</Label>
+  <InputRadeo type='radio' id='55' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType'value='office' />
+  <Label htmlFor='55'>OFFICE</Label>
+  <InputRadeo type='radio' id='56' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='shop' />
+  <Label htmlFor='56'>SHOP</Label>
+  <InputRadeo type='radio' id='57' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='warehouse' />
+  <Label htmlFor='57'>WAREHOUSE</Label>
+  <InputRadeo type='radio' id='58' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='industrial' />
+  <Label htmlFor='58'>INDUSTRIAL</Label>
+  <InputRadeo type='radio' id='59' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='retail' />
+  <Label htmlFor='59'>RETAIL</Label>
+  <InputRadeo type='radio' id='60' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='land' />
+  <Label htmlFor='60'>LAND</Label>
+  <InputRadeo type='radio' id='61' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='others' />
+  <Label htmlFor='61'>OTHERS</Label>
+  </ResidentContainer>
+  )}
+  </Grid>
+
+  <Grid item lg={2.4} md={2.4} sm={2.4} xs={12}>
   <SelectPropertyTypeContainer>
   <SelectPropertyType type='radio' id='lan'  {...register('propertyGroup',{required: 'Property category is required....'})} name='propertyGroup' value='land' />
   <SelectLabel htmlFor='lan' onClick={(e) => handleSelect3(select3)}>Land</SelectLabel>

@@ -13,7 +13,7 @@ import BedOutlinedIcon from '@mui/icons-material/BedOutlined';
 import TvOutlinedIcon from '@mui/icons-material/TvOutlined';
 import BathtubOutlinedIcon from '@mui/icons-material/BathtubOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { isTemplateExpression } from 'typescript';
+
 
 const StyledBox = styled(Box)`
 
@@ -371,7 +371,7 @@ function CrmPropertyDetailsPage() {
      <Grid item lg={10} md={10} sm={8} xs={8} >
     <RightContainer>
     <PlusTitleContainer>
-        <ArrowBackIcon  sx={{ color: '#494949',cursor: 'pointer'}} onClick={() => navigate('/properties')} />
+        <ArrowBackIcon  sx={{ color: '#494949',cursor: 'pointer'}} onClick={() => navigate('/agentproperties')} />
     <Title>Property Details</Title>
     </PlusTitleContainer>
     <InnerRightContainer>
