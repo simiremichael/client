@@ -45,13 +45,13 @@ const baseQuery = fetchBaseQuery({
    const customFetchBase = async (args: any, api: any, extraOptions: any) => {
    
     let result = await baseQuery(args, api, extraOptions);
-    console.log(result.error);
-console.log(result);
+    //console.log(result.error);
+//console.log(result);
     // If you want, handle other status codes, too
     //result?.error?.status === 403
     {/* @ts-ignore:next-line */}
     if (!result?.data?.token) {
-        console.log('sending refresh token')
+        //console.log('sending refresh token')
 
         // send refresh token to get new access token 
         const refreshResult = await baseQuery('/users/refresh', api, extraOptions)
@@ -59,7 +59,7 @@ console.log(result);
         if (refreshResult?.data) {
        const user = ( api.getState() as RootState).userState.user
             // store the new token 
-              console.log(user)
+             // console.log(user)
               {/* @ts-ignore:next-line */}
             api.dispatch(setUsers({ token: refreshResult?.data?.data?.token, user, refreshToken: undefined }))
 
@@ -78,15 +78,15 @@ console.log(result);
     
 {/* @ts-ignore:next-line */}
     if (!result?.data?.companyToken) {
-      console.log('sending company refresh token')
+     // console.log('sending company refresh token')
 
       // send refresh token to get new access token 
       const companyRefreshResult = await baseQuery('/companies/refresh', api, extraOptions)
-console.log(companyRefreshResult)
+//console.log(companyRefreshResult)
       if (companyRefreshResult?.data) {
      const company = ( api.getState() as RootState).companyState.company
           // store the new token 
-            console.log(company)
+           // console.log(company)
             {/* @ts-ignore:next-line */}
           api.dispatch(setCompanies({ companyToken: companyRefreshResult?.data?.companyToken, company}))
 
@@ -104,15 +104,15 @@ console.log(companyRefreshResult)
 
   {/* @ts-ignore:next-line */}
   if (!result?.data?.agentToken) {
-    console.log('sending agent refresh token')
+    //console.log('sending agent refresh token')
 
     // send refresh token to get new access token 
     const agentRefreshResult = await baseQuery('/agents/refresh', api, extraOptions)
-console.log(agentRefreshResult)
+    //console.log(agentRefreshResult)
     if (agentRefreshResult?.data) {
    const agent = ( api.getState() as RootState).agentState.agent
         // store the new token 
-          console.log(agent)
+          //console.log(agent)
           {/* @ts-ignore:next-line */}
         api.dispatch(setAgents({ agentToken: agentRefreshResult?.data?.agentToken, agent, refreshToken: undefined }))
 
