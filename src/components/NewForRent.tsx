@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import React from "react";
 import { Splide, SplideSlide } from '@splidejs/react-splide';
-import {Link } from "react-router-dom";
+import {Link, NavLink } from "react-router-dom";
 import '@splidejs/react-splide/css';
 
 
@@ -168,20 +168,22 @@ function NewForRent () {
         },
         
       } }>
+        <Link to='rent?search=lekki&category=rent&type=apartment&bath=4&bed=4&minPrice=100000&maxPrice=5000000&sort= '>
     <Card>
       <CardMedia>
         <TopContainer>
         <PlaceDiv>
         <Place>Lagos</Place>
         </PlaceDiv>
-      <Location >Lekki Phase</Location>
+      <Location>Lekki</Location>
       </TopContainer>
       </CardMedia>
       <CardTextContainer>
         <CardText>78 new properties for rent</CardText>
       </CardTextContainer>
     </Card>
-
+    </Link>
+    <Link to='rent?search=victoria%20island&category=rent&type=apartment&bath=4&bed=4&minPrice=100000&maxPrice=5000000&sort='>
     <Card>
       <CardMedia2>
         <TopContainer>
@@ -195,7 +197,9 @@ function NewForRent () {
         <CardText>78 new properties for rent</CardText>
       </CardTextContainer>
     </Card>
-    <Card>
+    </Link>
+    <Link to='rent?search=banana%20island&category=rent&type=apartment&bath=4&bed=4&minPrice=100000&maxPrice=5000000&sort='>
+     <Card>
       <CardMedia8>
         <TopContainer>
         <PlaceDiv>
@@ -208,6 +212,7 @@ function NewForRent () {
         <CardText>78 new properties for rent</CardText>
       </CardTextContainer>
     </Card>
+    </Link>
     <Card>
       <CardMedia4>
         <TopContainer>
@@ -273,6 +278,7 @@ function NewForRent () {
         <CardText>78 new properties for rent</CardText>
       </CardTextContainer>
     </Card>
+    <NavLink to='http://localhost:3000/rent?search=surulere&category=rent&type=apartment&bed=4&bath=4&minPrice=100000&maxPrice=200000&sort=&buy=5000000'>
     <Card>
       <CardMedia9>
         <TopContainer>
@@ -286,7 +292,7 @@ function NewForRent () {
         <CardText>78 new properties for rent</CardText>
       </CardTextContainer>
     </Card>
-
+    </NavLink>
     <Card>
       <CardMedia10>
         <TopContainer>

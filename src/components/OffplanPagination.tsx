@@ -4,13 +4,14 @@ import PaginationItem from '@mui/material/PaginationItem';
 import { Link } from "react-router-dom";
 import { useAppSelector } from '../app/hooks';
 import { selectCurrentRentProperty } from '../services/features/rentPropertySlice';
+import { selectCurrentOffplan } from '../services/features/offplanSlice';
 
 function OffplanPaginate(props: {page: any}) {
 
      
-     const { rentProperty} = useAppSelector(selectCurrentRentProperty);
+     const { offplan} = useAppSelector(selectCurrentOffplan);
       {/* @ts-ignore:next-line */}
-     const numberOfPages = rentProperty?.numberOfPages;
+     const numberOfPages = offplan?.numberOfPages;
     const page = props.page;
     console.log(numberOfPages);
     
@@ -21,7 +22,7 @@ function OffplanPaginate(props: {page: any}) {
     variant="outlined" 
     color='primary'
     renderItem={(item: any) => (
-        <PaginationItem {...item} component={Link} to={`/rent?page=${item.page}`}  />
+        <PaginationItem {...item} component={Link} to={`/offplan?page=${item.page}`}  />
     )}
     />                  
   )

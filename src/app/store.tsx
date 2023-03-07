@@ -18,7 +18,8 @@ import mapDataReducer from '../services/features/mapSlice'
 import newProjectsReducer from '../services/features/projectSlice';
 import offplanReducer from '../services/features/offplanSlice';
 import commercialReducer from "../services/features/commercialSlice";
-
+import buyDetailReducer from "../services/features/buyDetailSlice"; 
+import rentDetailReducer from "../services/features/rentDetailSlice";
 
 export const store = configureStore({
     reducer: {
@@ -38,7 +39,9 @@ export const store = configureStore({
         mapDataState: mapDataReducer,
         newProjectsState: newProjectsReducer,
         offplanState: offplanReducer,
-        commercialState:commercialReducer
+        commercialState:commercialReducer,
+        buyDetailState: buyDetailReducer,
+        rentDetailState: rentDetailReducer
     },
     middleware: (getDefaultMiddleware) => 
     getDefaultMiddleware().concat(propertyAPI.middleware),

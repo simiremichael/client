@@ -281,7 +281,7 @@ function PropertyType(props: { updateProperty: any, property: any, setProperty: 
   <Label htmlFor='1'>APARTMENT</Label>
   <InputRadeo type='radio' id='2' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType'  value='flat' />
   <Label htmlFor='2'>FLAT</Label>
-  <InputRadeo type='radio' id='3' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='office' />
+  <InputRadeo type='radio' id='3' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='studio' />
   <Label htmlFor='3'>STUDIO</Label>
   <InputRadeo type='radio' id='4'  {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='terraced' />
   <Label htmlFor='4'>TERRACED</Label>
@@ -343,7 +343,7 @@ function PropertyType(props: { updateProperty: any, property: any, setProperty: 
   <Label htmlFor='22'>APARTMENT</Label>
   <InputRadeo type='radio' id='23' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType'  value='flat' />
   <Label htmlFor='23'>FLAT</Label>
-  <InputRadeo type='radio' id='24' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='office' />
+  <InputRadeo type='radio' id='24' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='studio' />
   <Label htmlFor='24'>STUDIO</Label>
   <InputRadeo type='radio' id='25'  {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='terraced' />
   <Label htmlFor='25'>TERRACED</Label>
@@ -394,7 +394,7 @@ function PropertyType(props: { updateProperty: any, property: any, setProperty: 
   <Label htmlFor='42'>APARTMENT</Label>
   <InputRadeo type='radio' id='43' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType'  value='flat' />
   <Label htmlFor='43'>FLAT</Label>
-  <InputRadeo type='radio' id='44' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='office' />
+  <InputRadeo type='radio' id='44' {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='studio' />
   <Label htmlFor='44'>STUDIO</Label>
   <InputRadeo type='radio' id='45'  {...register('propertyType',{required: 'Property type is required....'})} name='propertyType' value='terraced' />
   <Label htmlFor='45'>TERRACED</Label>

@@ -4,13 +4,13 @@ import PaginationItem from '@mui/material/PaginationItem';
 import { Link } from "react-router-dom";
 import { useAppSelector } from '../app/hooks';
 import { selectCurrentRentProperty } from '../services/features/rentPropertySlice';
+import { selectCurrentCommercial } from '../services/features/commercialSlice';
 
 function CommercialPaginate(props: {page: any}) {
 
-     
-     const { rentProperty} = useAppSelector(selectCurrentRentProperty);
+  const {commercial} = useAppSelector(selectCurrentCommercial);
       {/* @ts-ignore:next-line */}
-     const numberOfPages = rentProperty?.numberOfPages;
+     const numberOfPages = commercial?.numberOfPages;
     const page = props.page;
     console.log(numberOfPages);
     
@@ -21,7 +21,7 @@ function CommercialPaginate(props: {page: any}) {
     variant="outlined" 
     color='primary'
     renderItem={(item: any) => (
-        <PaginationItem {...item} component={Link} to={`/rent?page=${item.page}`}  />
+        <PaginationItem {...item} component={Link} to={`/commercial?page=${item.page}`}  />
     )}
     />                  
   )

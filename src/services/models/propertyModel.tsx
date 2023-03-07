@@ -1,3 +1,5 @@
+import { StringDecoder } from "string_decoder"
+
 export interface PropertyModel {
   id: number | string
   category: string
@@ -55,4 +57,5 @@ export interface PropertyModel {
  latitude: number 
  phone: string
  logo: string
+ email: string
 }

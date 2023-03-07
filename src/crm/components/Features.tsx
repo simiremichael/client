@@ -124,18 +124,17 @@ const securities = [
 'Video surveillance',
 ];
 const comforts = [
-  'Fire place',
   'Fitness room',
   'Furnished',
+  'Unfurnished',
+  'Partly furnished',
   'Home automation',
   'Home cinema',
   'Suna',
   'Walk-in-closet',
-  'Wine cellar',
-  'Wheelchair access',
-  'EV charging',
-  'No smaking',
-  'Waterfront'
+  'Waterfront',
+  'Spa',
+  'Gym'
 ];
 const hvacs = [
   'Air conditioning',

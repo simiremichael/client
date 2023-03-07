@@ -6,20 +6,18 @@ import Grid from '@mui/material/Grid';
 import NavBar from '../components/NavBar';
 import Avatar from '@mui/material/Avatar';
 import Footer from '../components/Footer';
-import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import { Link, useParams } from "react-router-dom";
 import { useGetPropertyQuery, useMorePropertyQuery } from '../services/api/propertyAPI';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { selectCurrentPropertyDetail, setPropertyDetail } from '../services/features/propertyDetailSlice';
 import { selectCurrentMoreProperty, setMoreProperty } from '../services/features/morePropertySlice';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/splide/dist/css/splide.min.css';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-import MapDL, {Marker, Popup} from 'react-map-gl';
-import getCenter from 'geolib/es/getCenter';
+import MapDL, {FullscreenControl, GeolocateControl, Marker, NavigationControl, Popup} from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { selectCurrentMapData, setMapData } from '../services/features/mapSlice';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import { selectCurrentBuyDetail, setBuyDetail } from '../services/features/buyDetailSlice';
+import mapImg from '../images/mapImg.jpg';
 
 const StyledBox = styled(Box)`
 width: 100%;
@@ -488,7 +486,7 @@ backdrop-filter: blur( 10px );
  const MapCintainer = styled.div`
  position: absolute;
  z-index: 20001;
- width: 100vw;
+ width: 100%;
  height: 100vh;
  background-color: #f5f5f5;
  `
@@ -510,9 +508,9 @@ cursor: pointer;
 
 function BuyDetailsPage() {
 
-  const render = (status: Status) => {
-    return <h1>{status}</h1>;
-  };
+  // const render = (status: Status) => {
+  //   return <h1>{status}</h1>;
+  // };
   const [viewImage, setViewImage] = useState(false);
   const [openMap, setOpenMap] = useState(false);
   const [more, setMore] = useState({ location: '', price: '', propertyType: '', bedroom: '', category: ''});
@@ -526,21 +524,22 @@ function BuyDetailsPage() {
   const category = more.category
     const {data: moreProperty} = useMorePropertyQuery({location, price, propertyType, bedroom, category}, {refetchOnMountOrArgChange: true })
   useEffect(() => {
-   dispatch(setPropertyDetail({propertyDetail: data}))
+    {/* @ts-ignore:next-line */}
+   dispatch(setBuyDetail({buyDetail: data}))
   }, [dispatch, data])
 
  //, {refetchOnMountOrArgChange: true }
 
-  const {propertyDetail} = useAppSelector(selectCurrentPropertyDetail);
+  const {buyDetail} = useAppSelector(selectCurrentBuyDetail);
 
-  console.log(propertyDetail)
+
    {/* @ts-ignore:next-line */}
-  const img = propertyDetail?.images[0].img
+  const img = buyDetail?.images[0].img
 
   useEffect(() => {
     {/* @ts-ignore:next-line */}
-  setMore({...more, location: propertyDetail?.location, price: propertyDetail?.price, bedroom: propertyDetail?.bedroom, propertyType: propertyDetail?.propertyType, category: propertyDetail?.category}, {refetchOnMountOrArgChange: true });
-  }, [setMore, propertyDetail]);
+  setMore({...more, location: buyDetail?.location, price: buyDetail?.price, bedroom: buyDetail?.bedroom, propertyType: buyDetail?.propertyType, category: buyDetail?.category}, {refetchOnMountOrArgChange: true });
+  },[]);
 
   const {moreProperty: available} = useAppSelector(selectCurrentMoreProperty);
   
@@ -548,13 +547,8 @@ function BuyDetailsPage() {
     dispatch(setMoreProperty({moreProperty: moreProperty}))
   },[dispatch, moreProperty])
    
-
-    let longitude = data?.longitude
-    let latitude =   data?.latitude
-
-  const initial = { longitude: data?.longitude,  latitude: data?.latitude, zoom: 14}
+  const initial = { longitude: data?.longitude, latitude: data?.latitude, zoom: 14}
   const [viewState, setViewState] = useState(initial)
-  console.log(latitude, longitude)
 
   return (
     <StyledBox>
@@ -563,28 +557,26 @@ function BuyDetailsPage() {
         <MapCintainer>
           <MapBtn onClick={() => setOpenMap(false)}><CloseOutlinedIcon sx={{color: '#383838'}} /></MapBtn>
         <MapDL
-     {...viewState}
-    style={{width: '100vw', 
-    height: '100vh',
-     
-     }}
-     mapStyle="mapbox://styles/mapbox/streets-v9"
-    // mapStyle="mapbox://styles/simiremichael/clcz22d6e00l814qni4m9qxaq"
+        initialViewState={{
+        longitude: buyDetail?.longitude,
+        latitude: buyDetail?.latitude,
+        zoom: 14
+        }}
+        style={{width: '100%', 
+        height: '100vh',
+        }}
+     //mapStyle="mapbox://styles/mapbox/streets-v9"
+    mapStyle="mapbox://styles/simiremichael/clcz22d6e00l814qni4m9qxaq"
     mapboxAccessToken="pk.eyJ1Ijoic2ltaXJlbWljaGFlbCIsImEiOiJjbDhtMWZza3owOGM5M290aGdkdXNzbnhyIn0.cZ53EbJgw_QlQEq2-bRpWw"
     onMove={((evt: any) => setViewState(evt))}
     >
-   
-    <Marker longitude={data?.longitude} latitude={data?.latitude} anchor="bottom"  >
+    <Marker longitude={buyDetail?.longitude} latitude={buyDetail?.latitude} anchor="bottom" >
     <LocationOnOutlinedIcon sx={{color: '#008080', fontSize: 40}}/>
     {/* <Img src={img} /> */}
     </Marker>
-    {/* {showPopup && (
-      <Popup longitude={Number(data?.longitude)} latitude={Number(data?.latitude)}
-        anchor="top" 
-        offset={[+20, -10]}
-        onClose={() => setShowPopup(false)}>
-        You are here
-      </Popup>)} */}
+    <NavigationControl />
+    <GeolocateControl />
+    <FullscreenControl />
     </MapDL>
         </MapCintainer>
           )}
@@ -600,7 +592,7 @@ function BuyDetailsPage() {
         } }
       >
           {/* @ts-ignore:next-line */}
-        {propertyDetail?.images?.map((img: any) => (
+        {buyDetail?.images?.map((img: any) => (
   <SplideSlide>
     <ViewImg src={img.img}/>
   </SplideSlide>
@@ -618,7 +610,7 @@ function BuyDetailsPage() {
             </ListDiv1>
             <CameraContainer onClick={() => setViewImage(true)}>
               <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M194.6 32H317.4C338.1 32 356.4 45.22 362.9 64.82L373.3 96H448C483.3 96 512 124.7 512 160V416C512 451.3 483.3 480 448 480H64C28.65 480 0 451.3 0 416V160C0 124.7 28.65 96 64 96H138.7L149.1 64.82C155.6 45.22 173.9 32 194.6 32H194.6zM256 384C309 384 352 341 352 288C352 234.1 309 192 256 192C202.1 192 160 234.1 160 288C160 341 202.1 384 256 384z" /></Svg>
-              <Camera>Show {propertyDetail?.images.length} photos</Camera>
+              <Camera>Show {buyDetail?.images.length} photos</Camera>
             </CameraContainer>
             {/* <StyledLink to={`/map/${propertyDetail?._id}`}> */}
             <MapContainer onClick={() => setOpenMap(!openMap)}>
@@ -631,7 +623,7 @@ function BuyDetailsPage() {
             <Grid container spacing={1}>
               <Grid item lg={12} sm={12} md={12} xs={6}>
           <ListDiv>
-          <VideoPlayer  src={propertyDetail?.tour} allowFullScreen  />
+          <VideoPlayer  src={buyDetail?.tour} allowFullScreen  />
           </ListDiv>
             <TourContainer>
               <ImgView src='../images/img-360.png' />
@@ -640,7 +632,7 @@ function BuyDetailsPage() {
             </Grid>
             <Grid item lg={12} sm={12} md={12} xs={6}>
             <ListDiv>
-             <VideoPlayer src={propertyDetail?.video} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen  />
+             <VideoPlayer src={buyDetail?.video} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen  />
              </ListDiv>
             <VideoContainer>
               <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M188.3 147.1C195.8 142.8 205.1 142.1 212.5 147.5L356.5 235.5C363.6 239.9 368 247.6 368 256C368 264.4 363.6 272.1 356.5 276.5L212.5 364.5C205.1 369 195.8 369.2 188.3 364.9C180.7 360.7 176 352.7 176 344V167.1C176 159.3 180.7 151.3 188.3 147.1V147.1zM512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256zM256 48C141.1 48 48 141.1 48 256C48 370.9 141.1 464 256 464C370.9 464 464 370.9 464 256C464 141.1 370.9 48 256 48z" /></Svg>
@@ -652,23 +644,23 @@ function BuyDetailsPage() {
         </StyledGrid>
         <Grid container>
           <Grid item lg={8} sm={12} md={8} xs={12}>
-            <About>{propertyDetail?.location.toUpperCase()}</About>
-            <PropertyInfo>{propertyDetail?.propertyTitle}</PropertyInfo>
+            <About>{buyDetail?.location.toUpperCase()}</About>
+            <PropertyInfo>{buyDetail?.propertyTitle}</PropertyInfo>
             <Grid container>
               <LeftContainer item lg={6} sm={6} md={6} xs={6}>
                 {/* @ts-ignore:next-line */}
-                <Apart><Apsvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M88 104C88 95.16 95.16 88 104 88H152C160.8 88 168 95.16 168 104V152C168 160.8 160.8 168 152 168H104C95.16 168 88 160.8 88 152V104zM280 88C288.8 88 296 95.16 296 104V152C296 160.8 288.8 168 280 168H232C223.2 168 216 160.8 216 152V104C216 95.16 223.2 88 232 88H280zM88 232C88 223.2 95.16 216 104 216H152C160.8 216 168 223.2 168 232V280C168 288.8 160.8 296 152 296H104C95.16 296 88 288.8 88 280V232zM280 216C288.8 216 296 223.2 296 232V280C296 288.8 288.8 296 280 296H232C223.2 296 216 288.8 216 280V232C216 223.2 223.2 216 232 216H280zM0 64C0 28.65 28.65 0 64 0H320C355.3 0 384 28.65 384 64V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM48 64V448C48 456.8 55.16 464 64 464H144V400C144 373.5 165.5 352 192 352C218.5 352 240 373.5 240 400V464H320C328.8 464 336 456.8 336 448V64C336 55.16 328.8 48 320 48H64C55.16 48 48 55.16 48 64z" /></Apsvg>Property type: <Apartst>{propertyDetail?.propertyType.charAt(0).toUpperCase() + propertyDetail?.propertyType.slice(1)}</Apartst></Apart>
-                <Bed><Apsvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M176 288C220.1 288 256 252.1 256 208S220.1 128 176 128S96 163.9 96 208S131.9 288 176 288zM544 128H304C295.2 128 288 135.2 288 144V320H64V48C64 39.16 56.84 32 48 32h-32C7.163 32 0 39.16 0 48v416C0 472.8 7.163 480 16 480h32C56.84 480 64 472.8 64 464V416h512v48c0 8.837 7.163 16 16 16h32c8.837 0 16-7.163 16-16V224C640 170.1 597 128 544 128z" /></Apsvg>Bedrooms: <Bedst>{propertyDetail?.bedroom}</Bedst></Bed>
+                <Apart><Apsvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M88 104C88 95.16 95.16 88 104 88H152C160.8 88 168 95.16 168 104V152C168 160.8 160.8 168 152 168H104C95.16 168 88 160.8 88 152V104zM280 88C288.8 88 296 95.16 296 104V152C296 160.8 288.8 168 280 168H232C223.2 168 216 160.8 216 152V104C216 95.16 223.2 88 232 88H280zM88 232C88 223.2 95.16 216 104 216H152C160.8 216 168 223.2 168 232V280C168 288.8 160.8 296 152 296H104C95.16 296 88 288.8 88 280V232zM280 216C288.8 216 296 223.2 296 232V280C296 288.8 288.8 296 280 296H232C223.2 296 216 288.8 216 280V232C216 223.2 223.2 216 232 216H280zM0 64C0 28.65 28.65 0 64 0H320C355.3 0 384 28.65 384 64V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM48 64V448C48 456.8 55.16 464 64 464H144V400C144 373.5 165.5 352 192 352C218.5 352 240 373.5 240 400V464H320C328.8 464 336 456.8 336 448V64C336 55.16 328.8 48 320 48H64C55.16 48 48 55.16 48 64z" /></Apsvg>Property type: <Apartst>{buyDetail?.propertyType.charAt(0).toUpperCase() + buyDetail?.propertyType.slice(1)}</Apartst></Apart>
+                <Bed><Apsvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M176 288C220.1 288 256 252.1 256 208S220.1 128 176 128S96 163.9 96 208S131.9 288 176 288zM544 128H304C295.2 128 288 135.2 288 144V320H64V48C64 39.16 56.84 32 48 32h-32C7.163 32 0 39.16 0 48v416C0 472.8 7.163 480 16 480h32C56.84 480 64 472.8 64 464V416h512v48c0 8.837 7.163 16 16 16h32c8.837 0 16-7.163 16-16V224C640 170.1 597 128 544 128z" /></Apsvg>Bedrooms: <Bedst>{buyDetail?.bedroom}</Bedst></Bed>
               </LeftContainer>
               <RightContainer item lg={6} sm={6} md={6} xs={6}>
-                <Size><Apsvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M384 320c-17.67 0-32 14.33-32 32v96H64V160h96c17.67 0 32-14.32 32-32s-14.33-32-32-32L64 96c-35.35 0-64 28.65-64 64V448c0 35.34 28.65 64 64 64h288c35.35 0 64-28.66 64-64v-96C416 334.3 401.7 320 384 320zM488 0H352c-12.94 0-24.62 7.797-29.56 19.75c-4.969 11.97-2.219 25.72 6.938 34.88L370.8 96L169.4 297.4c-12.5 12.5-12.5 32.75 0 45.25C175.6 348.9 183.8 352 192 352s16.38-3.125 22.62-9.375L416 141.3l41.38 41.38c9.156 9.141 22.88 11.84 34.88 6.938C504.2 184.6 512 172.9 512 160V24C512 10.74 501.3 0 488 0z" /></Apsvg>Property Size: <Sizest>{propertyDetail?.size.toLocaleString()} sqt </Sizest></Size>
-                <Bath><Apsvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M32 384c0 28.32 12.49 53.52 32 71.09V496C64 504.8 71.16 512 80 512h32C120.8 512 128 504.8 128 496v-15.1h256V496c0 8.836 7.164 16 16 16h32c8.836 0 16-7.164 16-16v-40.9c19.51-17.57 32-42.77 32-71.09V352H32V384zM496 256H96V77.25C95.97 66.45 111 60.23 118.6 67.88L132.4 81.66C123.6 108.6 129.4 134.5 144.2 153.2C137.9 159.5 137.8 169.8 144 176l11.31 11.31c6.248 6.248 16.38 6.248 22.63 0l105.4-105.4c6.248-6.248 6.248-16.38 0-22.63l-11.31-11.31c-6.248-6.248-16.38-6.248-22.63 0C230.7 33.26 204.7 27.55 177.7 36.41L163.9 22.64C149.5 8.25 129.6 0 109.3 0C66.66 0 32 34.66 32 77.25v178.8L16 256C7.164 256 0 263.2 0 272v32C0 312.8 7.164 320 16 320h480c8.836 0 16-7.164 16-16v-32C512 263.2 504.8 256 496 256z" /></Apsvg>Bathrooms: <Bathst>{propertyDetail?.bathroom}</Bathst></Bath>
+                <Size><Apsvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M384 320c-17.67 0-32 14.33-32 32v96H64V160h96c17.67 0 32-14.32 32-32s-14.33-32-32-32L64 96c-35.35 0-64 28.65-64 64V448c0 35.34 28.65 64 64 64h288c35.35 0 64-28.66 64-64v-96C416 334.3 401.7 320 384 320zM488 0H352c-12.94 0-24.62 7.797-29.56 19.75c-4.969 11.97-2.219 25.72 6.938 34.88L370.8 96L169.4 297.4c-12.5 12.5-12.5 32.75 0 45.25C175.6 348.9 183.8 352 192 352s16.38-3.125 22.62-9.375L416 141.3l41.38 41.38c9.156 9.141 22.88 11.84 34.88 6.938C504.2 184.6 512 172.9 512 160V24C512 10.74 501.3 0 488 0z" /></Apsvg>Property Size: <Sizest>{buyDetail?.size.toLocaleString()} sqt </Sizest></Size>
+                <Bath><Apsvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M32 384c0 28.32 12.49 53.52 32 71.09V496C64 504.8 71.16 512 80 512h32C120.8 512 128 504.8 128 496v-15.1h256V496c0 8.836 7.164 16 16 16h32c8.836 0 16-7.164 16-16v-40.9c19.51-17.57 32-42.77 32-71.09V352H32V384zM496 256H96V77.25C95.97 66.45 111 60.23 118.6 67.88L132.4 81.66C123.6 108.6 129.4 134.5 144.2 153.2C137.9 159.5 137.8 169.8 144 176l11.31 11.31c6.248 6.248 16.38 6.248 22.63 0l105.4-105.4c6.248-6.248 6.248-16.38 0-22.63l-11.31-11.31c-6.248-6.248-16.38-6.248-22.63 0C230.7 33.26 204.7 27.55 177.7 36.41L163.9 22.64C149.5 8.25 129.6 0 109.3 0C66.66 0 32 34.66 32 77.25v178.8L16 256C7.164 256 0 263.2 0 272v32C0 312.8 7.164 320 16 320h480c8.836 0 16-7.164 16-16v-32C512 263.2 504.8 256 496 256z" /></Apsvg>Bathrooms: <Bathst>{buyDetail?.bathroom}</Bathst></Bath>
               </RightContainer>
             </Grid>
           </Grid>
 
           <GridPrice item lg={4} sm={12} md={4} xs={12}>
-            <Price>{propertyDetail?.price.toLocaleString()} NGN / yearly</Price>
+            <Price>{buyDetail?.price.toLocaleString()} NGN / yearly</Price>
             <ContactTopContainer>
               <CallContainer>
                 <Svg3 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M511.2 387l-23.25 100.8c-3.266 14.25-15.79 24.22-30.46 24.22C205.2 512 0 306.8 0 54.5c0-14.66 9.969-27.2 24.22-30.45l100.8-23.25C139.7-2.602 154.7 5.018 160.8 18.92l46.52 108.5c5.438 12.78 1.77 27.67-8.98 36.45L144.5 207.1c33.98 69.22 90.26 125.5 159.5 159.5l44.08-53.8c8.688-10.78 23.69-14.51 36.47-8.975l108.5 46.51C506.1 357.2 514.6 372.4 511.2 387z" /></Svg3>
@@ -704,14 +696,10 @@ function BuyDetailsPage() {
             <Location>Location</Location>
             <Grid container>
               <Grid item lg={6} sm={6} md={6} xs={6}>
-                <Avatar sx={{ width: 130, height: 130 }}>
-                  <Wrapper apiKey={"AIzaSyCYflY_hDSPBjAzmtqk2KANCZJl0ci_WHw"} render={render}>
-                    <p style={{textAlign: 'center'}}>pactum towers</p>
-                  </Wrapper>
-                </Avatar>
+                <Avatar sx={{ width: 130, height: 130, cursor: 'pointer' }} src={mapImg} alt='map' onClick={() => setOpenMap(true)}/>
               </Grid>
               <Grid item lg={6} sm={6} md={6} xs={6}>
-                <LocationAddress>{propertyDetail?.address1}</LocationAddress>
+                <LocationAddress>{buyDetail?.address1}</LocationAddress>
               </Grid>
             </Grid>
           </Grid>
@@ -719,12 +707,12 @@ function BuyDetailsPage() {
             <Agent>Agent</Agent>
             <Grid container>
               <Grid item lg={6} sm={6} md={6} xs={6}>
-                <Avatar src={propertyDetail?.profilePicture} sx={{ width: 130, height: 130 }} />
+                <Avatar src={buyDetail?.profilePicture} sx={{ width: 130, height: 130 }} />
               </Grid>
               <Grid item lg={6} sm={6} md={6} xs={6}>
-                <AgentName><strong>{propertyDetail?.name}</strong></AgentName>
+                <AgentName><strong>{buyDetail?.name}</strong></AgentName>
                 <AgentWork>Property Consultant at</AgentWork>
-                <AgentCompany>{propertyDetail?.companyName}</AgentCompany>
+                <AgentCompany>{buyDetail?.companyName}</AgentCompany>
                 <AgentProperty>(115 properties listed)</AgentProperty>
               </Grid>
             </Grid>
@@ -735,29 +723,29 @@ function BuyDetailsPage() {
             <AmenitiesTitle>Amenities</AmenitiesTitle>
             <Grid container>
               <Grid item lg={6} sm={6} md={6} xs={6}>
-                {propertyDetail?.comfort.map((comfort: any, index: any) => ( 
+                {buyDetail?.comfort.map((comfort: any, index: any) => ( 
                   <AmenitiesDiv key={index.toLocaleString()}>
                 <Amenities>{comfort}</Amenities>
                 </AmenitiesDiv>
                 ))}
-                {propertyDetail?.hvac.map((hvac: any, index: any) => ( 
+                {buyDetail?.hvac.map((hvac: any, index: any) => ( 
                   <AmenitiesDiv key={index.toLocaleString()}>
                 <Amenities>{hvac}</Amenities>
                 </AmenitiesDiv>
                 ))}
-                {propertyDetail?.pets.map((pets: any, index: any) => ( 
+                {buyDetail?.pets.map((pets: any, index: any) => ( 
                   <AmenitiesDiv key={index.toLocaleString()}>
                 <Amenities>{pets}</Amenities>
                 </AmenitiesDiv>
                 ))}
               </Grid>
               <Grid item lg={6} sm={6} md={6} xs={6}>
-              {propertyDetail?.parking.map((parking: any, index: any) => ( 
+              {buyDetail?.parking.map((parking: any, index: any) => ( 
                   <AmenitiesDiv key={index.toLocaleString()}>
                 <Amenities>{parking}</Amenities>
                 </AmenitiesDiv>
                 ))}
-                {propertyDetail?.security.map((security: any, index: any) => ( 
+                {buyDetail?.security.map((security: any, index: any) => ( 
                   <AmenitiesDiv key={index.toLocaleString()}>
                 <Amenities>{security}</Amenities>
                 </AmenitiesDiv>
@@ -771,7 +759,7 @@ function BuyDetailsPage() {
             <DescriptionTitle>Description</DescriptionTitle>
             <Grid container>
               <Grid item lg={12} sm={12} md={12} xs={12}>
-                <Description>{propertyDetail?.description}</Description>
+                <Description>{buyDetail?.description}</Description>
               </Grid>
             </Grid>
           </Grid>
@@ -802,23 +790,6 @@ function BuyDetailsPage() {
             </StyledLink>
             </CardGrid>
           )}
-          {/* <CardGrid>
-            <MoreCard>
-              <MoreTopContainer>
-              </MoreTopContainer>
-              <MoreBottomContainer>
-                <MoreApart>Flat</MoreApart>
-                <MorePrice>500,000 NGN/year</MorePrice>
-                <MoreAddress>20 agaungi ajiran road, agungi, lagos</MoreAddress>
-                <BottomInner>
-                  <InnerBed><Moresvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M176 288C220.1 288 256 252.1 256 208S220.1 128 176 128S96 163.9 96 208S131.9 288 176 288zM544 128H304C295.2 128 288 135.2 288 144V320H64V48C64 39.16 56.84 32 48 32h-32C7.163 32 0 39.16 0 48v416C0 472.8 7.163 480 16 480h32C56.84 480 64 472.8 64 464V416h512v48c0 8.837 7.163 16 16 16h32c8.837 0 16-7.163 16-16V224C640 170.1 597 128 544 128z" /></Moresvg>3</InnerBed>
-                  <InnerBath><Moresvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M32 384c0 28.32 12.49 53.52 32 71.09V496C64 504.8 71.16 512 80 512h32C120.8 512 128 504.8 128 496v-15.1h256V496c0 8.836 7.164 16 16 16h32c8.836 0 16-7.164 16-16v-40.9c19.51-17.57 32-42.77 32-71.09V352H32V384zM496 256H96V77.25C95.97 66.45 111 60.23 118.6 67.88L132.4 81.66C123.6 108.6 129.4 134.5 144.2 153.2C137.9 159.5 137.8 169.8 144 176l11.31 11.31c6.248 6.248 16.38 6.248 22.63 0l105.4-105.4c6.248-6.248 6.248-16.38 0-22.63l-11.31-11.31c-6.248-6.248-16.38-6.248-22.63 0C230.7 33.26 204.7 27.55 177.7 36.41L163.9 22.64C149.5 8.25 129.6 0 109.3 0C66.66 0 32 34.66 32 77.25v178.8L16 256C7.164 256 0 263.2 0 272v32C0 312.8 7.164 320 16 320h480c8.836 0 16-7.164 16-16v-32C512 263.2 504.8 256 496 256z" /></Moresvg>4</InnerBath>
-                  <InnerSize><Moresvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M384 320c-17.67 0-32 14.33-32 32v96H64V160h96c17.67 0 32-14.32 32-32s-14.33-32-32-32L64 96c-35.35 0-64 28.65-64 64V448c0 35.34 28.65 64 64 64h288c35.35 0 64-28.66 64-64v-96C416 334.3 401.7 320 384 320zM488 0H352c-12.94 0-24.62 7.797-29.56 19.75c-4.969 11.97-2.219 25.72 6.938 34.88L370.8 96L169.4 297.4c-12.5 12.5-12.5 32.75 0 45.25C175.6 348.9 183.8 352 192 352s16.38-3.125 22.62-9.375L416 141.3l41.38 41.38c9.156 9.141 22.88 11.84 34.88 6.938C504.2 184.6 512 172.9 512 160V24C512 10.74 501.3 0 488 0z" /></Moresvg>3,800 sqft</InnerSize>
-                </BottomInner>
-              </MoreBottomContainer>
-            </MoreCard>
-          </CardGrid> */}
-
         </MoreContainer>
       </StyledMoreContainer>
     </StyledContainer>

@@ -93,6 +93,7 @@ const comforts = [
   'Fire place',
   'Fitness room',
   'Furnished',
+  'Unfurnished',
   'Home automation',
   'Home cinema',
   'Suna',
@@ -572,23 +573,23 @@ const handleChange = (e: any) => {
           onChange={handleChange}
           size="small"
         >
-          <MenuItem value='Apartment'>Apartment</MenuItem>
-          <MenuItem value='Flat'>Flat</MenuItem>
-          <MenuItem value='Office'>Office</MenuItem>
-          <MenuItem value='Terraced'>Terraced</MenuItem>
-          <MenuItem value='Detatched'>Detached</MenuItem>
-          <MenuItem value='Semi detached'>Semi detached</MenuItem>
-          <MenuItem value='Full floor'>Full floor</MenuItem>
-          <MenuItem value='Hotel appartment'>Hotel appartment</MenuItem>
-          <MenuItem value='Bungalow'>Bungalow</MenuItem>
-          <MenuItem value='Room'>Room</MenuItem>
-          <MenuItem value='Mini flat'>Mini flat</MenuItem>
-          <MenuItem value='Self contain'>Self contain</MenuItem>
-          <MenuItem value='Shop'>Shop</MenuItem>
-          <MenuItem value='Warehouse'>Warehouse</MenuItem>
-          <MenuItem value='Land'>Land</MenuItem>                  
-          <MenuItem value='Farm'>Farm</MenuItem>
-          <MenuItem value='Others'>Other</MenuItem>
+          <MenuItem value='apartment'>Apartment</MenuItem>
+          <MenuItem value='flat'>Flat</MenuItem>
+          <MenuItem value='office'>Office</MenuItem>
+          <MenuItem value='terraced'>Terraced</MenuItem>
+          <MenuItem value='detatched'>Detached</MenuItem>
+          <MenuItem value='semi detached'>Semi detached</MenuItem>
+          <MenuItem value='full floor'>Full floor</MenuItem>
+          <MenuItem value='hotel appartment'>Hotel appartment</MenuItem>
+          <MenuItem value='bungalow'>Bungalow</MenuItem>
+          <MenuItem value='room'>Room</MenuItem>
+          <MenuItem value='mini flat'>Mini flat</MenuItem>
+          <MenuItem value='self contain'>Self contain</MenuItem>
+          <MenuItem value='shop'>Shop</MenuItem>
+          <MenuItem value='warehouse'>Warehouse</MenuItem>
+          <MenuItem value='land'>Land</MenuItem>                  
+          <MenuItem value='farm'>Farm</MenuItem>
+          <MenuItem value='others'>Other</MenuItem>
         </Select>
       </FormControl>
             </Grid>                

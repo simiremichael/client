@@ -136,9 +136,10 @@ tagTypes: ['Properties', 'Users', 'Agents', 'Companies'],
 
        getAgents: builder.query<AgentModel[], void>({
         query: ()  => '/agents',
-          providesTags: (result) => result ? [...result.map(({ id }) => ({ type: 'Agents' as const, id })),
-                  { type: 'Agents', id: 'AGENT' },
-                ] : [{ type: 'Agents', id: 'AGENT' }],
+        providesTags: (result, error, id: any) =>  [{ type:'Agents', id: 'AGENT' }],  
+          // providesTags: (result) => result ? [...result.map(({ id }) => ({ type: 'Agents' as const, id: 'AGENT'})),
+          //         { type: 'Agents', id: 'AGENT' },
+          //       ] : [{ type: 'Agents', id: 'AGENT' }],
       }),
       getAgent: builder.query <AgentModel, any>({
         query: (id) => `/agents/${id}`,
@@ -256,9 +257,10 @@ tagTypes: ['Properties', 'Users', 'Agents', 'Companies'],
 
            getCompanies: builder.query<CompanyModel[], void>({
             query: ()  => '/companies',
-              providesTags: (result) => result ? [...result.map(({ id }) => ({ type: 'Companies' as const, id })),
-                      { type: 'Companies', id: 'LIST' },
-                    ] : [{ type: 'Companies', id: 'LIST' }],
+            providesTags: (result, error, id: any) =>  [{ type:'Companies', id: 'LIST' }], 
+              // providesTags: (result) => result ? [...result.map(({ id }) => ({ type: 'Companies' as const, id })),
+              //         { type: 'Companies', id: 'LIST' },
+              //       ] : [{ type: 'Companies', id: 'LIST' }],
           }),
 
           getCompany: builder.query<CompanyModel, any>({
@@ -388,13 +390,19 @@ tagTypes: ['Properties', 'Users', 'Agents', 'Companies'],
                 transformResponse: (response: any) => response.sort((a: any, b: any) => b - a),
                 providesTags: (result, error, id: any) =>  [{ type:'Properties', id: 'PROP' }],  
               }),
+              commercial: builder.query<PropertyModel, any>({
+                query: ({searchQuery, search, category, propertyGroup, sort, bed,bath, minPrice, maxPrice, type, page})  => `/properties/commercial?search=${search || 'i'}&propertyGroup=${propertyGroup}&category=${category || 'sale'}&type=${type || 'office'}&sort=${sort}&bath=${bath || '1'}&bed=${bed || '1'}&minPrice=${minPrice || '200000'}&maxPrice=${maxPrice || '500000000'}&page=${page}`,
+               // transformResponse: (response: any) => response.sort((a: any, b: any) => b - a),
+                providesTags: (result, error, id: any) =>  [{ type:'Properties', id: 'PROP' }],  
+                //search, category, sort, bed, bath, minPrice, maxPrice, type, page
+              }),
               newProject: builder.query<PropertyModel, any>({
                 query: ({ search, sort, possession, minBed, maxBed, minPrice, maxPrice, type, propertyGroup, page})  => `/properties/newProject?search=${search || 'i'}&type=${type || 'apartment'}&sort=${sort}&minBed=${minBed || '1'}&maxBed=${maxBed || '4'}&minPrice=${minPrice || '200000'}&maxPrice=${maxPrice || '500000000'}&page=${page}&possession=${possession || 2022 }&propertyGroup=${propertyGroup}`,
                 //transformResponse: (response: any) => response.reverse(),
                 providesTags: (result, error, id: any) =>  [{ type:'Properties', id: 'PROP' }],  
               }),
               offplan: builder.query<PropertyModel, any>({
-                query: ({search, sort, minBed, maxBed, minPrice, possession, maxPrice, type, propertyGroup, page})  => `/properties/offplan?search=${search || 'i'}&type=${type || 'apartment'}&sort=${sort}&minBed=${minBed || '1'}&maxBed=${maxBed || '4'}&minPrice=${minPrice || '200000'}&maxPrice=${maxPrice || '500000000'}&page=${page}&possession=${possession || 2022}&propertyGroup=${propertyGroup}`,
+                query: ({search, sort, minBed, maxBed, minPrice, possession, maxPrice, type, propertyGroup, page})  => `/properties/offplan?search=${search || 'i'}&type=${type || 'semi detached'}&sort=${sort}&minBed=${minBed || '1'}&maxBed=${maxBed || '4'}&minPrice=${minPrice || '200000'}&maxPrice=${maxPrice || '500000000'}&page=${page}&possession=${possession || 2022}&propertyGroup=${propertyGroup}`,
                 //transformResponse: (response: any) => response.reverse(),
                 providesTags: (result, error, id: any) =>  [{ type:'Properties', id: 'PROP' }],  
               }),
@@ -471,6 +479,7 @@ export const {
     useDeleteAgentMutation,
     useGetPropertiesQuery,
     useGetPropertyQuery,
+    useCommercialQuery,
     useNewProjectQuery,
     useOffplanQuery,
     useMorePropertyQuery, 

@@ -61,6 +61,11 @@ import EditAgent from './admin/pages/EditAgent';
 import BuyDetailsPage from './pages/buyDetailsPage';
 import RentDetailsPage from './pages/rentDetailsPage';
 import GeoMap from './map/Map';
+import OffplanDetailsPage from './pages/offplanDetailsPage';
+import CommercialDetailsPage from './pages/commercialDetailsPage';
+import BuyMap from './map/BuyMap';
+import RentMap from './map/RentMap';
+import CommercialMap from './map/CommercialMap';
 // import  AgentProtectedRoute  from './pages/proptectedAgentRoute';
 
 
@@ -116,6 +121,7 @@ useEffect(() => {
       <Route path='/crmPropertyDetails/:cpdId' element={<CrmPropertyDetailsPage />} />
       <Route path='/client-login' element={<ClientLogin />} />
       <Route path='/commercial' element={<Commercial />} />
+      <Route path='/commercialDetailsPage/:comId' element={<CommercialDetailsPage />} />
       <Route path='/newproject' element={<NewProject />} />
       <Route path='/offplan' element={<Offplan />} />
       <Route path='/findagent' element={<FindAgent />} />
@@ -135,15 +141,17 @@ useEffect(() => {
       <Route path='/buydetailsPage/:buyPropertyId' element={<BuyDetailsPage />} />
       <Route path='/rentdetailsPage/:rentPropertyId' element={<RentDetailsPage />} />
       <Route path='/agentDetailsPage/:id' element={<AgentDetailsPage />} />
-      {/* <Route path='/newProjectDetailsPage' element={<CompanyDetailsPage />} /> */}
+      <Route path='/offplanDetailsPage/:offId' element={<OffplanDetailsPage />} />
       <Route path='/about' element={<About />} />
       <Route path='/mortgage' element={<Mortgage />} />
       <Route path='/propertyEditPage/:ptId' element={<PropertyEditPage />} />
-      ///:ptId
       <Route path='/agent-hub' element={<AgentHub />} />
       <Route path='/newProjectDetailsPage/:projId' element={<NewProjectDetailsPage />} />
       <Route path='/terms&condition' element={<TermsCondition />} />
       <Route path='/privacy-policy' element={<PrivacyPolicy />} />
+      <Route path='/buymap' element={<BuyMap />} />
+      <Route path='/rentmap' element={<RentMap />} />
+      <Route path='/commercialmap' element={<CommercialMap />} />
       <Route path='/dashboard' element={
       <AgentPrivateRoute>
       <DashBoard  />

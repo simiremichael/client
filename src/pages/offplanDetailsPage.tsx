@@ -320,11 +320,11 @@ align-items: end;
 margin: 5px 0;
 `
  
-function NewProjectDetailsPage() {
+function OffplanDetailsPage() {
 
  const [show, setShow] = useState(false);
- let { projId } = useParams();
-  const { data} = useGetPropertyQuery(projId, {refetchOnMountOrArgChange: true }); 
+ let { offId } = useParams();
+  const { data} = useGetPropertyQuery(offId, {refetchOnMountOrArgChange: true }); 
  
  const navigate = useNavigate();
 
@@ -352,7 +352,10 @@ function NewProjectDetailsPage() {
   <ContactContainer>
       <ContactCompany>Contact {data?.companyName[0].toUpperCase()}{data?.companyName.slice(1)}</ContactCompany>
       <ContactForm1 onSubmit={handleSubmit}>
-      <StyledLink href={`mailto:${data?.email}`}>
+        {/* <StyledInput  type='text' required label="name" variant='outlined' size='small'/>
+        <StyledInput type='email' required label="email" variant='outlined' size='small' />
+        <StyledInput type='number' required label="number" variant='outlined' size='small' /> */}
+       <StyledLink href={`mailto:${data?.email}`}>
         <RequestButoon type='button'>Send Email</RequestButoon>
         </StyledLink>
         <StyledLink href={`tel:${data?.phone}`}>
@@ -371,9 +374,8 @@ function NewProjectDetailsPage() {
       <ContactForm onSubmit={handleSubmit}>
         {/* <StyledInput  type='text' required label="name" variant='outlined' size='small'/>
         <StyledInput type='email' required label="email" variant='outlined' size='small' />
-        <StyledInput type='number' required label="number" variant='outlined' size='small' />
-        <RequestButoon type='submit'>Send</RequestButoon> */}
-          <StyledLink href={`mailto:${data?.email}`}>
+        <StyledInput type='number' required label="number" variant='outlined' size='small' /> */}
+         <StyledLink href={`mailto:${data?.email}`}>
         <RequestButoon type='button'>Send Email</RequestButoon>
         </StyledLink>
         <StyledLink href={`tel:${data?.phone}`}>
@@ -392,7 +394,7 @@ function NewProjectDetailsPage() {
           </Grid>
           <Grid item lg={3} md={3} sm={6}  xs={6}>
           <RightContainer>
-           <BackTo onClick={() => navigate('/newProject')}>Back to project</BackTo>
+           <BackTo onClick={() => navigate('/offplan')}>Back to offplan</BackTo>
            <DeveloperContainer>
             {/* @ts-ignore:next-line */}
            <Developer>BY {data?.companyName.toUpperCase()}</Developer><PropertyStatus>{data?.buildingYear <= new Date() ? 'Completed'.toUpperCase() : 'Under Construction'.toUpperCase() }</PropertyStatus>
@@ -480,4 +482,4 @@ function NewProjectDetailsPage() {
   )
 }
 
-export default NewProjectDetailsPage
+export default OffplanDetailsPage

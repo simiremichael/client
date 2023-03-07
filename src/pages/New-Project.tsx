@@ -256,7 +256,7 @@ const dispatch = useAppDispatch();
           onChange={handleChange}
         >
           <MenuItem value='apartment'>Apartment</MenuItem>
-          <MenuItem value='office'>Office</MenuItem>
+          <MenuItem value='office'>office</MenuItem>
           <MenuItem value='flat'>Flat</MenuItem>
           <MenuItem value='terraced'>Terraced</MenuItem>
           <MenuItem value='duplex'>Duplex</MenuItem>
@@ -268,6 +268,9 @@ const dispatch = useAppDispatch();
           <MenuItem value='werehouse'>WareHouse</MenuItem>
           <MenuItem value='mini-flat'>Mini Flat</MenuItem>
           <MenuItem value='self-contain'>Self Contain</MenuItem>
+          <MenuItem value='detached'>Detached</MenuItem>
+          <MenuItem value='semi detached'>Semi Detached</MenuItem>
+          <MenuItem value='others'>Others</MenuItem>
         </Select>
         </FormControl>
 

@@ -996,6 +996,8 @@ const handleSearch = () => {
           <RentDurationContainer>
            <Period>Rental Period</Period>
            <InnerSelect>
+            {toggle === 'rent' && ( 
+              <>
            <BtnInput5 type='radio' name='duration' id='year' value='yearly' onChange={handleDuration} />
       <Label5 htmlFor='year'>Yearly</Label5>
       <BtnInput5 type='radio' name='duration' id='month' value='monthly' onChange={handleDuration} />
@@ -1004,10 +1006,16 @@ const handleSearch = () => {
       <Label5 htmlFor='week'>Weekly</Label5>
       <BtnInput5 type='radio' name='duration' id='day' value='daily' onChange={handleDuration} />
       <Label5 htmlFor='day'>Daily</Label5>
+      </>
+      )}
+      {toggle === 'sale' && ( 
+        <>
       <BtnInput5 type='radio' name='duration' id='total' value='total price' onChange={handleDuration} />
       <Label5 htmlFor='total'>Total price</Label5>
       <BtnInput5 type='radio' name='duration' id='meter' value='price per square meter' onChange={handleDuration} />
       <Label5 htmlFor='meter'>Price per square meter</Label5>
+      </>
+      )}
            </InnerSelect>
           </RentDurationContainer>
           <PriceReset type='reset' onClick={() => clearPrice()} >Reset</PriceReset>

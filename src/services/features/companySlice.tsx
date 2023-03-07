@@ -5,7 +5,7 @@ import  {CompanyModel} from '../models/index'
 
 interface CompanyAuthState {
 
-  company:  undefined | string | CompanyModel | null ;   
+  company:  undefined | string | CompanyModel | null | [] | {} ;   
   companyToken : string | null | undefined;
   // refreshToken: string | null | string | undefined | {} ;
 }
@@ -20,7 +20,7 @@ export const companySlice = createSlice({
   name: 'CompanyAuth',
   initialState,
   reducers: {
-    setCompanies: (state, action: PayloadAction<{company:  undefined | string | CompanyModel | null, companyToken : string | undefined | null,}>) => {
+    setCompanies: (state, action: PayloadAction<{company:  undefined | string | CompanyModel | null | [] | {}, companyToken : string | undefined | null,}>) => {
       localStorage.setItem('my-property-finder-company', JSON.stringify({
         company: action.payload.company,
         companyToken : action.payload.companyToken ,

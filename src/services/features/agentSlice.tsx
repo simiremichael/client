@@ -5,7 +5,7 @@ import  {AgentModel} from '../models/index'
 
 interface AgentAuthState {
 
-  agent:  undefined | string | AgentModel | null ;   
+  agent:  undefined | string | AgentModel | null| [] | {} ;   
   // name: string | null;
   
   agentToken : string | null | undefined | {};
@@ -23,7 +23,7 @@ export const agentSlice = createSlice({
   name: 'AgentAuth',
   initialState,
   reducers: {
-    setAgents: (state, action: PayloadAction<{agent:  undefined | string | AgentModel | null, agentToken: string | undefined | null | {} }>) => {
+    setAgents: (state, action: PayloadAction<{agent:  undefined | string | AgentModel | null | [] | {}, agentToken: string | undefined | null | {} }>) => {
       localStorage.setItem('my-property-finder-agent', JSON.stringify({
         agent: action.payload.agent,
         agentToken: action.payload.agentToken,

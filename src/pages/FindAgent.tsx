@@ -1,10 +1,15 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Footer from '../components/Footer'
 import NavBar from '../components/NavBar'
 import styled from '@emotion/styled';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import { selectCurrentAgent, setAgents } from '../services/features/agentSlice';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { useGetAgentsQuery, useGetCompaniesQuery } from '../services/api/propertyAPI';
+import { Grid } from '@mui/material';
+import { selectCurrentCompany, setCompanies } from '../services/features/companySlice';
 
 const StyledBox = styled(Box)`
 background-image: url('../images/realtor.webp');
@@ -27,6 +32,8 @@ const TopOpecContainer = styled.div`
 const TopHeader = styled.h1`
 font-weight: bold;
 color: rgb(255 255 255);
+text-align: center;
+width: 100%;
 `
 const Buttonwrapper = styled.div`
 display: flex;
@@ -68,15 +75,21 @@ const InputContainer = styled.div`
 margin-top: 20px;
 margin-bottom: 40px;
 align-items: center;
-width: 100%;
+width: 75%;
+@media only screen and (max-width: 900px) {
+  width: 90%
+}
 `
 const Input = styled(TextField)`
- width: 40%;
+ width: 90%;
  height: 40px;
  background-color: #ffffff;
  outlined: none;
  border: none;
  border-radius: 5px;
+ @media only screen and (max-width: 900px) {
+  width: 80%
+}
 `
 const Button = styled.button`
 width: 60px;
@@ -90,7 +103,7 @@ width: 60px;
  cursor: pointer;
 `
 const AgentCard = styled.div`
-width: 260px;
+width: 100%;
 cursor: pointer;
 box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 `
@@ -114,14 +127,17 @@ padding-bottom: 30px;
 const Name = styled.h3`
 margin-bottom: 0;
 color: #383838;
+text-align: center;
 `
 const Job = styled.p`
 margin: 0;
 color: #494949;
+text-align: center;
 `
 const Organisation = styled.p`
 margin-top: 10px;
 color: #494949;
+text-align: center;
 `
 const LowerContainer = styled.div`
 display: flex;
@@ -157,7 +173,7 @@ font-size: 0.8rem;
 color: #494949;
 `
 const CompanyCard = styled.div`
-width: 260px;
+width: 100%;
 cursor: pointer;
 box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 `
@@ -173,29 +189,57 @@ padding-bottom: 30px;
 const CompanyName = styled.h3`
 margin-bottom: 0;
 color: #383838;
+text-align: center;
 `
 const NumOfAgent = styled.p`
-margin: 0 0 10px 0;
+margin: 10px 0 10px 0;
 font-size: 0.8rem;
+text-align: center;
+color: #919191;
+
 `
 const HeadOffice = styled.p`
 margin: 0;
 font-size: 0.7rem;
+text-align: center;
+color: #919191;
+
 `
 const Location = styled.p`
-margin: 0;
+margin-top: 5px;
 font-size: 0.6rem;
+text-align: center;
 `
 const Form = styled.form`
-
+display: flex;
+justify-content: center;
 `
 
 function FindAgent() {
 
   const [toggle, setToggle] = useState(false);
+  const dispatch = useAppDispatch();
 
   const [searchData, setSearchData] = useState({agent: '', company: ''})
+  const {data} = useGetAgentsQuery();
+  const {data: companyData} = useGetCompaniesQuery();
 
+  useEffect(() => {
+    dispatch(setAgents({
+      agent: data,
+      agentToken: undefined
+    }))
+     },[dispatch, data])
+     useEffect(() => {
+      dispatch(setCompanies({
+        company: companyData,
+        companyToken: undefined
+      }))
+       },[dispatch, data])
+
+  const {agent} = useAppSelector(selectCurrentAgent);
+  const {company} = useAppSelector(selectCurrentCompany);
+  console.log (companyData, toggle)
 
   const handleChange = (e: any) => {
   const name = e.target.name;
@@ -222,13 +266,13 @@ function FindAgent() {
         <TopHeader>Find your agent to find a home</TopHeader>
         <Buttonwrapper>
         <ButtonContainer>
-          <AgentButton onClick={handleToggle} style={{backgroundColor: !toggle? '#008080' : '#000000'}}>AGENTS</AgentButton>
-          <CompanyButton onClick={handleToggle} style={{backgroundColor: toggle? '#008080' : '#000000'}}>COMPANIES</CompanyButton>
+          <AgentButton onClick={handleToggle} style={{backgroundColor: toggle === false ? '#008080' : '#000000'}}>AGENTS</AgentButton>
+          <CompanyButton onClick={handleToggle} style={{backgroundColor: toggle === true ? '#008080' : '#000000'}}>COMPANIES</CompanyButton>
         </ButtonContainer>
         </Buttonwrapper>
         <Form onSubmit={handleSearch}>
         <InputContainer>
-        { !toggle ?
+        { toggle === false ?
         <Input type='search' variant='outlined' size='small' label='Enter location or agent name' name='agent' value={searchData.agent} onChange={handleChange} />
         :
         <Input type='search' variant='outlined' size='small' label= 'Enter location or company name' name='company' value={searchData.company} onChange={handleChange}  />
@@ -239,18 +283,23 @@ function FindAgent() {
        </TopContainer>
       </StyledContainer>
       </TopOpecContainer>
-      </StyledBox>
+      </StyledBox>                 
       <StyledBoxBottom>
       <StyledContainer>
-      {!toggle && (
+        <Grid container spacing={2}>
+      {toggle === false ?
+        <>
+        {/* @ts-ignore:next-line */}
+        {agent?.data?.map((item: any) => (
+      <Grid item lg={3} md={4} sm={6} xs={12}key={item._id}>
       <AgentCard>
        <AgentTopContainer>
-       <Img src='../images/agent1.jpg' />
+       <Img src={item.profilePicture} />
        </AgentTopContainer>
        <BottomContainer>
-       <Name>Adebayo Kemi</Name>
-       <Job>PROPERTY CONSULTANT</Job>
-       <Organisation>Anton Real Estate</Organisation> 
+       <Name>{item.name}</Name>
+       <Job>{item.role.toUpperCase()}</Job>
+       <Organisation>{item.companyName}</Organisation> 
        <LowerContainer>
        <Lowerleft>
         <Number>10</Number>
@@ -263,17 +312,23 @@ function FindAgent() {
        </LowerContainer>
        </BottomContainer>
        </AgentCard>
-       )}
-       {toggle && (
+       </Grid>
+      ))}
+      </>
+        :
+        <>
+        {/* @ts-ignore:next-line */}
+        {company?.data?.map((item: any) => (  
+          <Grid item lg={3} md={4} sm={6} xs={12}key={item._id}>
        <CompanyCard>
        <CompanyTopContainer>
-       <LogoImg src='../images/reallogo5.png' />
+       <LogoImg src={item.logo} />
        </CompanyTopContainer>
        <CompanyBottomContainer>
-       <CompanyName>Anto Real Estate</CompanyName>
+       <CompanyName>{item.companyName}</CompanyName>
        <NumOfAgent>15 AGENTS</NumOfAgent>
        <HeadOffice>HEAD OFFICE</HeadOffice> 
-       <Location>LEKKI LAGOS</Location> 
+       <Location>{item.area.toUpperCase()}</Location> 
        <LowerContainer>
        <Lowerleft>
         <Number>23</Number>
@@ -290,7 +345,11 @@ function FindAgent() {
        </LowerContainer>
        </CompanyBottomContainer>
        </CompanyCard>
-       )}
+       </Grid>
+       ))}
+       </>
+       }
+        </Grid>
       </StyledContainer>
       </StyledBoxBottom>
       <Footer />

@@ -302,6 +302,7 @@ function PropertySizeAndPrice(props: {updateProperty: any, property: any, setPro
      >
       <Option>Choose</Option>
       <Option value='yearly'>Yearly price</Option>
+      <Option value='outright'>Outright</Option>
       <Option value='monthly'>Monthly price</Option>
       <Option value='weekly'>Weekly price</Option>
       <Option value='daily'>Daily price</Option>
