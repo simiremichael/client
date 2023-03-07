@@ -13,7 +13,7 @@ import { selectCurrentMoreProperty, setMoreProperty } from '../services/features
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/splide/dist/css/splide.min.css';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-import MapDL, {Marker, Popup} from 'react-map-gl';
+import MapDL, {FullscreenControl, GeolocateControl, Marker, NavigationControl, Popup} from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import { selectCurrentRentDetail, setRentDetail } from '../services/features/rentDetailSlice';
@@ -486,7 +486,7 @@ backdrop-filter: blur( 10px );
  const MapCintainer = styled.div`
  position: absolute;
  z-index: 20001;
- width: 100vw;
+ width: 100%;
  height: 100vh;
  background-color: #f5f5f5;
  `
@@ -538,9 +538,6 @@ function RentDetailsPage() {
   useEffect(() => {
     dispatch(setMoreProperty({moreProperty: moreProperty}))
   },[dispatch, moreProperty])
-  
-  const longitude = (Number(rentDetail?.longitude))
-  const latitude =   (Number(rentDetail?.latitude))
 
 const initial = {longitude: rentDetail?.longitude, latitude: rentDetail?.latitude, zoom: 14}
 const [viewState, setViewState] = useState(initial)
@@ -557,27 +554,20 @@ const [viewState, setViewState] = useState(initial)
       latitude: rentDetail?.latitude,
       zoom: 14
     }}
-    style={{width: '100vw', 
+    style={{width: '100%', 
     height: '100vh',
-     
      }}
-     mapStyle="mapbox://styles/mapbox/streets-v9"
-    // mapStyle="mapbox://styles/simiremichael/clcz22d6e00l814qni4m9qxaq"
+    mapStyle="mapbox://styles/simiremichael/clcz22d6e00l814qni4m9qxaq"
     mapboxAccessToken="pk.eyJ1Ijoic2ltaXJlbWljaGFlbCIsImEiOiJjbDhtMWZza3owOGM5M290aGdkdXNzbnhyIn0.cZ53EbJgw_QlQEq2-bRpWw"
     onMove={((evt: any) => setViewState(evt))}
     >
-   
     <Marker longitude={data?.longitude} latitude={data?.latitude} anchor="bottom"  >
     <LocationOnOutlinedIcon sx={{color: '#008080', fontSize: 40}}/>
     {/* <Img src={img} /> */}
     </Marker>
-    {/* {showPopup && (
-      <Popup longitude={Number(data?.longitude)} latitude={Number(data?.latitude)}
-        anchor="top" 
-        offset={[+20, -10]}
-        onClose={() => setShowPopup(false)}>
-        You are here
-      </Popup>)} */}
+    <NavigationControl />
+    <GeolocateControl />
+    <FullscreenControl />
     </MapDL>
         </MapCintainer>
           )}
