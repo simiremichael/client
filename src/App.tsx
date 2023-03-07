@@ -59,7 +59,7 @@ import { useAgentRefreshQuery } from './services/api/propertyAPI';
 import PropertyEditPage from './crm/pages/PropertyEditPage';
 import EditAgent from './admin/pages/EditAgent';
 import BuyDetailsPage from './pages/buyDetailsPage';
-import RentDetailsPage from './pages/rentDetailsPage';
+import RentDetailsPage from './pages/RentDetailsPage';
 import GeoMap from './map/Map';
 import OffplanDetailsPage from './pages/offplanDetailsPage';
 import CommercialDetailsPage from './pages/commercialDetailsPage';
