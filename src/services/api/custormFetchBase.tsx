@@ -16,7 +16,7 @@ import CompanyPropertyPaginate from '../../admin/components/companyPropertyPagin
 
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'http://localhost:5000',
+  baseUrl: process.env.REACT_APP_SERVER_URL || 'http://localhost:5000',
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     const agentToken = ( getState() as RootState).agentState.agentToken
