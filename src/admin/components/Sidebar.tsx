@@ -4,10 +4,8 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import PeopleIcon from '@mui/icons-material/People';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import AvatarImage from "../../images/reallogo3.jpg";
-import {useLocation, useNavigate, NavLink} from "react-router-dom";
-import { companyLogout, selectCurrentCompany } from "../../services/features/companySlice";
-import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import {  selectCurrentCompany } from "../../services/features/companySlice";
 import {useAppSelector } from '../../app/hooks';
 import { toast } from "react-toastify";
 import { useLogoutCompanyMutation } from "../../services/api/propertyAPI";
@@ -20,7 +18,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
   const {company} = useAppSelector(selectCurrentCompany);
   const [logoutCompany, {isSuccess}] = useLogoutCompanyMutation();
   
-    const dispatchLogOut = useDispatch();
+    //const dispatchLogOut = useDispatch();
 
     const handleLogout = () => {
       // dispatchLogOut(companyLogout());

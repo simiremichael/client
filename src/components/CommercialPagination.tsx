@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
 import { Link } from "react-router-dom";
 import { useAppSelector } from '../app/hooks';
-import { selectCurrentRentProperty } from '../services/features/rentPropertySlice';
 import { selectCurrentCommercial } from '../services/features/commercialSlice';
 
 function CommercialPaginate(props: {page: any}) {

@@ -14,8 +14,6 @@ import LogoutIcon from '@mui/icons-material/Logout';
 const StyledBox = styled(Box)`
 
 `
-const BodyContainer = styled.div`
-`
 const BodyContainerGrid = styled(Grid)`
 
 `
@@ -97,11 +95,6 @@ cursor: pointer;
     width: auto;
 }
 
-`
-const Input = styled.input`
-height: 25px;
-outline: none;
-border: none;
 `
 const ProfilePix = styled.img`
 width: 30px;
@@ -276,9 +269,6 @@ function Finances() {
    const handleSidebar = () => {
      setSidebar(!sidebar);
    }
-   const handleInfo = () => {
-     setInfo(!info)
-   }
    const {agent} = useAppSelector(selectCurrentAgent);
    let navigate = useNavigate();
    const dispatch = useDispatch();
@@ -357,8 +347,7 @@ function Finances() {
      <ImgGif src={imggif} />
     </IllustrationContainer>
    </Grid>
-   </Grid>
-     
+   </Grid> 
      : ''}
     </BodyGrid>
     </BodyContainerGrid>

@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-import { ClickAwayListener, Link, Pagination, Portal } from '@mui/material';
+import { ClickAwayListener, Link } from '@mui/material';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import Tooltip from '@mui/material/Tooltip';
 import { useSearchPropertiesQuery } from '../services/api/propertyAPI';
@@ -38,10 +38,7 @@ margin-bottom: 10px;
 `
 const StyledBottomContainer = styled.div`
 width: 100%;
-
-
 `
-
 const Title = styled.h1`
 color: #ffffff;
 padding: 5px 0 1.5rem 0;
@@ -69,8 +66,6 @@ align-items: center;
 cursor: pointer;
 padding: 8px 10px 9px;
 `
-
-
 const SearchInputContainer = styled.div`
 height: 40px;
 background-color: #ffffff;
@@ -86,7 +81,6 @@ height: 95%;
 width: 90%;
 outline: none;
 `
-
 const Select1 = styled.select`
 width: 100%;
 border-radius: 5px;
@@ -94,13 +88,10 @@ height: 42px;
 cursor: pointer;
 outline: none;
 color: gray;
-
 `
-
 const Options = styled.option`
 color: gray;
 `
-
 const SearchButton = styled.button`
 background-color: #008080;
 width: 100%;
@@ -121,12 +112,6 @@ align-self: center;
 const Svg1Container = styled.div`
 width: 20px;
 margin: 10px 3px 0 8px;
-
-`
-const SelectContainer = styled.div`
-display: flex;
-width: 100%;
-justify-content: space-between;
 `
 const BedContainer = styled.div`
 width: 100%;
@@ -139,7 +124,6 @@ display: flex;
 align-items: center;
 justify-content: space-between;
 `
-
 const BedP = styled.span`
 font-size: 14px;
 color: gray;
@@ -155,7 +139,6 @@ const BedBathDropdown = styled.div`
 cursor: pointer;
 margin: 0 -11px;
 `
-
 const BedBathWrapper = styled.div`
 z-index: 1;
 position: absolute;
@@ -210,7 +193,6 @@ margin: 15px 0 15px 5px;
 align-items: center;
 cursor: pointer;
 padding: 1px 8px;
-
 `
 const StyledSvg = styled.svg`
 width: 10px;
@@ -247,7 +229,6 @@ padding: 5px;
 `
 const PriceSelect = styled.div`
 display: flex;
-
 `
 const MinPrice = styled.div`
 border: 1px solid gray;
@@ -281,13 +262,10 @@ color: gray;
 text-align: center;
 `
 const RentDurationContainer = styled.div`
-
 `
 const Datalist = styled.datalist`
-
 `
 const Option = styled.option`
-
 `
 const Period = styled.h3`
 text-align: start;
@@ -301,7 +279,6 @@ display: flex;
 flex-wrap: wrap;
 `
 const BtnInput5 = styled(BtnInput)`
-
 `
 const Label5 = styled(Label)`
 margin-bottom: 10px;
@@ -310,7 +287,6 @@ const PriceReset = styled(Button)`
 margin: 8px 0 0 5px;
 `
 const Div = styled.div`
-
 `
 const BoxDiv = styled.div`
 position: absolute;
@@ -345,7 +321,6 @@ const StyledContainer = styled(Container)`
 margin: 10px 0;
 `
 const CardImg = styled(Grid)`
-
 `
 const CardDetails = styled(Grid)`
 display: flex;     
@@ -358,9 +333,7 @@ cursor: pointer;
 @media screen and (max-width: 900px) {
   padding: 0 0 55px 0;
 }
-
 `
-
 const Img = styled.img`
 height: 200px;
 width: 100%;
@@ -440,7 +413,6 @@ cursor: pointer;
 :hover{
   background: #F5F5F5;
 }
-
 `
 const BottomContainer = styled.div`
 display: flex;
@@ -502,33 +474,6 @@ const WhatsApp = styled.p`
 text-align: start;
 color: #494949;
 `
-
-/*
-const SyncContainer = styled.div`
-border: 1px solid gray;
-display: flex;
-align-items: center;
-padding: 0 15px;
-height: 30px;
-font-size: 15px;
-margin-right: 5px;
-`
-const Option = styled.div`
-border: 1px solid gray;
-display: flex;
-align-items: center;
-padding: 0 15px;
-height: 30px;
-font-size: 15px;
-`
-
-const Share = styled.p`
-text-align: start;
-`
-const Report = styled.p`
-text-align: start;
-`
-*/
 const RightContainer = styled.div`
 display: flex;
 flex-direction: column;
@@ -629,9 +574,6 @@ justify-content: end;
 const Links = styled(Link)`
 text-decoration: none;
 `
-const RangeInput = styled.input`
-
-`
 
 function SearchArea() {
 
@@ -646,8 +588,6 @@ const priceState = 'Prices'
   const [bath, setBath] = useState('');
   const [value1, setValue1] = useState(priceState);
   const [value2, setValue2] = useState('');
-  const [bedChecked, setBedChecked] = useState(['']);
-  const [bathChecked, setBathChecked] = useState(false);
   const initialData = {toggle: '', search: '', type: '', select_bed: '', page: '', select_bath: '', MinPrice: '', MaxPrice: '', duration: ''  }
   const [searchData, setSearchData] = useState(initialData)
    let [searchParams, setSearchParams] = useSearchParams();
@@ -663,9 +603,6 @@ const priceState = 'Prices'
   const priceReveal = () => {
     setShowPrice((prev) => !prev);
   };
-  // const priceReveal = () => {
-  //   setShowPrice(!showPrice);
-  // };
 
   const clear = () => {
     setInput(initialInput);
@@ -702,17 +639,14 @@ const priceState = 'Prices'
  const minPrice = searchData.MinPrice
  const duration = searchData.duration
  const maxPrice = searchData.MaxPrice
-  const {data, isSuccess, isFetching} = useSearchPropertiesQuery({page, search, minPrice, maxPrice, toggle, type, selectBed, selectBath,duration}, {refetchOnMountOrArgChange: true });
-  //, search, minPrice, maxPrice, toggle, type, selectBed, selectBath,duration
+  const {data } = useSearchPropertiesQuery({page, search, minPrice, maxPrice, toggle, type, selectBed, selectBath,duration}, {refetchOnMountOrArgChange: true });
+
   useEffect(() => {
     if(data) {
       dispatch(setPropertySearch({propertySearch: data }));
    }
    }, [dispatch, data]);
    const {propertySearch} = useAppSelector(selectCurrentPropertySearch);
-  // console.log(propertySearch)
-  //  console.log(searchData)
-  //  console.log(data)
 
   const handleChange = (e: any) => {
     const name = e.target.name;
@@ -743,13 +677,7 @@ const handleSearch = () => {
     setReveal(false);
    }
 }
-//  const handleKeyPress = (e: any) => { 
-//   e.preventDefault();
-//  if (e.keyCode === 13) {
-//    {/* @ts-ignore:next-line */}
-//   handleSearch();
-//  }
-//  }
+
   return (
     <>
     <StyledBox>
@@ -1060,12 +988,6 @@ const handleSearch = () => {
                     <Img src={item?.img} />
                   </SplideSlide>   
                    ))}
-                  {/* <SplideSlide>
-                    <Img src="../images/pexels2.jpg" alt="Image 2" />
-                  </SplideSlide>
-                  <SplideSlide>
-                    <Img src="../images/pexels3.jpg" alt="Image 3" />
-                  </SplideSlide> */}
                 </Splide>
                 <VerifyContainer>
                   <VerifySvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256zM371.8 211.8C382.7 200.9 382.7 183.1 371.8 172.2C360.9 161.3 343.1 161.3 332.2 172.2L224 280.4L179.8 236.2C168.9 225.3 151.1 225.3 140.2 236.2C129.3 247.1 129.3 264.9 140.2 275.8L204.2 339.8C215.1 350.7 232.9 350.7 243.8 339.8L371.8 211.8z" /></VerifySvg>
@@ -1124,10 +1046,6 @@ const handleSearch = () => {
                     <WhatsApp>WhatsApp</WhatsApp>
                   </WhatsAppContainer>
                   </Links>
-                  {/*
-    <SyncContainer></SyncContainer>
-    <Option></Option>
-    */}
                 </BottomContainer>
                 <BottomContainer1>
                 <Links href={`tel:${result?.phone}`}>

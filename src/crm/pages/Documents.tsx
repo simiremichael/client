@@ -1,24 +1,18 @@
 import React, {useState} from 'react';
 import styled from '@emotion/styled';
-//import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { NavLink, useNavigate} from "react-router-dom";
-//import Avatar from '@mui/material/Avatar';
 import imggif from '../../images/imggif3.gif';
 import { useAppSelector } from '../../app/hooks';
-import { logout, selectCurrentAgent, setAgents } from '../../services/features/agentSlice';
+import { logout, selectCurrentAgent } from '../../services/features/agentSlice';
 import { useDispatch } from 'react-redux';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 
 const StyledBox = styled(Box)`
-
-`
-const BodyContainer = styled.div`
 `
 const BodyContainerGrid = styled(Grid)`
-
 `
 const BodyGrid = styled(Grid)`
 background-color: #F8F8FF;
@@ -97,12 +91,6 @@ cursor: pointer;
 @media screen and (max-width: 680px) {
     width: auto;
 }
-
-`
-const Input = styled.input`
-height: 25px;
-outline: none;
-border: none;
 `
 const ProfilePix = styled.img`
 width: 30px;
@@ -276,9 +264,6 @@ function Documents() {
   const handleSidebar = () => {
     setSidebar(!sidebar);
   }
-  const handleInfo = () => {
-    setInfo(!info)
-  }
   const {agent} = useAppSelector(selectCurrentAgent);
   let navigate = useNavigate();
   const dispatch = useDispatch();
@@ -358,7 +343,6 @@ function Documents() {
     </IllustrationContainer>
    </Grid>
    </Grid>
-     
      : ''}
     </BodyGrid>
     </BodyContainerGrid>

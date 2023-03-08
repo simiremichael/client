@@ -1,27 +1,18 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import styled from '@emotion/styled';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import { NavLink, useLocation} from "react-router-dom";
-import { useNavigate, redirect } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { dataTool } from 'echarts';
-import { logout, selectCurrentAgent, setAgents } from '../../services/features/agentSlice';
-import { useLogoutAgentMutation,  useAgentRefreshQuery } from '../../services/api/propertyAPI';
+import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useAppSelector } from '../../app/hooks';
+import { selectCurrentAgent } from '../../services/features/agentSlice';
+import { useLogoutAgentMutation } from '../../services/api/propertyAPI';
 import { ToastContainer } from 'react-toastify';
 import LogoutIcon from '@mui/icons-material/Logout';
           
-
-// import BackgroundImg from '../../images/bank_avater.jpg';
-
 const StyledBox = styled(Box)`
-
-`
-const BodyContainer = styled.div`
 `
 const BodyContainerGrid = styled(Grid)`
-
 `
 const BodyGrid = styled(Grid)`
 background-color: #F8F8FF;
@@ -96,12 +87,6 @@ justify-content: space-between;
 border-radius: 5px;
 width: 120px;
 cursor: pointer;
-
-`
-const Input = styled.input`
-height: 25px;
-outline: none;
-border: none;
 `
 const ProfilePix = styled.img`
 width: 30px;
@@ -280,17 +265,9 @@ padding-left: 20px;
 
 function DashBoard() {
 
-  let location = useLocation();
-  // const agent = props.agent;
   const {agent} = useAppSelector(selectCurrentAgent);
-  const [logoutAgent, {isLoading, isSuccess}] = useLogoutAgentMutation();
+  const [logoutAgent] = useLogoutAgentMutation();
  let navigate = useNavigate();
-const dispatch = useDispatch();
-const appDispatch = useAppDispatch();
-// useEffect(() => {
-//   appDispatch(setAgents({ agent: data, token: data?.token, refreshToken: data?.token}));
-// }, []);
-
 
     const [sidebar, setSidebar] = useState(false);
     const [info, setInfo] = useState(true)
@@ -309,13 +286,6 @@ const appDispatch = useAppDispatch();
       navigate("/client-login");
     }
       
-      // useEffect(() => {
-      //  if(isSuccess) {
-      //   navigate("/client-login");
-      //  }
-      // }, [logoutAgent, isSuccess]);
-// console.log(agent)
-  
     return (
       <StyledBox>
       <StyledGrid container>
@@ -330,7 +300,6 @@ const appDispatch = useAppDispatch();
       {agent ? <LogoutIcon sx={{color: '#fff', cursor: 'pointer'}} onClick={handleLogout} /> :  <LogoutBtn onClick={handleLogout}>Click to login</LogoutBtn>}
       <BurgerMenu onClick={handleSidebar} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z" /></BurgerMenu>
         </LeftContainer>
-
        </LeftInnerGrid>
        <Grid item lg={10} md={10} sm={8} xs={8} >
       <RightContainer>
@@ -466,7 +435,6 @@ const appDispatch = useAppDispatch();
       </Card>
       </Grid>
      </Grid>
-
      <Grid container spacing={4}>
      <Grid item lg={4} md={4} sm={12} xs={12}>
      <Card>
@@ -486,11 +454,8 @@ const appDispatch = useAppDispatch();
      </Grid>
      </Grid>
        </CardContainer>
-      
-       
        : ''}
        { !info ? <div>TIMELINE</div>
-        
        : ''
        }
       </BodyGrid>

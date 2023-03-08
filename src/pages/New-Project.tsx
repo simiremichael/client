@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import styled from '@emotion/styled';
-import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import NavBar from '../components/NavBar';
@@ -8,7 +7,7 @@ import Footer from '../components/Footer';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import Tooltip from '@mui/material/Tooltip/Tooltip';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';

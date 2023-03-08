@@ -8,16 +8,12 @@ import { useNavigate } from 'react-router-dom';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import LogoutIcon from '@mui/icons-material/Logout';
-
-
+import Select from '@mui/material/Select';
 
 const StyledBox = styled(Box)`
 margin-top: 40px;
 `
 const StyledContainer = styled(Container)`
-
 `
 const Title = styled.h1`
 margin-bottom: 40px;
@@ -43,7 +39,6 @@ width: 40px;
 height: 40px;
 cursor: pointer;
 `
-
 
 function PropertyScoutingForm() {
 

@@ -1,19 +1,8 @@
-import {
-    BaseQueryFn,
-    createApi,
-    FetchArgs,
-    fetchBaseQuery,
-    FetchBaseQueryError,
-  } from '@reduxjs/toolkit/query';
-  import { Mutex } from 'async-mutex';
+import { fetchBaseQuery } from '@reduxjs/toolkit/query';
 import { RootState } from '../../app/store';
   import { setAgents, logout } from '../features/agentSlice';
 import { setUsers, logoutUsers } from '../features/userSlice';
 import { setCompanies, companyLogout } from '../features/companySlice';
-import AgentPropertyPaginate from '../../crm/components/AgentPropertyPagination';
-import CompanyPropertyPaginate from '../../admin/components/companyPropertyPagination';
-
-
 
 const baseQuery = fetchBaseQuery({
   baseUrl: process.env.REACT_APP_SERVER_URL || 'http://localhost:5000',
@@ -39,9 +28,7 @@ const baseQuery = fetchBaseQuery({
     
 }
 })
-
 // BaseQueryFn< string | FetchArgs, unknown, FetchBaseQueryError>
-
    const customFetchBase = async (args: any, api: any, extraOptions: any) => {
    
     let result = await baseQuery(args, api, extraOptions);

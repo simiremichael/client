@@ -8,23 +8,18 @@ import { useGetPropertyQuery, useUpdatePropertyMutation } from '../../services/a
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import { Chip, TextField, Theme, useTheme } from '@mui/material';
 import DoneIcon from '@mui/icons-material/Done';
 import LinearProgress from '@mui/material/LinearProgress';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { toast } from 'react-toastify';
-import { getPreEmitDiagnostics } from 'typescript';
 
 const StyledBox = styled(Box)`
-
 `
 const StyledContainer = styled(Container)`
 margin: 30px 0;
 `
-const FileContainer = styled.div`
-
- `
  const SingleFile = styled.input`
  margin-bottom: 10px;
  `
@@ -52,10 +47,8 @@ justify-content: start;
  const VidContainer = styled.div`
   `
  const VideoUrl = styled(TextField)`
-
  `
  const TourUrl = styled(TextField)`
-
  `
  const NextButton = styled.button`
  border: none;
@@ -70,7 +63,6 @@ justify-content: start;
  cursor: pointer;
  `
  const Form = styled.form`
- 
  `
  const parkings = [
   'Garage',
@@ -82,7 +74,6 @@ justify-content: start;
 'Detached garage',
  'Valet parking',
   'Carport'
- 
 ];
 const securities = [
  'Alarm',
@@ -157,7 +148,6 @@ const hvacs = [
       },
     },
   };
-  
 
 function PropertyEditPage() {
 
@@ -168,8 +158,7 @@ function PropertyEditPage() {
  hvac: [], comfort: [], security: [], address1: '', address2: '', street: '', house: '', location: '', state: '', 
  postCode: '', lga: '', images: [], size: '', price: '', category: '', propertyTax: '', electricity: '', water: '', serviceCharge: '',
  utilities: '', taxes: '',video: '',tour: '',propertyType: '', creator: '', propertyGroup: '', paymentType: ''}
- const [edit, setEdit] = useState(initialValue);
-console.log(edit)          
+ const [edit, setEdit] = useState(initialValue);        
 
 const [imgstring3, setImgstring3] = useState('')
   const [imgstring4, setImgstring4] = useState('')
@@ -490,10 +479,6 @@ const [imgstring3, setImgstring3] = useState('')
     const slideArray = new Array([imgstring1, imgstring2, imgstring3, imgstring4, imgstring5, imgstring6, imgstring7, imgstring8, imgstring9, imgstring10, imgstring11, imgstring12])
     {/* @ts-ignore:next-line */}    
     setEdit({...edit, images: imgarray, slideImages: slideArray});
-    // const imgarray = new Array([{ img:imgstring1}, {img:imgstring2}, {img:imgstring3}, {img:imgstring4}, {img:imgstring5}, {img: imgstring6}, {img:imgstring7}, {img:imgstring8}, {img:imgstring9}, {img:imgstring10}, {img:imgstring11}, {img:imgstring12}]);
-    // {/* @ts-ignore:next-line */}                        
-    // setEdit({...edit, images: imgarray});
-    // console.log(imgarray);
   }
   
 
@@ -525,9 +510,9 @@ const handleChange = (e: any) => {
       }
     } catch (error) {
       console.error('rejected', error);
-   
     }
   };
+  
   useEffect(() => {
     if(isSuccess) { 
       navigate('/agentproperties')

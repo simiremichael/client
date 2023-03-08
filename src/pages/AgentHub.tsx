@@ -1,7 +1,5 @@
 import React from 'react';
-import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import styled from '@emotion/styled';
 import { Box, Grid } from '@mui/material';
 import ArrowBackIosSharpIcon from '@mui/icons-material/ArrowBackIosSharp';
@@ -128,8 +126,7 @@ margin-top: 60px;
 `
 
 function AgentHub() {
-   
-
+  
   const navigate = useNavigate();
 
   return (
@@ -205,7 +202,6 @@ function AgentHub() {
     </Grid>
     <Grid item lg={2} md={2} sm={1} xs={0}></Grid>
     </Grid>
-    
     <Grid container spacing={3}>
     <Grid item lg={2} md={2} sm={1} xs={0}></Grid>
     <Grid item lg={8} md={8} sm={10} xs={12}>
@@ -236,7 +232,6 @@ function AgentHub() {
     </BottomContainer>
         </Grid>
         <Grid item lg={3} md={3} sm={2} xs={12}>
-
         </Grid>
         <Grid item lg={12} md={12} sm={12} xs={12}>
         <Divider></Divider>

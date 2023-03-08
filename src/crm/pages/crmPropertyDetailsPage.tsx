@@ -352,9 +352,8 @@ function CrmPropertyDetailsPage() {
         }
     let { cpdId } = useParams();
     const { data} = useGetPropertyQuery(cpdId);   
- console.log(data);
+
   return (
-    
     <StyledBox>
     <StyledGrid container>
     <StyledContainer>

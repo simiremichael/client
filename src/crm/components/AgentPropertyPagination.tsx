@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
 import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
-import { useAppSelector } from '../../app/hooks';
 import { selectCurrentAgentProperty} from '../../services/features/agentPropertySlice';
 
 function AgentPropertyPaginate(props: {page: any}) {

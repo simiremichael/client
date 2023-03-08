@@ -3,17 +3,15 @@ import styled from '@emotion/styled';
 //import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import { Link, NavLink, useNavigate, useParams, useSearchParams} from "react-router-dom";
+import { Link, NavLink, useNavigate, useSearchParams} from "react-router-dom";
 //import Avatar from '@mui/material/Avatar';
 import imggif from '../../images/imggif1.gif';
 import { useAppSelector } from '../../app/hooks';
-import { logout, selectCurrentAgent } from '../../services/features/agentSlice';
+import { selectCurrentAgent } from '../../services/features/agentSlice';
 import { useDispatch } from 'react-redux';
-import { useDeletePropertyMutation, useGetAgentCompanyQuery,  useGetPropertiesByAgentQuery, useLogoutAgentMutation, useUpdatePropertyMutation} from '../../services/api/propertyAPI';
+import { useDeletePropertyMutation, useGetPropertiesByAgentQuery, useLogoutAgentMutation } from '../../services/api/propertyAPI';
 import { selectCurrentAgentProperty, setAgentProperties } from '../../services/features/agentPropertySlice';
 import { useAppDispatch } from '../../app/store';
-import { setProperties } from '../../services/features/propertySlice';
-import jwt_decode from 'jwt-decode';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -21,12 +19,8 @@ import { Paper } from '@mui/material';
 import AgentPropertyPaginate from '../components/AgentPropertyPagination';
 
 const StyledBox = styled(Box)`
-
-`
-const BodyContainer = styled.div`
 `
 const BodyContainerGrid = styled(Grid)`
-
 `
 const BodyGrid = styled(Grid)`
 background-color: #F8F8FF;
@@ -105,12 +99,6 @@ cursor: pointer;
 @media screen and (max-width: 680px) {
     width: auto;
 }
-
-`
-const Input = styled.input`
-height: 25px;
-outline: none;
-border: none;
 `
 const ProfilePix = styled.img`
 width: 30px;
@@ -346,9 +334,6 @@ padding-left: 20px;
   background-color: #f8f8ff;
  }
  `
- const ActivitySvg = styled.svg`
- 
- `
  const PropertyImg = styled.img`
  width: 100%; 
  height: 90%; 
@@ -418,23 +403,17 @@ const UserImg = styled.img`
 function Properties() {
 
   const initialValue = {propertyGroup: '', propertyType: '', }
-  // const [data, setData] = useState(false)
-   // let navigate = useNavigate();
     const [sidebar, setSidebar] = useState(false);
-    const [info, setInfo] = useState(false)
     const [reveal, setReveal] = useState(false);
     const [all, setAll] = useState(true);
     const [active, setActive] = useState(false);
     const [reserved, setReserved] = useState(false);
     const [sold, setSold] = useState(false);
     const [archive, setArchive] = useState(false);
-    const [formData, setFormData] = useState(initialValue);
-    let [searchParams, setSearchParams] = useSearchParams();
+    //const [formData, setFormData] = useState(initialValue);
+    //let [searchParams, setSearchParams] = useSearchParams();
     const handleSidebar = () => {
       setSidebar(!sidebar);
-    }
-    const handleReveal = () => {
-      setReveal(!reveal)
     }
     const handleAll = () => {
       setAll(true)
@@ -474,15 +453,15 @@ function Properties() {
   
     const {agent} = useAppSelector(selectCurrentAgent);
     let navigate = useNavigate();
-    const dispatch = useDispatch();
+    //const dispatch = useDispatch();
     {/* @ts-ignore:next-line */}
-    // const tokenData = jwt_decode(token)
+
     const page = searchParams.get('page') || 1;
   
     {/* @ts-ignore:next-line */}
     const agentId = agent?.result?._id;
     const {agentProperty} = useAppSelector(selectCurrentAgentProperty);
-    const { data, error, isLoading } = useGetPropertiesByAgentQuery({agentId, page}, {refetchOnMountOrArgChange: true })
+    const { data } = useGetPropertiesByAgentQuery({agentId, page}, {refetchOnMountOrArgChange: true })
     const [deleteProperty ] = useDeletePropertyMutation();
     const [logoutAgent ] = useLogoutAgentMutation();
 
@@ -500,8 +479,6 @@ function Properties() {
           }
         }, [agentId, appDispatch, data]);
      
-  // console.log(compData)
-
     return (
       <StyledBox>
       <StyledGrid container>
@@ -571,7 +548,6 @@ function Properties() {
       </IllustrationContainer>
      </Grid>
      </Grid>
-       
        : 
        <>
        <Grid container>
@@ -669,7 +645,6 @@ function Properties() {
             <Activityinput  type='search'  />
           </InnerActivityContainer> 
             </Grid>
-
             <Grid item lg={0.5} md={0.5} sm={0.5} xs={0.5}>
           <ActivityHeading style={{textAlign: 'start', paddingLeft: '10%'}}>Edit</ActivityHeading>
          <InnerActivityContainer>
@@ -685,10 +660,8 @@ function Properties() {
             </Grid>
             </Grid>
             </BodyTopContainer>
-              
               {/* @ts-ignore:next-line */}
              {agentProperty?.agentProperties?.map((result: any) =>  ( 
-            
             <BodyBottomContainer key={result._id}>
             <Grid container>
             <Grid item lg={0.5} md={0.5} sm={0.5} xs={0.5}>
@@ -778,7 +751,6 @@ function Properties() {
              ))}
        </PropertyBodyContainer>
        </>
-       
        }
        <Paper elevation={2} sx={{ background: 'inherit', width: '100%', marginTop: 2, marginBottom: 2, display: 'flex', justifyContent: 'center'}}>
       <AgentPropertyPaginate page={page} />

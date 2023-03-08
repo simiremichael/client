@@ -9,8 +9,7 @@ import Search from '../miniSearch/Search';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import PropertyCard from '../card/PropertyCard';
+import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useCommercialQuery } from '../services/api/propertyAPI';
@@ -391,12 +390,6 @@ const StyledLink = styled(Link)`
  `
 
 function Commercial() {
-  
- // const [sort, setSort] = useState('');
-  
-  // const handleSort = (event: SelectChangeEvent) => {
-  //   setSort(event.target.value as string);
-  // };
 
   let [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate()
@@ -686,12 +679,6 @@ function Commercial() {
                     <Img src={item?.img} />
                   </SplideSlide>   
                    ))}
-                  {/* <SplideSlide>
-                    <Img src="../images/pexels2.jpg" alt="Image 2" />
-                  </SplideSlide>
-                  <SplideSlide>
-                    <Img src="../images/pexels3.jpg" alt="Image 3" />
-                  </SplideSlide> */}
                 </Splide>
                 <VerifyContainer>
                   <VerifySvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256zM371.8 211.8C382.7 200.9 382.7 183.1 371.8 172.2C360.9 161.3 343.1 161.3 332.2 172.2L224 280.4L179.8 236.2C168.9 225.3 151.1 225.3 140.2 236.2C129.3 247.1 129.3 264.9 140.2 275.8L204.2 339.8C215.1 350.7 232.9 350.7 243.8 339.8L371.8 211.8z" /></VerifySvg>
@@ -750,10 +737,6 @@ function Commercial() {
                     <WhatsApp>WhatsApp</WhatsApp>
                   </WhatsAppContainer>
                   </Links>
-                  {/*
-    <SyncContainer></SyncContainer>
-    <Option></Option>
-    */}
                 </BottomContainer>
                 <BottomContainer1>
                 <Links href={`tel:${result?.phone}`}>
@@ -777,7 +760,6 @@ function Commercial() {
                 </BottomContainer1>
                 </StyledGrid>
                 ))}
-   
         </StyledContainers>
         <Paper elevation={2} sx={{ background: 'inherit', marginTop: 2, marginBottom: 2, display: 'flex', justifyContent: 'center'}}>
       <CommercialPaginate page={page} />

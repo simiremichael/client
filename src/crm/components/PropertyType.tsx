@@ -3,15 +3,13 @@ import styled from '@emotion/styled';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import { NavLink, useParams} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useGetPropertyQuery, useUpdatePropertyMutation } from '../../services/api/propertyAPI';
 
 const StyledBox = styled(Box)`
-
 `
 const StyledContainer = styled(Container)`
 margin-bottom: 20px;
@@ -60,12 +58,6 @@ const PropertyTypeLink = styled(NavLink)`
   background-color:#008080;
   color: #ffffff;
 }
- `
-  const SelectDiv = styled.div`
-  color: #383838;
- padding: 8px 8px 10px 8px;
- cursor: pointer;
- border-bottom: 3px solid #D3D3D3;
  `
  const SelectLabel = styled.label`
  text-align: start;
@@ -146,14 +138,6 @@ font-size: 0.8rem;
  const ErrMessage = styled.h5`
  color: red;
  `
- const Commercial = styled.p`
- font-size: 1.2rem;
- color: #383838;
- `
- const Land = styled.p`
- font-size: 1.2rem;
- color: #383838;
- `
 
 function PropertyType(props: { updateProperty: any, property: any, setProperty: any}) {
 
@@ -162,8 +146,6 @@ function PropertyType(props: { updateProperty: any, property: any, setProperty: 
   const [select3, setSelect3] = useState(false);
   const [select4, setSelect4] = useState(false);
   const [select5, setSelect5] = useState(false);
-  //const [input, setInput] = useState('');
-  //const [isChecked, setIsCheck ] = useState(false);
  
  const property = props.property;
  const setProperty = props.setProperty;
@@ -173,9 +155,9 @@ function PropertyType(props: { updateProperty: any, property: any, setProperty: 
       propertyGroup: property.propertyGroup
     }
   });
+
   let navigate = useNavigate();
-                              
-              
+                                      
   const handleSelect1 = (state: boolean) => {
     setSelect1(!state)
     setSelect2(false)
@@ -212,13 +194,6 @@ function PropertyType(props: { updateProperty: any, property: any, setProperty: 
     setSelect4(false)
     setSelect1(false)
   };
-/*
-  const handleGroupChange = (e: any) => {
-   setInput(e.target.value)
-  // setIsCheck(!isChecked)
-  }
-*/
-  
 
   const notify = () => {
     toast.success('Saved..')
@@ -231,8 +206,6 @@ function PropertyType(props: { updateProperty: any, property: any, setProperty: 
     navigate('/agentproperties/location')
   };
   
-  
-
   const ref = useRef<HTMLDivElement>(null);
   
   useEffect(() => { 
@@ -247,6 +220,7 @@ function PropertyType(props: { updateProperty: any, property: any, setProperty: 
   }
   window.addEventListener('click', closeDropDown, true)
 }, []);
+
   return (
     <div  ref={ref}>
 <StyledBox >
@@ -382,7 +356,6 @@ function PropertyType(props: { updateProperty: any, property: any, setProperty: 
   </ResidentContainer>
   )}
   </Grid>
-
   <Grid item lg={2.4} md={2.4} sm={2.4} xs={12}>
  <SelectPropertyTypeContainer>
   <SelectPropertyType type='radio' id='off' {...register('propertyGroup',{required: 'Property category is required....'})} name='propertyGroup'   value='offplan'  />
@@ -456,7 +429,6 @@ function PropertyType(props: { updateProperty: any, property: any, setProperty: 
  <CloseButton onClick={() => navigate('/agentproperties')} type='button'>Close</CloseButton>
  <NextButton type='submit'>Continue</NextButton>
  </ButtonContainer>
-
   </Grid>
   </Form> 
   </FormContainer>

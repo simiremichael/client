@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import MortgageNavBar from '../components/MortgageNavBar';
 import {useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import CallIcon from '@mui/icons-material/Call';
@@ -91,12 +90,6 @@ align-items: center;
 cursor: pointer;
 padding: 8px 10px 9px;
 `
-const BtnInput1 = styled(BtnInput)`
-
-`
-const Label1 = styled(Label)`
-
-`
 const TopContainer = styled.div`
 display: flex;
 margin-bottom: 10px;
@@ -142,7 +135,7 @@ function MortgateApplication() {
  
   const percent =  20;
   const continous = range <= 1 ? 2 : 1;
-  const continue2 = range == 2 ? 1.25 : 1;
+  const continue2 = range === 2 ? 1.25 : 1;
   let result = value / 100 * payment;
   const loanAmount = value - result;
   const monthlyPayment = loanAmount / range;
@@ -167,11 +160,9 @@ function MortgateApplication() {
      <StyledContainer>
       <Heading>MORTGAGE APPLICATION</Heading>
       <Form>
-        
         <TextField  sx={{marginBottom: 1}} size='small' fullWidth type='text' id="outlined-basic" label="Full name" variant="outlined" />
         <TextField  sx={{marginBottom: 1}} size='small' fullWidth type='email' id="outlined-basic" label="Email" variant="outlined" />
         <TextField  size='small' fullWidth type='numder' id="outlined-basic" label="Phone" variant="outlined" />
-      
         <Divider />
       <Title>What type of mortgage are you looking to get?</Title>
       <TopContainer>
@@ -221,8 +212,6 @@ function MortgateApplication() {
           <Label htmlFor='type2'>Full building</Label>  
           <BtnInput type='radio' value="Land" name='type-of-property' id='type3'/>
           <Label htmlFor='type3'>Land</Label>  
-          {/* <BtnInput type='radio' value="i haven't decided yet" name='when' id='three'/>
-          <Label htmlFor='three'>i haven't decided yet</Label> */}
           </TopContainer>
           <Divider />
           <Title>Are you interested in completed properties or still under construction?</Title>

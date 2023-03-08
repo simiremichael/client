@@ -122,48 +122,7 @@ font-weight: 700;
 color: #383838;
 `
 const Duration = styled.div`
-
 `
-// const InterestContainer = styled.div`
-
-// `
-// const Interest = styled.p`
-// text-align: start;
-// `
-// const Rate = styled.p`
-
-// `
-// const RateInputContainer = styled.div`
-// border: 0.5px solid #c4c4c4;
-// display: flex;
-// align-items: center;
-// padding: 0 5px;
-// justify-content: center;
-// `
-
-// const RateInput = styled.p`
-// font-weight: 700;
-
-// `
-// const RateBtn = styled.div`
-// width: 40px;
-// height: 40px;
-// border: 0.5px solid #c4c4c4;
-// border-radius: 20px;
-// display: flex;
-// align-items: center;
-// justify-content: center;
-// font-size: 1.5rem;
-// cursor: pointer;
-// margin-left: 8px;
-// `
-// const RateContainer = styled.div`
-// display: flex;
-// justify-content: space-between;
-// `
-// const BtnContainer = styled.div`
-// display: flex;
-// `
 const RateDetails = styled.p`
 text-align: start;
 color: #494949;
@@ -220,27 +179,6 @@ color: #494949;
 
 function Calculator() {
 
-// const [select1, setSelect1] = useState(true)
-// const [select2, setSelect2] = useState(false)
-// const [select3, setSelect3] = useState(false)
-
-
-// const handleSelect1 = (e: any) => {
-//     setSelect1(true)
-//     setSelect2(false)
-//     setSelect3(false)
-// }    
-// const handleSelect2 = () => {
-//     setSelect2(true)
-//     setSelect1(false)
-//     setSelect3(false)
-// }
-// const handleSelect3 = () => {
-//     setSelect3(true)
-//     setSelect2(false)
-//     setSelect1(false)
-// }
-
 const propertyValue = 500000
 const [payment, setPayment] = useState(50)
   const [range, setRange] = useState(6)
@@ -251,7 +189,7 @@ const [payment, setPayment] = useState(50)
 
 // console.log(percent)
 const continous = range <= 1 ? 2 : 1;
-const continue2 = range == 2 ? 1.25 : 1;
+const continue2 = range === 2 ? 1.25 : 1;
 let result = value / 100 * payment;
   const loanAmount = value - result;
   const monthlyPayment = loanAmount / range;
@@ -326,19 +264,6 @@ let result = value / 100 * payment;
              <Duration><RangeOutput>{range}</RangeOutput>months</Duration>
             </LoanDurationContainer>
             <RangeInput value={range} onChange={(e:any) => setRange(e.target.value)} type='range' min={1} max={12} name='month' id='month' />
-            {/* <InterestContainer>
-                <Interest>Interest rate</Interest>
-            </InterestContainer> */}
-            {/* <RateContainer>
-            <RateInputContainer>
-            <RateInput>{interestRate.toLocaleString()}</RateInput>
-            <Span style={{marginLeft: 10, fontWeight: 700}}>NGN</Span>
-            </RateInputContainer>
-            <BtnContainer>
-                <RateBtn>-</RateBtn>
-                <RateBtn>+</RateBtn>
-            </BtnContainer>
-            </RateContainer> */}
             <RateDetails>The interest rate is the rate you borrow your loan at and it affects your monthly repayments. Interest rates vary, but are currently set at between 4.75% and 5%</RateDetails>
             <Divider />
             <RepaymentContainer>

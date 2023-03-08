@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect, useCallback} from 'react';
+import React, {useState} from 'react';
 import styled from '@emotion/styled';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -6,17 +6,11 @@ import Grid from '@mui/material/Grid';
 import { NavLink} from "react-router-dom";
 import { useForm } from 'react-hook-form';
 import { TextareaAutosize, TextField} from '@mui/material';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-//import FileBase from 'react-file-base64';
-import { FileUploader } from "react-drag-drop-files";
-
-const fileTypes = ["JPG", "PNG", "GIF"];
 
 const StyledBox = styled(Box)`
-
 `
 const StyledContainer = styled(Container)`
 margin-bottom: 20px;
@@ -67,19 +61,6 @@ const PropertyTypeLink = styled(NavLink)`
   front-weight: bold;
  }
  `
- const SelectPropertyTypeContainer = styled.div`
- display: flex;
- border: none;
- outline: none;
- background-color: inherit;
- `
- const SelectPropertyType = styled.input`
- display: none;
- :checked + Label {
-  background-color:#008080;
-  color: #ffffff;
-}
- `
  const Form = styled.form`
 
 `
@@ -125,31 +106,17 @@ marging-top: 8px;
 
 function VideoAnd3Dtours(props: { updateProperty: any, property: any, setProperty: any}) {
 
-  //const [input, setInput] = useState({video: '', tour: ''});
-  const [isChecked, setIsCheck ] = useState(false);
-  const [category, setCategory] = useState(false);
-  const [price, setPrice] = useState('');
-  const [dragActive, setDragActive] = React.useState(false);
-  //const [toggle1, setToggle1] =useState(false);
-  //console.log(input);
-
   const property = props.property;
   const setProperty = props.setProperty;
-  const { register, formState: { errors },handleSubmit } = useForm({
+  const { register,handleSubmit } = useForm({
     defaultValues: {
       video: property.video,
       tour: property.tour,
     }
   });
+
  let navigate = useNavigate();
   
- //const inputRef = React.useRef(null);
- //const { getRootProps, getInputProps } = useDropzone({});
-
- const fileTypes = ["JPG", "PNG", "GIF"];
-
-
-
  const onSubmit = (data: any) => {
   toast.success('Saved..')
  console.log(data);
@@ -158,15 +125,6 @@ function VideoAnd3Dtours(props: { updateProperty: any, property: any, setPropert
 
 };
 
-const handleCategory = () => {
-  setCategory(!category);
-}
-
-/*
-const handleChange = (event: SelectChangeEvent) => {
-  setPrice(event.target.value as string);
-};
-*/
 const handleBackButton = () => {
   navigate('/agentproperties/photos')
 }

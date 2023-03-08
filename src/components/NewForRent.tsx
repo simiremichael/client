@@ -155,7 +155,6 @@ function NewForRent () {
       <Title>Something New Everyday</Title>
       <PropertyType>New properties <Links to='/rent'>For Rent</Links></PropertyType>
       <CardContainer>
-      
       <Splide
       options={ {
         gap : '1rem',

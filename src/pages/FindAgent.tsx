@@ -249,13 +249,12 @@ function FindAgent() {
 
   const handleSearch = () => {
   // e.preventDefault();
-
   }
 
-  console.log(searchData)
   const handleToggle = () => {
     setToggle(!toggle);
   }
+  
   return (
     <>
       <NavBar />

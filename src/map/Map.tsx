@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import Map, {Marker, Popup} from 'react-map-gl';
-import getCenter from 'geolib/es/getCenter';
-import { useNavigate, useParams } from 'react-router-dom';
+import Map, {Marker} from 'react-map-gl';
 import { useGetPropertyQuery } from '../services/api/propertyAPI';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { selectCurrentMapData, setMapData } from '../services/features/mapSlice';
+import { useParams } from 'react-router-dom';
 
 const Img = styled.img`
 width: 80px;
@@ -17,7 +16,6 @@ function GeoMap() {
 
     let {propId} = useParams();
   const { data} = useGetPropertyQuery(propId); 
-  const [showPopup, setShowPopup] = useState(true);
   const dispatch = useAppDispatch();
   //, {refetchOnMountOrArgChange: true }
   

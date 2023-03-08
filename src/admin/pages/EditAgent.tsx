@@ -9,7 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from '../components/Sidebar';
 import Navbar from '../components/Navbar';
-import { useAddAgentMutation, useGetAgentQuery, useUpdateAgentMutation } from '../../services/api/propertyAPI'
+import { useGetAgentQuery, useUpdateAgentMutation } from '../../services/api/propertyAPI'
 
 
 const StyledContainer = styled(Container)`
@@ -104,8 +104,6 @@ function EditAgent() {
     const [image, setImage] = useState('')
 
    const handleChange = (e: any) => {
-  //  const name = e.target.name;
-  //  const value = e.target.value;
    setAgent(({...agent, [e.target.name]: e.target.value}))
    }
 
@@ -144,8 +142,7 @@ let {agId} = useParams();
         
       } catch (error) {
         console.error('rejected', error);
-      }
-        // navigate('/adminHomepage')s        
+      }      
     }
 useEffect(() => { 
     if(isSuccess) {

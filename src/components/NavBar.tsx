@@ -1,13 +1,13 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from '@emotion/styled';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import { NavLink, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import TextField from '@mui/material/TextField';
-import {InputAdornment, IconButton, ClickAwayListener, Drawer, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Tooltip, Menu} from '@mui/material';
+import { ClickAwayListener, Tooltip, Menu, IconButton} from '@mui/material';
 import FormControl from '@mui/material/FormControl';
-import { useNavigate, redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Grid from '@mui/material/Grid';
 import { useSigninUserMutation, useSignupUserMutation,  useGoogleSignInMutation, useLogoutUserMutation} from '../services/api/propertyAPI';
 import jwt_decode from 'jwt-decode';
@@ -20,15 +20,6 @@ import { selectCurrentUser, setUsers, logoutUsers } from '../services/features/u
 import { useDispatch } from 'react-redux';
 import MenuIcon from '@mui/icons-material/Menu';
 import LogoutIcon from '@mui/icons-material/Logout';
-import Collapse from '@mui/material/Collapse';
-import {motion} from 'framer-motion';
-
-
-
-//import MenuItem from '@mui/material/MenuItem';
-//import MenuList from '@mui/material/MenuList';
-//import Visibility from '@mui/icons-material/Visibility';
-//import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 const StyledBox = styled(Box)`
 width: 100%;
@@ -101,17 +92,9 @@ const IconButtons = styled(IconButton)`
   display: none;
 }
 `
-const NavBox = styled(Box)`
-padding-bottom: 10px;
-@media screen and (min-width: 901px) {
-  display: none;
- 
-}
-`
 const LoginContainer = styled.div`
 @media screen and (max-width: 900px) {
   display: none;
- 
 }
 height: 80px;
 display: flex;
@@ -256,13 +239,9 @@ width: 100%;
 flex-direction: column;
 justify-content: space-around;
 `
-const UserName = styled.h4`
-
-`
 const GoogleContainer = styled.div`
 width: 100%;
 `
-
 const Div = styled.div`
 width: 100%;
 color: #fff;
@@ -270,32 +249,11 @@ margin-top: 10px;
 font-size: 0.8rem;
 margin-bottom: 5px;
 `
-const ProfileContainer = styled.div`
-margin-left: 10px;
-`
-
 const TopContainer = styled.div`
 display: flex;
 margin-bottom: 15px;
 `
-const BtnInput = styled.input`
-display: none;
-:checked + Label {
-  background-color:#008080;
-  color: #ffffff;
-}
-`
-const Label = styled.label`
-position: relative;
-color: #fff;
-font-size: 15px;
-border: 1px solid #fff;
-border-radius: 5px;
-margin-right: 5px;
-align-items: center;
-cursor: pointer;
-padding: 8px 10px 9px;
-`
+
 const ClickAwayDiv = styled.div`
 margin: 0;
 `
@@ -358,42 +316,27 @@ function NavBar() {
 
   const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '', familyName: '', givenName: '', picture: '', role: ''}
 
-  // const AgentInitialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '', familyName: '', area: '', givenName: '', picture: '', role: ''}
     const [login, setLogin] = useState(false);
-    const [showPassword, setShowPassword] = useState(false)
+    const [showPassword, setShowPassword] = useState(false);
      const [isSignup, setIsSignup] = useState(false);
-     const [userFormData, setUserFormData] = useState(initialState)
-    //  
-      const [googleData, setGoogleData] = useState('');
+     const [userFormData, setUserFormData] = useState(initialState);
+     // const [googleData, setGoogleData] = useState('');
       const [picture, setPicture] = useState('')
      let navigate = useNavigate();
      const [signinUser, { data, isError, error, isSuccess } ] = useSigninUserMutation()
-     const [googleSignIn, { data: data1, isError: isError1, error: error1, isSuccess: isSuccess1 } ] =  useGoogleSignInMutation()  
+     const [googleSignIn, { data: data1, isSuccess: isSuccess1 } ] =  useGoogleSignInMutation()  
       const [signupUser, {isSuccess: isSuccess2}] = useSignupUserMutation();
       const [logoutUser] = useLogoutUserMutation();
-  
-      // const [user, setUser] = useState(JSON.parse(localStorage.getItem('user') || 'false'));
-      // const [company, setCompany] = useState(JSON.parse(localStorage.getItem('company') || 'false'));
-      // const [agent, setAgent] = useState(JSON.parse(localStorage.getItem('agent') || 'false'));
-  
-      // const user = JSON.parse(localStorage.getItem("user") )
     
       const [open, setOpen] = useState(false);
     
       const handleDrawerOpen = () => {
         setOpen(!open);
       };
-    
-     
-    
-     const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword)
-    //  console.log(data)
-    let location = useLocation();
+   
     const dispatch = useAppDispatch()
     const switchMode = () => {
-      //preventDefault();
       setIsSignup((prevIsSignup) => !prevIsSignup);
-      //setShowPassword(false)
       }
       const toggleLogin = () => {
         setLogin(!login);
@@ -430,17 +373,6 @@ function NavBar() {
           console.log(error)
         }
       }, [isSuccess, isSuccess1, isSuccess2,setLogin, setIsSignup, dispatch, error, isError, data, data1])
-
-    //   useEffect(() => {
-    //     setUser(JSON.parse(localStorage.getItem('user') || 'false'))
-    //     // setCompany(JSON.parse(localStorage.getItem('company') || 'false'))
-    //     // setAgent(JSON.parse(localStorage.getItem('agent') || 'false'))
-    //     // const token = user?.token;
-    //     // if(token) {
-    //     //     const decodedToken = jwt_decode(token);
-    //     //     if (decodedToken.exp * 1000 < new Date().getDate()) handleLogout();
-    //     // }
-    // }, [location]) 
       
     const {user} = useAppSelector(selectCurrentUser);
     const handleChange = (e: any) => {
@@ -521,7 +453,7 @@ const handleUpload = async () => {
   }
   // const {user} = useAppSelector(selectCurrentUser);
 //console.log(user)
-console.log(data)
+
 
 const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
@@ -558,14 +490,6 @@ const handleCloseUserMenu = () => {
             <TitleContainer>
               <FormTitle>Sign in</FormTitle>
               </TitleContainer>
-              {/* <TopContainer>
-          <BtnInput type='radio' name='role' id='seaker' value='Home seeker' defaultChecked onChange={handleChange}/>
-          <Label htmlFor='seaker' onClick={handleSeaker}>Home seekers</Label>
-          <BtnInput type='radio' name='role' id='admin' value='admin' checked={formData.role === 'admin'} onChange={handleChange} />
-          <Label htmlFor='admin' onClick={handleAdmin}>Admin</Label>  
-          <BtnInput type='radio' name='role' id='agent' value='agent' checked={formData.role === 'agent'} onChange={handleChange} />
-          <Label htmlFor='agent' onClick={handleAgent}>Agent</Label> 
-           </TopContainer>  */}
               <FormControls sx={{input:{color: 'white'}, "& .MuiOutlinedInput-root": {"& > fieldset": {borderColor: "white" },}, "& .MuiInputLabel-root": {color: 'white'}, "& .MuiOutlinedInput-root.Mui-focused": {"& > fieldset": {borderColor: "white"}},  "& .MuiOutlinedInput-root:hover": {"& > fieldset": {borderColor: "white"}} }}>
           <TextFields autoComplete='off' id="outlined-basic" type='email' name='email' value={userFormData.email} onChange={handleChange} label="Enter your email" variant="outlined" size='small'  />
           <TextFields id="outlined-basic" type='password' name='password' value={userFormData.password} onChange={handleChange} label="Enter your password" variant="outlined" size='small'  />
@@ -680,10 +604,7 @@ const handleCloseUserMenu = () => {
             <MenuItems><StyledLink to='/offplan'>Offplan</StyledLink></MenuItems>
             <MenuItems><StyledLink to='/findAgent'>Find agent</StyledLink></MenuItems>
             <MenuItems><StyledLink to='/mortgage'>Mortgage</StyledLink></MenuItems>
-            {/* <MenuItems><StyledLink to='/propertyEditPage'>propertyEdit</StyledLink></MenuItems>
-            <MenuItems><StyledLink to='/adminHomepage'>AdminHomepage</StyledLink></MenuItems> */}
-           </UL>
-            
+           </UL> 
         </MenuItemsContainer>
         <IconButtons
             color="inherit"
@@ -698,8 +619,6 @@ const handleCloseUserMenu = () => {
            {/* @ts-ignore:next-line */}
           {/* <UserName>{user?.result?.name}</UserName> */}
          {user &&
-        //  <ProfileContainer>
-         
           <Box sx={{ flexGrow: 0 }}>
           <Tooltip title="Open settings">
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -724,15 +643,11 @@ const handleCloseUserMenu = () => {
             onClose={handleCloseUserMenu}
           >
              <LogoutIcon onClick={handleLogout} style={{paddingLeft: 10, paddingRight: 10, marginTop: 15, color: '#494949', cursor: 'pointer'}} />
-            {/* <LogoutBtn onClick={handleLogout}>logout</LogoutBtn> */}
           </Menu>
         </Box>
           
        } 
           {!user &&
-          // <LogoutIcon onClick={handleLogout} style={{color: '#494949', cursor: 'pointer'}}/> 
-        // <LoginButton type='button' onClick={handleLogout}> Log out</LoginButton>
-        
         <LoginButton type='button' onClick={toggleLogin}> Log in</LoginButton>    
         } 
          </LoginContainer> 
@@ -770,7 +685,7 @@ const handleCloseUserMenu = () => {
             onClose={handleCloseUserMenu}
           >
              <LogoutIcon onClick={handleLogout} style={{paddingLeft: 10, paddingRight: 10, marginTop: 15, color: '#494949', cursor: 'pointer', display: open ? '' : 'none' }} />
-            {/* <LogoutBtn onClick={handleLogout}>logout</LogoutBtn> */}
+
           </Menu>
         </Box>
                       {/* @ts-ignore:next-line */}
@@ -786,8 +701,6 @@ const handleCloseUserMenu = () => {
                   <NavMenuItems style={{display: open ? '' : 'none'}}><StyledLink to='/offplan'>Offplan</StyledLink></NavMenuItems>
                   <NavMenuItems style={{display: open ? '' : 'none'}}><StyledLink to='/findAgent'>Find agent</StyledLink></NavMenuItems>
                   <NavMenuItems style={{display: open ? '' : 'none'}}><StyledLink to='/mortgage'>Mortgage</StyledLink></NavMenuItems>
-                  {/* <MenuItems><StyledLink to='/propertyEditPage'>propertyEdit</StyledLink></MenuItems>
-    <MenuItems><StyledLink to='/adminHomepage'>AdminHomepage</StyledLink></MenuItems> */}
                   {/* {user &&
                      <LogoutIcon onClick={handleLogout} style={{ marginTop: 15, color: '#494949', cursor: 'pointer', display: open ? '' : 'none' }} />
                   } */}

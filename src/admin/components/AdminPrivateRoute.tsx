@@ -1,4 +1,3 @@
-import React from 'react'
 import { useSelector } from 'react-redux'
 import { selectCurrentCompany } from '../../services/features/companySlice';
 import AdminRedirect from './AdminRedirect';

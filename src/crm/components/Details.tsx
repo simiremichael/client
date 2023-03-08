@@ -1,19 +1,16 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState} from 'react';
 import styled from '@emotion/styled';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { NavLink} from "react-router-dom";
 import { useForm } from 'react-hook-form';
-import { TextareaAutosize, TextField} from '@mui/material';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { TextField} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { updateLanguageServiceSourceFile } from 'typescript';
 
 const StyledBox = styled(Box)`
-
 `
 const StyledContainer = styled(Container)`
 margin-bottom: 20px;
@@ -60,7 +57,6 @@ const PropertyTypeLink = styled(NavLink)`
  }
  `
  const Form = styled.form`
-
 `
  const ButtonContainer = styled.div`
  display: flex;
@@ -92,29 +88,18 @@ const PropertyTypeLink = styled(NavLink)`
   border-radius: 5px;
   cursor: pointer;
  `
- const ErrMessage = styled.h5`
- color: red;
- `
  const StyledTextField = styled(TextField)`
-
  `
  const InnerContainer = styled.div`
- 
  `
-
-
-
 function Details(props: { updateProperty: any, property: any, setProperty: any}) {
 
-  //const [input, setInput] = useState({uniqNo: '', bedroom: '', kitchen: '', livingRoom: '', Showerroom: '', bathroom: '', buildingYear: '', yearRenovated: '', lotSize: '' });
-  const [isChecked, setIsCheck ] = useState(false);
   const [category, setCategory] = useState(false);
   const [price, setPrice] = useState('');
-  //const [toggle1, setToggle1] =useState(false);
   
   const property = props.property;
   const setProperty = props.setProperty;
-  const { register, formState: { errors },handleSubmit } = useForm({
+  const { handleSubmit } = useForm({
     defaultValues: {
       uniqNo: property.uniqNo,
       bedroom: property.bedroom,
@@ -127,10 +112,9 @@ function Details(props: { updateProperty: any, property: any, setProperty: any})
       lotSize: property.lotSize 
     }
   });
+
  let navigate = useNavigate();
   
- 
-
  const onSubmit = (data: any) => {
   toast.success('Saved..')
  console.log(data);
@@ -138,14 +122,14 @@ function Details(props: { updateProperty: any, property: any, setProperty: any})
  navigate('/agentproperties/utilities')
 };
 
-const handleCategory = () => {
-  setCategory(!category);
-}
+// const handleCategory = () => {
+//   setCategory(!category);
+// }
 
 
-const handleChange = (e: any) => {
-  setPrice(e.target.value as string);
-};
+// const handleChange = (e: any) => {
+//   setPrice(e.target.value as string);
+// };
 
 const handleBackButton = () => {
   navigate('/agentproperties/propertySizeAndPrice')
@@ -188,9 +172,6 @@ const handleBackButton = () => {
         <Grid item lg={3} md={3} sm={4} xs={4}>
          <StyledTextField variant='outlined' label='LIVING ROOMS' type='NUMBER' name='livingRoom' value={property.livingRoom} onChange={(e: any) => setProperty({...property, livingRoom: e.target.value})} size='small' fullWidth />
         </Grid>
-        {/* <Grid item lg={3} md={3} sm={4} xs={4}>
-         <StyledTextField variant='outlined' label='SHOWER ROOMS' type='NUMBER' {...register('showerRoom')} name='showerRoom' value={property.showerRoom} onChange={(e: any) => setProperty({...property, showerRoom: e.target.value})}  size='small' fullWidth />
-        </Grid> */}
         <Grid item lg={3} md={3} sm={4} xs={4}>
          <StyledTextField variant='outlined' label='BATHROOMS' type='number' name='bathRoom' value={property.bathroom} onChange={(e: any) => setProperty({...property, bathroom: e.target.value})} size='small' fullWidth />
         </Grid>
@@ -200,9 +181,6 @@ const handleBackButton = () => {
         <Grid item lg={3} md={3} sm={4} xs={4}>
          <StyledTextField variant='outlined' label='YEAR RENOVATED' type='NUMBER' name='yearRenovated' value={property.yearRenovated} onChange={(e: any) => setProperty({...property, yearRenovated: e.target.value})} size='small' fullWidth />
         </Grid>
-        {/* <Grid item lg={3} md={3} sm={4} xs={4}>
-         <StyledTextField variant='outlined' label='LOT SIZE' type='NUMBER' {...register('lotSize')} name='lotSize' value={property.lotSize} onChange={(e: any) => setProperty({...property, lotSize: e.target.value})} size='small' fullWidth />
-        </Grid> */}
         </Grid>
      </InnerContainer>
       <ToastContainer />

@@ -1,9 +1,9 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from '@emotion/styled';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import { NavLink, useParams} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -12,15 +12,12 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 import { Theme, useTheme } from '@mui/material';
-import { useAddPropertyMutation, useGetPropertyQuery, useUpdatePropertyMutation } from '../../services/api/propertyAPI'
-//import Multiselect from 'multiselect-react-dropdown';
-
+import { useAddPropertyMutation } from '../../services/api/propertyAPI'
 
 const StyledBox = styled(Box)`
-
 `
 const StyledContainer = styled(Container)`
 margin-bottom: 20px;
@@ -53,12 +50,6 @@ font-weight: 400;
 color: #383838;
 margin-bottom: 0;
 `
-const FormInfo = styled.p`
-color: #494949;
-font-size: 0.7rem;
-text-align: start;
-margin-bottom: 30px;
-`
 const PropertyTypeLink = styled(NavLink)`
  text-decoration: none;
  color: #494949;
@@ -67,7 +58,6 @@ const PropertyTypeLink = styled(NavLink)`
  }
  `
  const Form = styled.form`
-
 `
  const ButtonContainer = styled.div`
  display: flex;
@@ -99,12 +89,7 @@ const PropertyTypeLink = styled(NavLink)`
   border-radius: 5px;
   cursor: pointer;
  `
- const ErrMessage = styled.h5`
- color: red;
- 
- `
  const InnerContainer = styled.div`
- 
  `
  const parkings = [
   'Garage',
@@ -116,7 +101,6 @@ const PropertyTypeLink = styled(NavLink)`
 'Detached garage',
  'Valet parking',
   'Carport'
- 
 ];
 const securities = [
  'Alarm',
@@ -197,12 +181,9 @@ function Features(props: { updateProperty: any, property: any, resetProperty: an
 
   const [addProperty, {isSuccess}] = useAddPropertyMutation();
   const theme = useTheme();
-  // const [input, setInput] = useState({condition: '',   pets: ''  })
- 
-
   const property = props.property;
   const setProperty = props.setProperty;
-  const { register, formState: { errors },handleSubmit } = useForm({
+  const { register } = useForm({
     defaultValues: {
       condition: property.condition,
       pets: property.pets,
@@ -221,12 +202,8 @@ const reset = props.resetProperty;
     await addProperty({...property}).unwrap();
     console.log('fulfilled')
     props.updateProperty({...property});
-//     const form = e.currentTarget;
-// const fileInput = Array.from(form.elements).find(({ name }) => name === 'file');
-// updateProperty({...property})
   } catch (error) {
     console.error('rejected', error);
- 
   }
 };
         
@@ -373,29 +350,8 @@ const [parking, setParking] = useState<string[]>([]);
           ))}
         </Select>
       </FormControl>
-    
-
-          {/*
-        <Select 
-     {...register('parking')} 
-     name='parking'
-     value={input.parking}
-     onChange={(e) => {setInput({...input, parking: e.target.value})}}
-     >
-      <Option defaultValue='garage'>Garage</Option>
-      <Option value='indoor parking'>Indoor parking</Option>
-      <Option value='on-street-parking'>On-street-parking</Option>
-      <Option value='off-street-parking'>Off-street-parking</Option>
-      <Option value='parking lot'>IParking lot</Option>
-      <Option value='attached garage'>Attached garage</Option>
-      <Option value='Detached garage'>Detached garage</Option>
-      <Option value='valet parking'>Valet parking</Option>
-      <Option value='carport'>Carport</Option>
-     </Select>
-  */}
         </Grid>
         <Grid item lg={12} md={12} sm={12} xs={12}>
-       
         <FormControl sx={{  width: '100%' }}>
         <InputLabel id="demo-multiple-chip-label">Comfort</InputLabel>
         <Select
@@ -428,30 +384,8 @@ const [parking, setParking] = useState<string[]>([]);
           ))}
         </Select>
       </FormControl>
-{/*
-        <Select 
-     {...register('paymentType')} 
-     name='paymentType'
-     value={input.comfort}
-     onChange={(e) => {setInput({...input, comfort: e.target.value})}}
-     >
-      <Option defaultValue='fire place'>Fire place</Option>
-      <Option value='fitness room'>Fitness room</Option>
-      <Option value='furnished'>Furniched</Option>
-      <Option value='home automation'>Home automation</Option>
-      <Option value='home cinema'>Home cinema</Option>
-      <Option value='sauna'>Sauna</Option>
-      <Option value='walk-in-closet'>Walk-in-closet</Option>
-      <Option value='wine cellar'>Wine cellar</Option>
-      <Option value='wheelchair access'>EWheelchar access</Option>
-      <Option value='EV charging'>EV charging</Option>
-      <Option value='no smoking'>No smoking</Option>
-      <Option value='waterfront'>Waterfront</Option>
-     </Select>
-          */}
         </Grid>
-        <Grid item lg={12} md={12} sm={12} xs={12}>
-        
+        <Grid item lg={12} md={12} sm={12} xs={12}> 
         <FormControl sx={{  width: '100%' }}>
         <InputLabel id="demo-multiple-chip-label">HVAC</InputLabel>
         <Select
@@ -484,26 +418,8 @@ const [parking, setParking] = useState<string[]>([]);
           ))}
         </Select>
       </FormControl>
-         
-{/*
-        <Select 
-     {...register('heatingAndCoolingSystem')} 
-     name='heatingAndCoolingSystem'
-     value={input.heatingAndCoolingSystem}
-     onChange={(e) => {setInput({...input, heatingAndCoolingSystem: e.target.value})}}
-     >
-      <Option defaultValue='airconditioning'>Yearly price</Option>
-      <Option value='central heating'>Central heating</Option>
-      <Option value='floor heating'>Floor heating</Option>
-      <Option value='geothermal heating'>Geothermal heating</Option>
-      <Option value='gas heating'>Gas heating</Option>
-      <Option value='aerothermal heating'>Aerothermal heating</Option>
-      <Option value='electricity heating'>Electricity heating</Option>
-     </Select>
-          */}
         </Grid>
         <Grid item lg={12} md={12} sm={12} xs={12}>
-
       <FormControl sx={{ width: '100%' }}>
         <InputLabel id="demo-multiple-chip-label">Security</InputLabel>
         <Select
@@ -536,20 +452,6 @@ const [parking, setParking] = useState<string[]>([]);
           ))}
         </Select>
       </FormControl>
-
-
-      {/*    
-        <Select 
-     {...register('security')} 
-     name='security'
-     value={input.security}
-     onChange={(e) => {setInput({...input, security: e.target.value})}}
-     >
-      <Option defaultValue='alarm'>Alarm</Option>
-      <Option value='concierge'>Concierge</Option>
-      <Option value='video surveillance'>video surveillance</Option>
-     </Select>
-        */}
         </Grid>
         <Grid item lg={12} md={12} sm={12} xs={12}>
         <FormControl fullWidth sx={{ textAlign: 'start'}}>

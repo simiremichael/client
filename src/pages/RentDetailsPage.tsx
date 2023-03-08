@@ -13,7 +13,7 @@ import { selectCurrentMoreProperty, setMoreProperty } from '../services/features
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/splide/dist/css/splide.min.css';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-import MapDL, {FullscreenControl, GeolocateControl, Marker, NavigationControl, Popup} from 'react-map-gl';
+import MapDL, {FullscreenControl, GeolocateControl, Marker, NavigationControl } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import { selectCurrentRentDetail, setRentDetail } from '../services/features/rentDetailSlice';

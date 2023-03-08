@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
 import { Link } from "react-router-dom";
 import { useAppSelector } from '../app/hooks';
 import { selectCurrentBuyProperty } from '../services/features/buyPropertySlice';
-import { useSelector } from 'react-redux';
 
 function BuyPaginate(props: {page: any}) {
 

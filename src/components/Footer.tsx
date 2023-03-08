@@ -116,7 +116,6 @@ const Footer = () => {
         <StyledLink to='/terms&Condition'><MenuItems>Terms & Conditions</MenuItems></StyledLink>
         <StyledLink to='/privacy-policy'><MenuItems>Privacy Policy</MenuItems></StyledLink>
         <StyledLink to='/client-login'><MenuItems>Login as admin/agent</MenuItems></StyledLink>
-        {/* <StyledLink to='/agent-hub'><MenuItems>Agent Hub</MenuItems></StyledLink> */}
       </UL>
       </MenuItemsContainer> 
       <RightContainer>

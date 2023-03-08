@@ -47,14 +47,14 @@ const Row = styled.div`
   height: 100%;
 `;
 
-const Title = styled.h3`
-  color: #383838;
-  text-align: start;
-  font-weight: 800;
-`;
-const SubTitle = styled.h5`
-  color: #494949;
-  text-align: start;
-`;
+// const Title = styled.h3`
+//   color: #383838;
+//   text-align: start;
+//   font-weight: 800;
+// `;
+// const SubTitle = styled.h5`
+//   color: #494949;
+//   text-align: start;
+// `;
 
 export default PropertyForSale;

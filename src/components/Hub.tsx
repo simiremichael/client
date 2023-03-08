@@ -82,15 +82,6 @@ margin: 10px 0 0 10px;
 font-size: 1rem;
 align-items: center;
 `
-const Svg = styled.svg`
-width: 7px;
-fill: #008080;
-align-self: center;
-margin: 0 -18px 0 18px;
-`
-const Video = styled.video`
-
-`
 const A = styled.a`
 text-align: start;
 margin-left: 15px;

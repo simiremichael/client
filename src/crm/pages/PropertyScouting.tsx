@@ -13,12 +13,8 @@ import { useAppSelector } from '../../app/hooks';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 const StyledBox = styled(Box)`
-
-`
-const BodyContainer = styled.div`
 `
 const BodyContainerGrid = styled(Grid)`
-
 `
 const BodyGrid = styled(Grid)`
 background-color: #F8F8FF;
@@ -97,12 +93,6 @@ cursor: pointer;
 @media screen and (max-width: 680px) {
     width: auto;
 }
-
-`
-const Input = styled.input`
-height: 25px;
-outline: none;
-border: none;
 `
 const ProfilePix = styled.img`
 width: 30px;
@@ -273,19 +263,6 @@ cursor: pointer;
  font-weight: 600;
  color: #383838;
  `
- const SelectBtn = styled.button`
-width: 100%;
-border: none;
-outline: none;
-height: 40px;
-background-color: inherit;
-cursor: pointer;
-text-align: start;
-padding-left: 20px;
-:hover {
-  background-color: #d3d3d3;
- }
- `
  const ActivityHeading = styled.p`
  border: 0.2px solid #d3d3d3;
  margin: 0;
@@ -301,16 +278,6 @@ padding-left: 20px;
  :hover {
   background-color: #f8f8ff;
  }
- `
- const ActivitySvg = styled.svg`
- 
- `
- const PropertyImg = styled.img`
- width: 53px;
- height: 50px;
- object-fit: fill;   
- margin: none; 
- margin-left: -10px;                                                                            ;
  `
  const InnerActivityContainer = styled.div`
  padding: 5px;
@@ -394,9 +361,7 @@ function PropertyScouting() {
    const handleSidebar = () => {
      setSidebar(!sidebar);
    }
-   const handleInfo = () => {
-     setInfo(!info)
-   }
+
    const handleNavigate = () => {
     navigate('/propertyScouting/Propertyscoutingform');
    }
@@ -478,8 +443,7 @@ function PropertyScouting() {
      <ImgGif src={imggif} />
     </IllustrationContainer>
    </Grid>
-   </Grid>
-     
+   </Grid> 
      : 
      <>
      <Grid container>
@@ -487,9 +451,7 @@ function PropertyScouting() {
      <AllProperties>All Property Scouting</AllProperties>
      </Grid>
     </Grid>
-    
     <PropertyBodyContainer>
-    
      <BodyTopContainer>
      <Grid container>
        <Grid item lg={0.5} md={0.5} sm={0.5} xs={0.5}>
@@ -625,7 +587,6 @@ function PropertyScouting() {
          </Grid>
          </Grid>
          </BodyBottomContainer>
-
          <BodyBottomContainer>
          <Grid container>
        <Grid item lg={0.5} md={0.5} sm={0.5} xs={0.5}>
@@ -697,7 +658,6 @@ function PropertyScouting() {
          </BodyBottomContainer>
     </PropertyBodyContainer>
     </>
-     
      }
     </BodyGrid>
     </BodyContainerGrid>

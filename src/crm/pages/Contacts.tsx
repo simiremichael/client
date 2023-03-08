@@ -1,24 +1,18 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import styled from '@emotion/styled';
-//import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { NavLink} from "react-router-dom";
-//import Avatar from '@mui/material/Avatar';
 import imggif from '../../images/imggif3.gif';
 import { useNavigate } from 'react-router-dom';
-import { logout, selectCurrentAgent, setAgents } from '../../services/features/agentSlice';
+import { logout, selectCurrentAgent } from '../../services/features/agentSlice';
 import { useAppSelector } from '../../app/hooks';
 import { useDispatch } from 'react-redux';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 const StyledBox = styled(Box)`
-
-`
-const BodyContainer = styled.div`
 `
 const BodyContainerGrid = styled(Grid)`
-
 `
 const BodyGrid = styled(Grid)`
 background-color: #F8F8FF;
@@ -97,12 +91,6 @@ cursor: pointer;
 @media screen and (max-width: 680px) {
     width: auto;
 }
-
-`
-const Input = styled.input`
-height: 25px;
-outline: none;
-border: none;
 `
 const ProfilePix = styled.img`
 width: 30px;
@@ -330,16 +318,6 @@ cursor: pointer;
   background-color: #f8f8ff;
  }
  `
- const ActivitySvg = styled.svg`
- 
- `
- const PropertyImg = styled.img`
- width: 53px;
- height: 50px;
- object-fit: fill;   
- margin: none; 
- margin-left: -10px;                                                                            ;
- `
  const InnerActivityContainer = styled.div`
  padding: 5px;
  height: 100%;
@@ -353,18 +331,6 @@ cursor: pointer;
  outline: none;
  margin-bottom: 5px;
  ` 
- const  Select = styled.select`
- border: 0.2px solid #c4c4c4;;
- outline: none;
- width: 96%;
- height: 29px;
- border-radius: 5px;
- margin-bottom: 5px;
- `
- const  Option = styled.option`
- margin-bottom: 5px;
- color: #494949;
- `
  const PropertDetailContainer = styled.div`
  margin: 5px;
  font-size: 0.9rem;
@@ -378,7 +344,6 @@ cursor: pointer;
  border-right: 0.2px solid #c4c4c4;
  border-left: 0.2px solid #c4c4c4;
  border-bottom: 0.2px solid #c4c4c4;
-
  : hover {
   background-color: #F5F5F5;
 }
@@ -419,8 +384,6 @@ function Contacts() {
    let navigate = useNavigate();
   const [sidebar, setSidebar] = useState(false);
   const [info, setInfo] = useState(true)
-  const [data, setData] = useState(false)
-    const [reveal, setReveal] = useState(false);
     const [all, setAll] = useState(true);
     const [active, setActive] = useState(false);
     const [reserved, setReserved] = useState(false);
@@ -431,18 +394,7 @@ function Contacts() {
   const handleSidebar = () => {
     setSidebar(!sidebar);
   }
-  const handleInfo = () => {
-    setInfo(!info)
-  }
-  // const dispatch = useDispatch();
-  // const agent = JSON.parse(localStorage.getItem('agent') || 'false');
-  // useEffect(() => {
-  //  dispatch(setAgents(agent))
-  // }, []);
   
-    const handleReveal = () => {
-      setReveal(!reveal)
-    }
     const handleAll = () => {
       setAll(true)
       setActive(false)
@@ -770,7 +722,6 @@ function Contacts() {
             </BodyBottomContainer>
        </PropertyBodyContainer>
        </>
-       
        }
       </BodyGrid>
       </BodyContainerGrid>

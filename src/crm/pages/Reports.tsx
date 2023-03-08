@@ -4,16 +4,11 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { NavLink, useNavigate} from "react-router-dom";
 import { useAppSelector } from '../../app/hooks';
-import { logout, selectCurrentAgent, setAgents } from '../../services/features/agentSlice';
+import { logout, selectCurrentAgent } from '../../services/features/agentSlice';
 import { useDispatch } from 'react-redux';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-
-import imggif from '../../images/imggif3.gif';
-
 const StyledBox = styled(Box)`
-`
-const BodyContainer = styled.div`
 `
 const BodyContainerGrid = styled(Grid)`
 height: auto;
@@ -94,12 +89,6 @@ cursor: pointer;
 @media screen and (max-width: 680px) {
     width: auto;
 }
-
-`
-const Input = styled.input`
-height: 25px;
-outline: none;
-border: none;
 `
 const ProfilePix = styled.img`
 width: 30px;
@@ -166,12 +155,6 @@ cursor: pointer;
   front-weight: bold;
  }
  `
-
- const ReportsTitle = styled.p`
- font-size: 1.5rem;
- font-weight: 600;
- color: #383838;
- `
  const PlusTitleContainer = styled.div`
  display: flex;
  align-items: center;
@@ -223,9 +206,7 @@ function Reports() {
   const handleSidebar = () => {
     setSidebar(!sidebar);
   }
-  const handleInfo = () => {
-    setInfo(!info)
-  }
+
   const {agent} = useAppSelector(selectCurrentAgent);
   let navigate = useNavigate();
   const dispatch = useDispatch();

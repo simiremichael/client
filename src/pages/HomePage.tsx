@@ -8,15 +8,9 @@ import Footer from '../components/Footer';
 import Popular from '../components/Popular';
 import CompanySlide from '../components/CompanySlide';
 import Hub from '../components/Hub';
-import Paginate from '../components/Pagination';
-import { Paper } from '@mui/material';
-
-
 
 const Container = styled(Box)`
-
 `
-
 
 function HomePage() {
   

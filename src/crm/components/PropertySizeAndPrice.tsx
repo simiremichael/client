@@ -1,19 +1,17 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState} from 'react';
 import styled from '@emotion/styled';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { NavLink} from "react-router-dom";
 import { useForm } from 'react-hook-form';
-import {fabClasses, TextField} from '@mui/material';
-//import Select, { SelectChangeEvent } from '@mui/material/Select';
+import {TextField} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
 const StyledBox = styled(Box)`
-
 `
 const StyledContainer = styled(Container)`
 margin-bottom: 20px;
@@ -52,21 +50,7 @@ const PropertyTypeLink = styled(NavLink)`
   front-weight: bold;
  }
  `
- const SelectPropertyTypeContainer = styled.div`
- display: flex;
- border: none;
- outline: none;
- background-color: inherit;
- `
- const SelectPropertyType = styled.input`
- display: none;
- :checked + Label {
-  background-color:#008080;
-  color: #ffffff;
-}
- `
  const Form = styled.form`
-
 `
  const ButtonContainer = styled.div`
  display: flex;
@@ -157,19 +141,13 @@ margin-right: 10px;
  font-size: 1rem;
  `
  const Option = styled.option`
- 
+
  `
 
 function PropertySizeAndPrice(props: {updateProperty: any, property: any, setProperty: any}) {
   
-  // const [input, setInput] = useState({category: 'for sale', size: '', price: '', paymentType: 'total price'})
-    const [isChecked, setIsCheck ] = useState(false);
     const [category, setCategory] = useState(false);
-    const [price, setPrice] = useState('');
-    //const [toggle1, setToggle1] =useState(false);
-// console.log(input);
-   
-   
+
     const property = props.property;
     const setProperty = props.setProperty;
     const { register, formState: { errors },handleSubmit } = useForm({
@@ -195,24 +173,11 @@ function PropertySizeAndPrice(props: {updateProperty: any, property: any, setPro
     navigate('/agentproperties/description')
   };
   
- 
-
-  const handleCategory = () => {
-    setCategory(!category);
-  }
- 
-  //const isRadioSelected = (value: string):boolean => input.category === value;
-  //const handleRadioClick = (e: any) => setInput(e.target.value);
-
-
-
   const handleBackButton = () => {
     navigate('/agentproperties/location')
   }
   
-  
   return (
-  
   <StyledBox >
    <StyledContainer >
    <FormTitle>Price</FormTitle>
@@ -309,7 +274,6 @@ function PropertySizeAndPrice(props: {updateProperty: any, property: any, setPro
      </Select>
      </>
      }
-      {console.log(price)}
       </>
      </Grid>
      </Grid>

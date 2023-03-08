@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState} from 'react';
 import styled from '@emotion/styled';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -6,7 +6,7 @@ import Grid from '@mui/material/Grid';
 import { NavLink} from "react-router-dom";
 import { useForm } from 'react-hook-form';
 import { TextareaAutosize, TextField} from '@mui/material';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { SelectChangeEvent } from '@mui/material/Select';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -63,19 +63,19 @@ const PropertyTypeLink = styled(NavLink)`
   front-weight: bold;
  }
  `
- const SelectPropertyTypeContainer = styled.div`
- display: flex;
- border: none;
- outline: none;
- background-color: inherit;
- `
- const SelectPropertyType = styled.input`
- display: none;
- :checked + Label {
-  background-color:#008080;
-  color: #ffffff;
-}
- `
+//  const SelectPropertyTypeContainer = styled.div`
+//  display: flex;
+//  border: none;
+//  outline: none;
+//  background-color: inherit;
+//  `
+//  const SelectPropertyType = styled.input`
+//  display: none;
+//  :checked + Label {
+//   background-color:#008080;
+//   color: #ffffff;
+// }
+//  `
  const Form = styled.form`
 
 `
@@ -112,62 +112,11 @@ const PropertyTypeLink = styled(NavLink)`
  const ErrMessage = styled.h5`
  color: red;
  `
- const InputContainer = styled.div`
- display: flex;
- justify-content: start;
- margin-bottom: 20px;
- `
- const Input = styled.input`
- text-align: start;
- display: none;
-:checked + Label {
-  background-color:#008080;
-  color: #ffffff;
-}
- `
- const Label = styled.label`
- text-align: center;
- color: #008080;
-border: 1px solid #008080;
-border-radius: 5px;
-cursor: pointer;
-padding: 2px 5px;
-width: 60px;
-margin-top: 10px;
-font-size: 0.8rem;
-margin-right: 10px;
- `
  const StyledTextField = styled(TextField)`
 
  `
- const Span = styled.span`
- text-align: start;
- color: #494949;
-`
- const SpanContainer = styled.div`
- border: 0.5px solid #D3D3D3;
- padding: 8.6px 10px;
- border-radius: 5px;
- `
- const Sup = styled.sup`
- font-size: 10px;
- color: #494949;
- `
- const NairaContainer = styled.div`
- border: 0.5px solid #D3D3D3;
- padding: 8.8px 10px;
- border-radius: 5px;
- `
-
-
 function Description(props: { updateProperty: any, property: any, setProperty: any }) {
 
- // const [input, setInput] = useState({propertyTitle: '', description: '' });
-  const [isChecked, setIsCheck ] = useState(false);
-  const [category, setCategory] = useState(false);
-  const [price, setPrice] = useState('');
-  //const [toggle1, setToggle1] =useState(false);
-  
   const property = props.property;
   const setProperty = props.setProperty;
   const { register, formState: { errors },handleSubmit } = useForm({
@@ -176,25 +125,15 @@ function Description(props: { updateProperty: any, property: any, setProperty: a
       description: property.description,
     }
   });
+
  let navigate = useNavigate();
   
- 
-
  const onSubmit = (data: any) => {
   toast.success('Saved..')
  console.log(data);
  props.updateProperty(data);
  navigate('/agentproperties/photos')
 
-};
-
-const handleCategory = () => {
-  setCategory(!category);
-}
-
-
-const handleChange = (event: SelectChangeEvent) => {
-  setPrice(event.target.value as string);
 };
 
 const handleBackButton = () => {

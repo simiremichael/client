@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
 import { Link } from "react-router-dom";
@@ -7,7 +7,6 @@ import { selectCurrentRentProperty } from '../services/features/rentPropertySlic
 
 function RentPaginate(props: {page: any}) {
 
-     
      const { rentProperty} = useAppSelector(selectCurrentRentProperty);
       {/* @ts-ignore:next-line */}
      const numberOfPages = rentProperty?.numberOfPages;

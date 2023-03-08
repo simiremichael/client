@@ -2,19 +2,13 @@ import React, {useEffect, useState} from 'react';
 import styled from '@emotion/styled';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
-import { NavLink, useLocation } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import TextField from '@mui/material/TextField';
-import {InputAdornment, IconButton, ClickAwayListener} from '@mui/material';
 import FormControl from '@mui/material/FormControl';
-import { useNavigate, redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Grid from '@mui/material/Grid';
-import { useSigninUserMutation, useSignupUserMutation, useAddCompanyMutation, useSigninCompanyMutation, useSigninAgentMutation, useLogoutAgentMutation,} from '../services/api/propertyAPI';
-import jwt_decode from 'jwt-decode';
+import { useAddCompanyMutation, useSigninCompanyMutation, useSigninAgentMutation } from '../services/api/propertyAPI';
 import { toast, ToastContainer } from 'react-toastify';
-import { GoogleOAuthProvider } from '@react-oauth/google';
-import { GoogleLogin } from '@react-oauth/google';
-import Avatar from '@mui/material/Avatar';
 import { setAgents } from '../services/features/agentSlice';
 import { useAppDispatch } from '../app/hooks';
 import ArrowBackIosNewSharpIcon from '@mui/icons-material/ArrowBackIosNewSharp';
@@ -174,7 +168,6 @@ border-radius: 5px;
 cursor: pointer;
 `
 
-
 function ClientLogin() {
   
   const [switchForm, setSwitchForm] = useState(false)
@@ -197,9 +190,6 @@ function ClientLogin() {
      const [signinAgent, { data: data2, isError: isError2, error: error2, isSuccess: isSuccess2 } ] = useSigninAgentMutation()//  
       const [addCompany, {isSuccess: addCompanyIsSuccess }] = useAddCompanyMutation();
     
-  
-   
-     const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword)
     let location = useLocation();
     const dispatch = useAppDispatch()
 
@@ -207,12 +197,9 @@ function ClientLogin() {
       setIsSignup((prevIsSignup) => !prevIsSignup);
       //setShowPassword(false)
       }
-      const toggleLogin = () => {
-        setLogin(!login);
-      }
+
       useEffect(() => {
           if(isSuccess2) {
-            // localStorage.setItem('agent', JSON.stringify({...data2, }))
             dispatch(setAgents({ agent: data2, agentToken: data2?.agentToken }));
             setShowPassword(false);
             setIsSignup(false);
@@ -228,33 +215,17 @@ function ClientLogin() {
         }
       }, [ isSuccess1, isSuccess2, data1, data2, error1, error2, isError1, isError2, dispatch])
 
-      
-    //   const handleLogout = () => {
-    //     if(admin === true){
-    //     setLogin(false);
-    //     localStorage.removeItem('company');
-    //     // setCompany('');
-    //     setAdminFormData(initialState);
-    //     navigate("/client-login");
-    //     } else{
-    //       setLogin(false);
-    //     localStorage.removeItem('agent');
-    //     setAgentFormData(initialState);
-    //     navigate("/client-login");
-
-    //     }
-    // }
     const clear = () => {
   setAgentFormData(agentInitialState)
   setAdminFormData(adminInitialState)
     }
     
-      
     const handleChange = (e: any) => {
       setAgentFormData({...agentFormData, [e.target.name]: e.target.value})
       setAdminFormData({...adminFormData, [e.target.name]: e.target.value})
       setLoginFormData({...loginFormData, [e.target.name]: e.target.value})
     }
+
     useEffect(() => { 
      if(addCompanyIsSuccess) {
       toast.success('Login successfully....')
@@ -459,7 +430,6 @@ console.log(adminFormData)
                  </strong></SwitchButton>
              </SwitchContainer>
         </Form>
-
       </FormContainer>
       <ToastContainer />
       </StyledContainer>

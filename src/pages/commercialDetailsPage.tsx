@@ -14,7 +14,7 @@ import { selectCurrentMoreProperty, setMoreProperty } from '../services/features
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/splide/dist/css/splide.min.css';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-import MapDL, {FullscreenControl, GeolocateControl, Marker, NavigationControl, Popup} from 'react-map-gl';
+import MapDL, {FullscreenControl, GeolocateControl, Marker, NavigationControl } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import { Link } from '@mui/material';
@@ -491,10 +491,6 @@ backdrop-filter: blur( 10px );
  height: 100vh;
  background-color: #f5f5f5;
  `
- const Img = styled.img`
-width: 80px;
-height: 40px;
-`
 const MapBtn = styled.button`
 position: absolute;
 z-index: 30003;
@@ -797,23 +793,6 @@ function CommercialDetailsPage() {
             </StyledLink>
             </CardGrid>
           )}
-          {/* <CardGrid>
-            <MoreCard>
-              <MoreTopContainer>
-              </MoreTopContainer>
-              <MoreBottomContainer>
-                <MoreApart>Flat</MoreApart>
-                <MorePrice>500,000 NGN/year</MorePrice>
-                <MoreAddress>20 agaungi ajiran road, agungi, lagos</MoreAddress>
-                <BottomInner>
-                  <InnerBed><Moresvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M176 288C220.1 288 256 252.1 256 208S220.1 128 176 128S96 163.9 96 208S131.9 288 176 288zM544 128H304C295.2 128 288 135.2 288 144V320H64V48C64 39.16 56.84 32 48 32h-32C7.163 32 0 39.16 0 48v416C0 472.8 7.163 480 16 480h32C56.84 480 64 472.8 64 464V416h512v48c0 8.837 7.163 16 16 16h32c8.837 0 16-7.163 16-16V224C640 170.1 597 128 544 128z" /></Moresvg>3</InnerBed>
-                  <InnerBath><Moresvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M32 384c0 28.32 12.49 53.52 32 71.09V496C64 504.8 71.16 512 80 512h32C120.8 512 128 504.8 128 496v-15.1h256V496c0 8.836 7.164 16 16 16h32c8.836 0 16-7.164 16-16v-40.9c19.51-17.57 32-42.77 32-71.09V352H32V384zM496 256H96V77.25C95.97 66.45 111 60.23 118.6 67.88L132.4 81.66C123.6 108.6 129.4 134.5 144.2 153.2C137.9 159.5 137.8 169.8 144 176l11.31 11.31c6.248 6.248 16.38 6.248 22.63 0l105.4-105.4c6.248-6.248 6.248-16.38 0-22.63l-11.31-11.31c-6.248-6.248-16.38-6.248-22.63 0C230.7 33.26 204.7 27.55 177.7 36.41L163.9 22.64C149.5 8.25 129.6 0 109.3 0C66.66 0 32 34.66 32 77.25v178.8L16 256C7.164 256 0 263.2 0 272v32C0 312.8 7.164 320 16 320h480c8.836 0 16-7.164 16-16v-32C512 263.2 504.8 256 496 256z" /></Moresvg>4</InnerBath>
-                  <InnerSize><Moresvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M384 320c-17.67 0-32 14.33-32 32v96H64V160h96c17.67 0 32-14.32 32-32s-14.33-32-32-32L64 96c-35.35 0-64 28.65-64 64V448c0 35.34 28.65 64 64 64h288c35.35 0 64-28.66 64-64v-96C416 334.3 401.7 320 384 320zM488 0H352c-12.94 0-24.62 7.797-29.56 19.75c-4.969 11.97-2.219 25.72 6.938 34.88L370.8 96L169.4 297.4c-12.5 12.5-12.5 32.75 0 45.25C175.6 348.9 183.8 352 192 352s16.38-3.125 22.62-9.375L416 141.3l41.38 41.38c9.156 9.141 22.88 11.84 34.88 6.938C504.2 184.6 512 172.9 512 160V24C512 10.74 501.3 0 488 0z" /></Moresvg>3,800 sqft</InnerSize>
-                </BottomInner>
-              </MoreBottomContainer>
-            </MoreCard>
-          </CardGrid> */}
-
         </MoreContainer>
       </StyledMoreContainer>
     </StyledContainer>

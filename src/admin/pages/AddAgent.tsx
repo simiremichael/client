@@ -4,12 +4,12 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import styled from '@emotion/styled'
 import TextField from '@mui/material/TextField';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from '../components/Sidebar';
 import Navbar from '../components/Navbar';
-import { useAddAgentMutation, useGetAgentQuery, useUpdateAgentMutation } from '../../services/api/propertyAPI'
+import { useAddAgentMutation } from '../../services/api/propertyAPI'
 
 
 const StyledContainer = styled(Container)`
@@ -104,8 +104,6 @@ function AddAgent() {
     const [image, setImage] = useState('')
 
    const handleChange = (e: any) => {
-  //  const name = e.target.name;
-  //  const value = e.target.value;
    setAgent(({...agent, [e.target.name]: e.target.value}))
    }
 

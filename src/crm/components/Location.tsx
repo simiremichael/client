@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -12,10 +12,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 const StyledBox = styled(Box)`
-
 `
 const StyledContainer = styled(Container)`
-
 `
 const ItmesContainer= styled.div`
 margin-top: 50px;
@@ -118,8 +116,6 @@ color: red;
 
 function Location(props: { updateProperty: any, property: any, setProperty: any}) {
 
-  //const [input, setInput] = useState({address1: '', address2: '', street: '', house: '', city: '', postCode: '', lga: '', state: '' });
-
   const property = props.property;
   const setProperty = props.setProperty;
   const { register, formState: { errors },handleSubmit } = useForm({
@@ -205,7 +201,6 @@ function Location(props: { updateProperty: any, property: any, setProperty: any}
  <CloseButton type='button' onClick={handleBack}>back</CloseButton>
  <NextButton type='submit'>Continue</NextButton>
  </ButtonContainer>
-
   </InputContainer>
   </LocationForm>
  </FormContainer>

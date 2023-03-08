@@ -12,7 +12,7 @@ function TotalProperties() {
   const {company} = useAppSelector(selectCurrentCompany);
     {/* @ts-ignore:next-line */}
    const companyId = company?.result?._id;
-   let navigate = useNavigate();
+   //let navigate = useNavigate();
    const { data} = useCompanyPropertySearchQuery(companyId);
 
   return (
@@ -67,12 +67,12 @@ const Earning = styled.h2`
   font-weight: 800;
 `;
 
-const EarningsIncrease = styled.h5`
-  text-align: center;
-  font-weight: normal;
-  background-color: rgba(0, 0, 0, 0.2);
-  padding: 0.5rem;
-  border-radius: 2rem;
-`;
+// const EarningsIncrease = styled.h5`
+//   text-align: center;
+//   font-weight: normal;
+//   background-color: rgba(0, 0, 0, 0.2);
+//   padding: 0.5rem;
+//   border-radius: 2rem;
+// `;
 
 export default TotalProperties;

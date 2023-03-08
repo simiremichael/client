@@ -5,16 +5,6 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { NavLink } from "react-router-dom";
 
-const StyledBox = styled(Box)`
-
-`
-const StyledContainer = styled(Container)`
-background-color: #F8F8FF;
-`
-const StyledGrid = styled(Grid)`
-height: 50px;
-border-bottom: 0.5px solid #D3D3D3;;
-`
 const LeftInnerGrid = styled(Grid)`
 background-color: #008080;;
 height: 50px;
@@ -47,10 +37,6 @@ align-items: center;
 height: 100%;
 margin: 0 15px;
 `
-const Title = styled.h2`
-margin: 0;
-color: #383838;
-`
 const InnerRightContainer = styled.div`
 display: flex;
 justify-content: space-between;
@@ -65,11 +51,6 @@ justify-content: space-between;
 border-radius: 5px;
 width: 150px;
 cursor: pointer;
-`
-const Input = styled.input`
-height: 25px;
-outline: none;
-border: none;
 `
 const ProfilePix = styled.img`
 width: 30px;
@@ -102,37 +83,6 @@ cursor: pointer;
  width: 15px;
  fill: #D3D3D3;
  `
- const SideBarContainer = styled(Grid)`
-  max-width: 225px; 
-  height: 600px;
-  background-color:  #029999;
-  padding: 15px 0;
- `
- const NavItemsContainer = styled.div`
- 
- `
- const NavItems = styled.li`
- list-style-type: none;
- color: #ffffff;
- margin: 15px 0 15px 50px;
- display: flex;
- justify-content: start;
- `
- const NavItemsIcon = styled.svg`
- width: 15px;
- fill: #ffffff;
- margin-right: 5px;
- `
- const NavBarLink = styled(NavLink)`
- text-decoration: none;
- color: #ffffff;
- display: flex;
- align-items: center;
- :active{
-  front-weight: bold;
- }
- `
-
 function NavBar() {
 
   const [sidebar, setSidebar] = useState(false);
@@ -155,11 +105,6 @@ function NavBar() {
      </LeftInnerGrid>
      <Grid item lg={10} md={10} sm={8} xs={8} >
     <RightContainer>
-    {/* <PlusTitleContainer>
-    <CreateContactsContainer>
-      <CreateContacts><NavItemsIcon xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M152 64H296V24C296 10.75 306.7 0 320 0C333.3 0 344 10.75 344 24V64H384C419.3 64 448 92.65 448 128V448C448 483.3 419.3 512 384 512H64C28.65 512 0 483.3 0 448V128C0 92.65 28.65 64 64 64H104V24C104 10.75 114.7 0 128 0C141.3 0 152 10.75 152 24V64zM48 448C48 456.8 55.16 464 64 464H384C392.8 464 400 456.8 400 448V192H48V448z"/></NavItemsIcon>Create event</CreateContacts>
-      </CreateContactsContainer>
-    </PlusTitleContainer> */}
     <InnerRightContainer>
       <InputContainer>
         <SearchSpan>search</SearchSpan>

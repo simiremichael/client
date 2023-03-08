@@ -7,8 +7,8 @@ import Footer from '../components/Footer';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { ClickAwayListener, Link, Pagination, Paper, Portal } from '@mui/material';
+import Select from '@mui/material/Select';
+import { Link, Paper } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useSearchPropertiesByBuyQuery } from '../services/api/propertyAPI';
@@ -424,7 +424,6 @@ console.log(data);
        navigate(`/buy?search=${search || 'none'}&category=${category}&type=${type}&bath=${bath}&bed=${bed}&minPrice=${minPrice}&maxPrice=${maxPrice}&sort=${sort}`)
   }
 
-
 useEffect(() => {
   if(data) {
     dispatch(setBuyProperty({buyProperty: data }));
@@ -434,7 +433,6 @@ useEffect(() => {
 
   return (
     <>
-      
         <NavBar />
         <Form> 
         <SearchStyledBox>
@@ -442,7 +440,6 @@ useEffect(() => {
     <FormControl sx={{ m: 1, minWidth: 300 }} >
     <TextField  id="City" size="small" label="City, community or building" variant="outlined" name='search' value={searchData.search} onChange={handleChange} />
     </FormControl>
-   
     <FormControl sx={{m: 1,  minWidth: 105}} size="small">
     <InputLabel id="demo-simple-select-label">Buy/Rent</InputLabel>
         <Select
@@ -460,9 +457,8 @@ useEffect(() => {
           {/* <MenuItem value='commercial-rent'>Commercial rent</MenuItem> */}
         </Select>
         </FormControl>
-
         <FormControl sx={{ m: 1, minWidth: 125 }} size="small">
-    <InputLabel id="demo-simple-select-autowidth-label">Project type</InputLabel>
+        <InputLabel id="demo-simple-select-autowidth-label">Project type</InputLabel>
         <Select
           labelId="demo-simple-select-autowidth-label"
           id="demo-simple-select-autowidth"
@@ -487,9 +483,8 @@ useEffect(() => {
           <MenuItem value='self-contain'>Self Contain</MenuItem>
         </Select>
         </FormControl>
-
         <FormControl sx={{ m: 1, minWidth: 80 }} size="small">
-    <InputLabel id="demo-simple-select-autowidth-label">Beds</InputLabel>
+        <InputLabel id="demo-simple-select-autowidth-label">Beds</InputLabel>
         <Select
           labelId="demo-simple-select-autowidth-label"
           id="demo-simple-select-autowidth"
@@ -508,9 +503,8 @@ useEffect(() => {
           <MenuItem value='7+'>7+</MenuItem>
         </Select>
         </FormControl>
-
         <FormControl sx={{ m: 1, minWidth: 80 }} size="small">
-    <InputLabel id="demo-simple-select-autowidth-label">Baths</InputLabel>
+        <InputLabel id="demo-simple-select-autowidth-label">Baths</InputLabel>
         <Select
           labelId="demo-simple-select-autowidth-label"
           id="demo-simple-select-autowidth"
@@ -570,9 +564,8 @@ useEffect(() => {
           <MenuItem value='5000000000'>₦5,000,000,000</MenuItem>
         </Select>
         </FormControl>
-
         <FormControl sx={{ m: 1, minWidth: 110 }} size="small">
-    <InputLabel id="demo-simple-select-autowidth-label">Max-price</InputLabel>
+        <InputLabel id="demo-simple-select-autowidth-label">Max-price</InputLabel>
         <Select
           labelId="demo-simple-select-autowidth-label"
           id="demo-simple-select-autowidth"
@@ -611,13 +604,10 @@ useEffect(() => {
           <MenuItem value='5000000000'>₦5,000,000,000</MenuItem>
         </Select>
         </FormControl>
-
         <StyledButton type='button' variant="contained" onClick={handleSearch}><strong>Find</strong></StyledButton>
     </SearchStyledContainer>
     </SearchStyledBox>
     </Form>
-     
-
      <StyledBox>
         <StyledContainer>
         <TopContainer>
@@ -644,7 +634,7 @@ useEffect(() => {
           <RightContainer>
             <Sort>Sort by:</Sort>
             <FormControl sx={{ m: 1, minWidth: 150, }} size="small">
-    <InputLabel id="demo-simple-select-autowidth-label">Search</InputLabel>
+           <InputLabel id="demo-simple-select-autowidth-label">Search</InputLabel>
         <Select
           labelId="demo-simple-select-autowidth-label"
           id="demo-simple-select-autowidth"
@@ -666,7 +656,6 @@ useEffect(() => {
         </FormControl>
           </RightContainer>
         </SortContainer>
-
         <StyledContainers>
             {/* @ts-ignore:next-line */}
             {buyProperty?.data.map((result: any) => ( 
@@ -751,10 +740,6 @@ useEffect(() => {
                     <WhatsApp>WhatsApp</WhatsApp>
                   </WhatsAppContainer>
                   </Links>
-                  {/*
-    <SyncContainer></SyncContainer>
-    <Option></Option>
-    */}
                 </BottomContainer>
                 <BottomContainer1>
                 <Links href={`tel:${result?.phone}`}>
@@ -778,7 +763,6 @@ useEffect(() => {
                 </BottomContainer1>
                 </StyledGrid>
                 ))}
-   
         </StyledContainers>
         <Paper elevation={2} sx={{ background: 'inherit', marginTop: 2, marginBottom: 2, display: 'flex', justifyContent: 'center'}}>
       <BuyPaginate page={page} />

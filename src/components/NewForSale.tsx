@@ -5,8 +5,6 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 import {Link } from "react-router-dom";
 import '@splidejs/react-splide/css';
 
-
-
 const StyledBox = styled.div`
 
 overflow: hidden;
@@ -15,13 +13,6 @@ const StyledContainer = styled(Container)`
 `
 const TopContainer = styled.div`
  padding: 10px 0 0 10px;
-`
-
-const Title = styled.h1`
-text-align: start;
-margin: 15px 0 15px 0;
-color: #383838;
-font-size: 4.5vmin;
 `
 const PropertyType = styled.p`
 text-align: start;
@@ -144,8 +135,6 @@ color: #007ea8;
 text-decoration: none;
 font-family: "Open Sans",sans-serif;
 `
-
-
 function NewForSale () {
   
   return (

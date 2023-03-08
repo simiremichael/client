@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from '@emotion/styled';
 import Navbar from "../components/Navbar";
 import Grid from '@mui/material/Grid';
@@ -8,23 +8,14 @@ import TotalProperties from "../components/TotalProperties";
 import PropertyForSale from "../components/PropertyForSale";
 import TotalAgent from "../components/TotalAgent";
 import PropertyChart from "../components/PropertyChart";
-import { useNavigate, redirect, useLocation } from "react-router-dom";
+
 import RevenueChart from "../components/RevenueChart";
 import PropertyForRent from "../components/PropertyForRent";
-import { toast, ToastContainer } from "react-toastify";
-import { useLogoutCompanyMutation } from "../../services/api/propertyAPI";
-import { companyLogout } from "../../services/features/companySlice";
+import {ToastContainer } from "react-toastify";
+
 
 function AdminDashboard () {
 
-  let navigate = useNavigate();
-
-
-//   const handleLogout = () => {
-//      {/* @ts-ignore:next-line */}
-//     // dispatch(companyLogout());
-//     navigate("/");
-// }
   return (
     <Container>
       <Grid container>
@@ -89,12 +80,7 @@ const SubContainer = styled.div`
   width: 100%;
   margin-top: 30px;
 `;
-const SectionOne = styled.div`
-  width: 100%;
-`;
 
 export default AdminDashboard;
-function dispatch(arg0: any) {
-  throw new Error("Function not implemented.");
-}
+
 

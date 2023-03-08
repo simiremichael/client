@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import styled from '@emotion/styled'
@@ -25,9 +25,6 @@ height: 44px;
 margin-top: 20px;
 border-bottom: 3px solid rgba(0, 0, 0, 0.1);
 margin-left: 4%;
-`
-const StyledUl = styled.ul`
-
 `
 const StyledLi =styled.li`
 list-style-type: none;

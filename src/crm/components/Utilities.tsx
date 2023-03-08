@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState} from 'react';
 import styled from '@emotion/styled';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -6,13 +6,12 @@ import Grid from '@mui/material/Grid';
 import { NavLink} from "react-router-dom";
 import { useForm } from 'react-hook-form';
 import { TextareaAutosize, TextField} from '@mui/material';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import  { SelectChangeEvent } from '@mui/material/Select';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const StyledBox = styled(Box)`
-
 `
 const StyledContainer = styled(Container)`
 margin-bottom: 20px;
@@ -64,7 +63,6 @@ const PropertyTypeLink = styled(NavLink)`
  }
  `
  const Form = styled.form`
-
 `
  const ButtonContainer = styled.div`
  display: flex;
@@ -96,29 +94,16 @@ const PropertyTypeLink = styled(NavLink)`
   border-radius: 5px;
   cursor: pointer;
  `
- const ErrMessage = styled.h5`
- color: red;
- `
  const StyledTextField = styled(TextField)`
-
  `
 const InnerContainer = styled.div`
- 
 `
-
 
 function Utilities(props: { updateProperty: any, property: any, setProperty: any}) {
 
- // const [input, setInput] = useState({propertyTax: '', electricity: '', water: '', otherUtilities: '', utilities: '', taxes: '' });
-  //const [isChecked, setIsCheck ] = useState(false);
-  const [category, setCategory] = useState(false);
-  const [price, setPrice] = useState('');
-  //const [toggle1, setToggle1] =useState(false);
-  
-
   const property = props.property;
   const setProperty = props.setProperty;
-  const { register, formState: { errors },handleSubmit } = useForm({
+  const { handleSubmit } = useForm({
     defaultValues: {
       propertyTax: property.propertyTax,
       electricity: property.electricity,
@@ -127,24 +112,14 @@ function Utilities(props: { updateProperty: any, property: any, setProperty: any
       utilities: property.utilities,
       taxes: property.taxes,
     }});
- let navigate = useNavigate();
-  
  
-
+    let navigate = useNavigate();
+  
  const onSubmit = (data: any) => {
   toast.success('Saved..')
  console.log(data);
  props.updateProperty(data);
  navigate('/agentproperties/features')
-};
-
-const handleCategory = () => {
-  setCategory(!category);
-}
-
-
-const handleChange = (event: SelectChangeEvent) => {
-  setPrice(event.target.value as string);
 };
 
 const handleBackButton = () => {

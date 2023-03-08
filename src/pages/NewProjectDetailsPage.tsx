@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import styled from '@emotion/styled';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -10,7 +10,6 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useGetPropertyQuery } from '../services/api/propertyAPI';
 import Link from '@mui/material/Link';
-
 
 const StyledBox = styled(Box)`
 `
@@ -67,12 +66,6 @@ flex-direction: column;
 `
 const ContactForm1 = styled(ContactForm)`
 margin: 30px 0;
-`
-const StyledInput = styled(TextField)`
-height: 30px;
-margin: 10px 0;
-outline: none;
-border: none;
 `
 const RequestButoon = styled.button`
 height: 40px;
@@ -369,10 +362,6 @@ function NewProjectDetailsPage() {
         </ClickMoreButton1Container>
         <ContactCompany>Contact {data?.companyName[0].toUpperCase()}{data?.companyName.slice(1)}</ContactCompany>
       <ContactForm onSubmit={handleSubmit}>
-        {/* <StyledInput  type='text' required label="name" variant='outlined' size='small'/>
-        <StyledInput type='email' required label="email" variant='outlined' size='small' />
-        <StyledInput type='number' required label="number" variant='outlined' size='small' />
-        <RequestButoon type='submit'>Send</RequestButoon> */}
           <StyledLink href={`mailto:${data?.email}`}>
         <RequestButoon type='button'>Send Email</RequestButoon>
         </StyledLink>

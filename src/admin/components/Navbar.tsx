@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from '@emotion/styled';
-// import { FiSearch } from "react-icons/fi";
-function Navbar() {
 
+
+function Navbar() {
 let greetings;
   if(new Date().getHours() <= 12 ) {
     greetings = 'Good morning'
@@ -18,12 +18,6 @@ let greetings;
         {greetings},
         <Span>Admin</Span>
       </Text>
-      {/* <InputContainer>
-        <Icon>
-          <FiSearch />
-        </Icon>
-        <Input type="search" placeholder="Search for projects" />
-      </InputContainer> */}
     </NavbarContainer>
   );
 }
@@ -53,34 +47,34 @@ margin-left: 0.3rem;
 const Span = styled.span`
 margin-left: 0.5rem;
 `
-const InputContainer = styled.div`
-  display: flex;
-`;
+// const InputContainer = styled.div`
+//   display: flex;
+// `;
 
-const Icon = styled.div`
-  height: 3rem;
-  width: 3rem;
-  background-color: #dce4ff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-top-left-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
-  svg {
-    color: #555555;
-  }
-`;
-const Input = styled.input`
-  border: none;
-  background-color: #dce4ff;
-  border-top-right-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
-  color: #464646;
+// const Icon = styled.div`
+//   height: 3rem;
+//   width: 3rem;
+//   background-color: #dce4ff;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   border-top-left-radius: 0.5rem;
+//   border-bottom-left-radius: 0.5rem;
+//   svg {
+//     color: #555555;
+//   }
+// `;
+// const Input = styled.input`
+//   border: none;
+//   background-color: #dce4ff;
+//   border-top-right-radius: 0.5rem;
+//   border-bottom-right-radius: 0.5rem;
+//   color: #464646;
 
-  &:focus {
-    border: none;
-    outline: none;
-  }
-`;
+//   &:focus {
+//     border: none;
+//     outline: none;
+//   }
+// `;
 
 export default Navbar;

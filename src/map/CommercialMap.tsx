@@ -1,17 +1,12 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import Map, {FullscreenControl, GeolocateControl, Marker, NavigationControl, Popup} from 'react-map-gl';
+import Map, {FullscreenControl, GeolocateControl, Marker, NavigationControl } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useAppSelector } from '../app/hooks';
 import { selectCurrentCommercial } from '../services/features/commercialSlice';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import { useNavigate } from 'react-router-dom';
-
-const Img = styled.img`
-width: 80px;
-height: 40px;
-`
 
 const MapContainer = styled.div`
  width: 100%;

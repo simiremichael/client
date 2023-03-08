@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 import styled from '@emotion/styled'
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
-import {useNavigate, useSearchParams} from "react-router-dom";
+import {useSearchParams} from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
 import { useCompanyPropertySearchQuery } from '../../services/api/propertyAPI';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
@@ -13,7 +13,6 @@ import { selectCurrentCompanyProperty, setCompanyProperties } from '../../servic
 import CompanyPropertyPaginate from '../components/companyPropertyPagination';
 import { Paper } from '@mui/material';
 import useDebounce from '../../debounce/useDebounce';
-//import debounce from 'lodash';
 
 const StyledBox = styled(Box)`
 width: 100%;
@@ -92,13 +91,13 @@ background-size: 100% 100%;
 const NavContainer = styled.div`
 margin-left: 22px;
 `
-const ClearSearchBtn = styled.button`
-outline: none;
-background-color: transparent;
-padding: 2px;
-border: none;
-cursor: pointer;
-`
+// const ClearSearchBtn = styled.button`
+// outline: none;
+// background-color: transparent;
+// padding: 2px;
+// border: none;
+// cursor: pointer;
+// `
 
 function PropertyList() {
 
@@ -111,9 +110,6 @@ function PropertyList() {
    console.log(company);
     {/* @ts-ignore:next-line */}
    const companyId = company?.result?._id;
-   let navigate = useNavigate();
-   //const debounceValue = debounce(search, 500);
-   //console.log(debounce)
    const { data} = useCompanyPropertySearchQuery({companyId, searchQuery, page, search}, {refetchOnMountOrArgChange: true });
    useEffect(() => {
     if(data) {
@@ -123,13 +119,6 @@ function PropertyList() {
    const {companyProperty} = useAppSelector(selectCurrentCompanyProperty);
  
 const debouncedSearch = useDebounce(search, 300);
-
-// useEffect(() => {
-//   return () => {
-   
-//     debouncedSearch.cancel;
-//   };
-// }, [debouncedSearch]);
 
    const handleChange = (e: any) => {
  e.preventDefault();
@@ -143,13 +132,6 @@ const debouncedSearch = useDebounce(search, 300);
   }
    }, [search])
  
-
-          {/* @ts-ignore:next-line */}
-        // let result1 = companyProperty?.companyPropertiesBySearch?.map((result: any) => result) 
-      {/* @ts-ignore:next-line */}
-     //let result2 = companyProperty?.companyProperties?.map((result: any) => result) 
-
-console.log(companyProperty)
   return (
    <StyledBox>
    <Grid container>

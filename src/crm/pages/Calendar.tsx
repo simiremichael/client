@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import styled from '@emotion/styled';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { NavLink, useNavigate} from "react-router-dom";
-import { Calendar, dateFnsLocalizer, momentLocalizer } from 'react-big-calendar'
+import { Calendar, momentLocalizer } from 'react-big-calendar'
 import moment from 'moment'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import { logout, selectCurrentAgent, setAgents } from '../../services/features/agentSlice';
+import { logout, selectCurrentAgent} from '../../services/features/agentSlice';
 import { useAppSelector } from '../../app/hooks';
 import { useDispatch } from 'react-redux';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -16,12 +16,8 @@ import LogoutIcon from '@mui/icons-material/Logout';
 
 
 const StyledBox = styled(Box)`
-
-`
-const BodyContainer = styled.div`
 `
 const BodyContainerGrid = styled(Grid)`
-
 `
 const BodyGrid = styled(Grid)`
 background-color: #F8F8FF;
@@ -76,13 +72,6 @@ background-color: #ffffff;
     justify-content: end;
   }
 `
-const Title = styled.h2`
-margin: 0;
-color: #383838;
-@media screen and (max-width: 800px) {
-  display: none;
-}
-`
 const InnerRightContainer = styled.div`
 display: flex;
 justify-content: space-between;
@@ -100,12 +89,6 @@ cursor: pointer;
 @media screen and (max-width: 680px) {
     width: auto;
 }
-
-`
-const Input = styled.input`
-height: 25px;
-outline: none;
-border: none;
 `
 const ProfilePix = styled.img`
 width: 30px;
@@ -185,15 +168,6 @@ cursor: pointer;
   margin-top: 30px;
 }
  `
- const ContactsTitle = styled.p`
- font-size: 1.5rem;
- font-weight: 600;
- color: #383838;
- `
- const ContactsContent = styled.p`
- text-align: start;
- font-size: 2.5vmin;
- `
  const CreateContactsContainer = styled.div`
  
  `
@@ -209,58 +183,7 @@ cursor: pointer;
  cursor: pointer;
  margin-right: 10px;
  `
- const IllustrationContainer = styled.div`
- margin-top: 70px;
- width: 100%;
- height: 100%;
- display: flex;
- flex-direction: column;
- align-items: center;
- justify-content: center;
- @media screen and (min-width: 680px) {
-    margin-top: 140px;
-}
- `
- const ImgGif = styled.img`
- width: 70%;
- height: auto;
- `
- const Plusbutton = styled.div`
- margin-left: 15px;
- background-color: #029999;
- padding: 0;
- border-radius: 50px;
- height: 28px;
- width: 28px;
- display: flex;
- align-items: center;
- justify-content: center;
- transition: width ease-in-out 0.3s;
- :hover {
-  width: 120px;
-  justify-content: space-between;
-  ::after{
-    content: 'Create new';
-    color: #ffffff;
-    font-size: 0.9rem;
- margin-right: 5px;
- margin-top: -2px;
- cursor: pointer;
-  }
- }
- @media screen and (max-width: 680px) {
-  margin-left: 0;
-}
- `
- const Span = styled.p`
- font-size: 1.8rem;
- color: #ffffff;
- font-weight: 500;
- margin-top: 22px;
- cursor: pointer;
- text-align: start;
  
- `
  const PlusTitleContainer = styled.div`
  display: flex;
  align-items: center;
@@ -305,19 +228,8 @@ cursor: pointer;
  outline: none;
  cursor: pointer;
  `
-
-
  const localizer = momentLocalizer(moment)
 
-/*
-const localizer = dateFnsLocalizer({
-  format,
-  parse,
-  startOfWeek,
-  getDay,
-  locales,
-})
-*/
 const eventsList = [
   {
     title: 'Viewing',
@@ -454,22 +366,5 @@ function CrmCalendar() {
 
 export default CrmCalendar
 
-
- 
-  
-/*
-   <GoogleLogin
-    clientId="867443898220-jhl4n28trh9v8j08ejp0vr0usv7k70lj.apps.googleusercontent.com"
-    buttonText="authorze calendar"
-    onSuccess={responseGoogle}
-    onFailure={responseError}
-    cookiePolicy={"single_host_origin"}
-    responseType="code"
-    accessType="offline"
-    scope="openid email profile https://www.googleapis.com/auth/calendar"
-    
-  />
-   
-*/
 
  

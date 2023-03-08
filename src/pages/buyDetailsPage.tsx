@@ -13,7 +13,7 @@ import { selectCurrentMoreProperty, setMoreProperty } from '../services/features
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/splide/dist/css/splide.min.css';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-import MapDL, {FullscreenControl, GeolocateControl, Marker, NavigationControl, Popup} from 'react-map-gl';
+import MapDL, {FullscreenControl, GeolocateControl, Marker, NavigationControl} from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import { selectCurrentBuyDetail, setBuyDetail } from '../services/features/buyDetailSlice';
@@ -490,10 +490,6 @@ backdrop-filter: blur( 10px );
  height: 100vh;
  background-color: #f5f5f5;
  `
- const Img = styled.img`
-width: 80px;
-height: 40px;
-`
 const MapBtn = styled.button`
 position: absolute;
 z-index: 30003;
@@ -508,9 +504,6 @@ cursor: pointer;
 
 function BuyDetailsPage() {
 
-  // const render = (status: Status) => {
-  //   return <h1>{status}</h1>;
-  // };
   const [viewImage, setViewImage] = useState(false);
   const [openMap, setOpenMap] = useState(false);
   const [more, setMore] = useState({ location: '', price: '', propertyType: '', bedroom: '', category: ''});
@@ -531,7 +524,6 @@ function BuyDetailsPage() {
  //, {refetchOnMountOrArgChange: true }
 
   const {buyDetail} = useAppSelector(selectCurrentBuyDetail);
-
 
    {/* @ts-ignore:next-line */}
   const img = buyDetail?.images[0].img

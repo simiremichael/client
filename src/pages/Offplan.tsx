@@ -8,7 +8,7 @@ import Footer from '../components/Footer';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import Tooltip from '@mui/material/Tooltip/Tooltip';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -18,7 +18,6 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { selectCurrentOffplan, setOffplan } from '../services/features/offplanSlice';
 import { Paper } from '@mui/material';
 import OffplanPaginate from '../components/OffplanPagination';
-import { style } from '@mui/system';
 
 const BoxContainer = styled(Box)``
 const StyledContainer = styled(Container)`
@@ -243,8 +242,6 @@ const dispatch = useAppDispatch();
     <FormControl sx={{ m: 1, minWidth: 300 }} >
     <TextField  id="City" size="small" label="City, community or building" variant="outlined" name='search' value={searchData.search} onChange={handleChange} />
     </FormControl>
-   
-
         <FormControl sx={{ m: 1, minWidth: 125 }} size="small">
     <InputLabel id="demo-simple-select-autowidth-label">Project type</InputLabel>
         <Select
@@ -274,9 +271,8 @@ const dispatch = useAppDispatch();
           <MenuItem value='others'>Others</MenuItem>
         </Select>
         </FormControl>
-
         <FormControl sx={{ m: 1, minWidth: 108 }} size="small">
-    <InputLabel id="demo-simple-select-autowidth-label">Min-Beds</InputLabel>
+        <InputLabel id="demo-simple-select-autowidth-label">Min-Beds</InputLabel>
         <Select
           labelId="demo-simple-select-autowidth-label"
           id="demo-simple-select-autowidth"
@@ -295,7 +291,6 @@ const dispatch = useAppDispatch();
           <MenuItem value='7+'>7+</MenuItem>
         </Select>
         </FormControl>
-
         <FormControl sx={{ m: 1, minWidth: 110 }} size="small">
     <InputLabel id="demo-simple-select-autowidth-label">Max-Beds</InputLabel>
         <Select
@@ -340,7 +335,6 @@ const dispatch = useAppDispatch();
           <MenuItem value='from-2030'>From 2030</MenuItem>
         </Select>
         </FormControl>
-
         <FormControl sx={{ m: 1, minWidth: 110 }} size="small">
     <InputLabel id="demo-simple-select-autowidth-label">Min-price</InputLabel>
         <Select
@@ -438,7 +432,6 @@ const dispatch = useAppDispatch();
     <Verify>VERIFIED</Verify>
     </VerifyContainer>
     </CardImg>  
-    
     <CardDetails item lg={5} xs={12} md={5} sm={8}>
     <StyledLink to={`/offplanDetailsPage/${result._id}`}>
     <LeftContainer>
@@ -467,7 +460,6 @@ const dispatch = useAppDispatch();
     </CardDetails>
     </StyledGrid>
      ))}
-
         <Paper elevation={2} sx={{ background: 'inherit', marginTop: 2, marginBottom: 2, display: 'flex', justifyContent: 'center'}}>
         <OffplanPaginate page={page} />
         </Paper>
