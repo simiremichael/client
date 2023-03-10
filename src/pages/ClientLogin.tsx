@@ -249,7 +249,7 @@ function ClientLogin() {
   
       const  handleSubmit = async (e: any) => {
         e.preventDefault();
-        console.log(formData);
+       
         if(isSignup) {
             await addCompany({...adminFormData}).unwrap().then((payload: any) => console.log('fulfilled', payload)).catch((error1: any) => console.error('rejected', error1));
         } else {
@@ -294,8 +294,8 @@ const handleUpload = async () => {
  
   }
 
-console.log(formData)
-console.log(adminFormData)
+// console.log(formData)
+// console.log(adminFormData)
 
 
   return (
@@ -371,7 +371,6 @@ console.log(adminFormData)
                                 value={adminFormData.confirmPassword} onChange={handleChange} />
                             </Grid>
                           {/* </Grid>
-
                           <Grid container> */}
                               <Grid item lg={12} md={12} sm={12} xs={12}>
                                 <TextFields id="outlined-basic" type='text' name='address' value={adminFormData.address} onChange={handleChange} label="company address" variant="outlined" size='small' />

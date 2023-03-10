@@ -9,12 +9,10 @@ interface AgentAuthState {
   // name: string | null;
   
   agentToken : string | null | undefined | {};
-  refreshToken: string | null | string | undefined | {} ;
 }
 
 const initialState: AgentAuthState = { 
   agent: null, 
-  refreshToken: null ,
   agentToken : null 
 } 
 

@@ -8,7 +8,6 @@ import { Link, NavLink, useNavigate, useSearchParams} from "react-router-dom";
 import imggif from '../../images/imggif1.gif';
 import { useAppSelector } from '../../app/hooks';
 import { selectCurrentAgent } from '../../services/features/agentSlice';
-import { useDispatch } from 'react-redux';
 import { useDeletePropertyMutation, useGetPropertiesByAgentQuery, useLogoutAgentMutation } from '../../services/api/propertyAPI';
 import { selectCurrentAgentProperty, setAgentProperties } from '../../services/features/agentPropertySlice';
 import { useAppDispatch } from '../../app/store';
@@ -19,12 +18,18 @@ import { Paper } from '@mui/material';
 import AgentPropertyPaginate from '../components/AgentPropertyPagination';
 
 const StyledBox = styled(Box)`
+width: auto;
 `
 const BodyContainerGrid = styled(Grid)`
+width: 100%;
 `
 const BodyGrid = styled(Grid)`
 background-color: #F8F8FF;
-height: 100vh;
+width: 100%;
+@media screen and (max-width: 900px) {
+  width: 800px;
+  overflow-x: scroll;
+}
 `
 const StyledContainer = styled.div`
 height: 50px;
@@ -33,7 +38,7 @@ display: flex;
 width: 100%;
 `
 const StyledGrid = styled(Grid)`
-
+width: 100%;
 `
 const LeftInnerGrid = styled(Grid)`
 height: 50px;
@@ -50,6 +55,9 @@ const BurgerMenu = styled.svg`
 width: 18px;
 fill: #ffffff;
 cursor: pointer;
+@media screen and (max-width: 680px) {
+  width: 14px;
+}
 `
 const CompanyName = styled.p`
 color: #ffffff;
@@ -88,18 +96,18 @@ justify-content: space-between;
 align-items: center;
 height: 100%;
 `
-const InputContainer = styled.div`
-border: 0.5px solid #D3D3D3;
-height: 26px;
-display: flex;
-justify-content: space-between;
-border-radius: 5px;
-width: 120px;
-cursor: pointer;
-@media screen and (max-width: 680px) {
-    width: auto;
-}
-`
+// const InputContainer = styled.div`
+// border: 0.5px solid #D3D3D3;
+// height: 26px;
+// display: flex;
+// justify-content: space-between;
+// border-radius: 5px;
+// width: 120px;
+// cursor: pointer;
+// @media screen and (max-width: 680px) {
+//     width: auto;
+// }
+// `
 const ProfilePix = styled.img`
 width: 30px;
 height: 30px;
@@ -118,15 +126,15 @@ justify-content: center;
 margin-left: 5px;
 cursor: pointer;
  `
- const SearchIcon = styled.svg`
- width: 15px;
- fill: #D3D3D3;
- margin-right: 5px
- `
- const SearchSpan = styled.span`
- margin-left: 5px;
- color: #D3D3D3;
- `
+//  const SearchIcon = styled.svg`
+//  width: 15px;
+//  fill: #D3D3D3;
+//  margin-right: 5px
+//  `
+//  const SearchSpan = styled.span`
+//  margin-left: 5px;
+//  color: #D3D3D3;
+//  `
  const Bell = styled.svg`
  width: 15px;
  fill: #D3D3D3;
@@ -134,7 +142,7 @@ cursor: pointer;
  const SideBarContainer = styled(Grid)`
  height: 655px; 
  width: 225px;
- transition: height ease-in-out 0.3s; 
+ transition: height ease-in-out 0.5s; 
  `
 
  const NavItemsContainer = styled.div`
@@ -142,14 +150,13 @@ cursor: pointer;
  height: 100%;
  background-color:  #029999;
  padding-top: 20px;
- transition: height ease-in-out 0.3s;
  `
  const NavItems = styled.li`
  llist-style-type: none;
  color: #ffffff;
- padding: 20px 0 0 20%;
+ padding: 20px 0 0 15%;
  display: flex;
- justify-content: startS;
+ justify-content: start;
  font-size: 2.5vmin;
  `
  const NavItemsIcon = styled.svg`
@@ -233,7 +240,7 @@ cursor: pointer;
   width: 120px;
   justify-content: space-between;
   ::after{
-    content: 'Create new';
+    content: 'Add property';
     color: #ffffff;
     font-size: 0.9rem;
  margin-right: 5px;
@@ -269,40 +276,33 @@ cursor: pointer;
  font-weight: 600;
  color: #383838;
  `
- const ItemsContainer = styled.div`
- display: flex;
- justify-content: start;
- margin: 20px;
- `
- const  Items = styled.button`
- padding: 5px 10px;
- color: #494949;
- border: 0.5px solid #c4c4c4;
- outline: none;
- background: inherit;
- display: flex;
- align-items: center;
- cursor: pointer;
-  :hover {
-    background-color: #fff;
-    color: #029999;
-   }
+//  const  Items = styled.button`
+//  padding: 5px 10px;
+//  color: #494949;
+//  border: 0.5px solid #c4c4c4;
+//  outline: none;
+//  background: inherit;
+//  display: flex;
+//  align-items: center;
+//  cursor: pointer;
+//   :hover {
+//     background-color: #fff;
+//     color: #029999;
+//    }
  
- `
- const ItemsSvg = styled.svg`
- height: 15px;
- width: 15px;
- color: #494949;
- margin-right: 3px;
+//  `
+//  const ItemsSvg = styled.svg`
+//  height: 15px;
+//  width: 15px;
+//  color: #494949;
+//  margin-right: 3px;
 
- `
+//  `
  const PropertyBodyContainer = styled.div`
- margin: 5px 20px 20px 20px;
  background-color: #fff;
- width: 100%;
- overflow-x: scroll;
+ margin: 3% 1%;
+ min-width: 900px;
  ` 
-
  const SelectBtn = styled.button`
 width: 100%;
 border: none;
@@ -319,8 +319,8 @@ padding-left: 20px;
  const ActivityHeading = styled.p`
  border: 0.2px solid #d3d3d3;
  margin: 0;
- padding: 15px;
- font-size: 0.8rem;
+ padding: 15px 5px;
+ font-size: 0.7rem;
  font-weight: 600;
  color: #383838;
  text-align: start;
@@ -328,7 +328,7 @@ padding-left: 20px;
  const Activity = styled.p`
  text-align: start;
  cursor: pointer;
- font-size: 0.8rem;
+ font-size: 0.7rem;
  margin-left: 5%;
  :hover {
   background-color: #f8f8ff;
@@ -369,7 +369,8 @@ padding-left: 20px;
  height: 100%; 
  width: 100%; 
  display: flex;
- align-items: center;                                                                                                                                                                                                                                     
+ align-items: center; 
+ margin: 0;                                                                                                                                                                                                                                    
  `
  const BodyTopContainer = styled.div`
  border-left: 0.2px solid #c4c4c4;
@@ -410,8 +411,8 @@ function Properties() {
     const [reserved, setReserved] = useState(false);
     const [sold, setSold] = useState(false);
     const [archive, setArchive] = useState(false);
-    //const [formData, setFormData] = useState(initialValue);
-    //let [searchParams, setSearchParams] = useSearchParams();
+    const [formData, setFormData] = useState(initialValue);
+    let [searchParams, setSearchParams] = useSearchParams();
     const handleSidebar = () => {
       setSidebar(!sidebar);
     }
@@ -454,8 +455,6 @@ function Properties() {
     const {agent} = useAppSelector(selectCurrentAgent);
     let navigate = useNavigate();
     //const dispatch = useDispatch();
-    {/* @ts-ignore:next-line */}
-
     const page = searchParams.get('page') || 1;
   
     {/* @ts-ignore:next-line */}
@@ -489,9 +488,8 @@ function Properties() {
        <CompanyLogo src={agent?.result?.profilePicture} />
       {/* @ts-ignore:next-line */}
       <CompanyName>{agent?.result?.name}</CompanyName>
-      {agent ? <LogoutIcon sx={{color: '#fff', cursor: 'pointer'}} onClick={handleLogout} /> :  <LogoutBtn onClick={handleLogout}>Click to login</LogoutBtn>}
+      {agent ? <LogoutIcon sx={{color: '#fff', cursor: 'pointer', fontSize: '17px'}} onClick={handleLogout} /> :  <LogoutBtn onClick={handleLogout}>Click to login</LogoutBtn>}
       {agent ? <BurgerMenu onClick={handleSidebar} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z"/></BurgerMenu> : ''}
-      
        </LeftContainer>
        </LeftInnerGrid>
        <Grid item lg={10} md={10} sm={8} xs={8} >
@@ -501,11 +499,12 @@ function Properties() {
       {agent ? <PropertyTypeLink to='/agentproperties/propertyType'><Plusbutton><Span>+</Span></Plusbutton></PropertyTypeLink> : ''}
       </PlusTitleContainer>
       <InnerRightContainer>
-        <InputContainer>
+        {/* <InputContainer>
           <SearchSpan>search</SearchSpan>
           <SearchIcon xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M500.3 443.7l-119.7-119.7c27.22-40.41 40.65-90.9 33.46-144.7C401.8 87.79 326.8 13.32 235.2 1.723C99.01-15.51-15.51 99.01 1.724 235.2c11.6 91.64 86.08 166.7 177.6 178.9c53.8 7.189 104.3-6.236 144.7-33.46l119.7 119.7c15.62 15.62 40.95 15.62 56.57 0C515.9 484.7 515.9 459.3 500.3 443.7zM79.1 208c0-70.58 57.42-128 128-128s128 57.42 128 128c0 70.58-57.42 128-128 128S79.1 278.6 79.1 208z"/></SearchIcon>
-          </InputContainer>
-          <ProfilePix src='../images/blank_avater.jpg'/>
+          </InputContainer> */}
+           {/* @ts-ignore:next-line */}
+          <ProfilePix src={agent?.result?.logo ? agent?.result?.logo : '../images/blank_avater.jpg'}/>
           <Notification><Bell xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M256 32V49.88C328.5 61.39 384 124.2 384 200V233.4C384 278.8 399.5 322.9 427.8 358.4L442.7 377C448.5 384.2 449.6 394.1 445.6 402.4C441.6 410.7 433.2 416 424 416H24C14.77 416 6.365 410.7 2.369 402.4C-1.628 394.1-.504 384.2 5.26 377L20.17 358.4C48.54 322.9 64 278.8 64 233.4V200C64 124.2 119.5 61.39 192 49.88V32C192 14.33 206.3 0 224 0C241.7 0 256 14.33 256 32V32zM216 96C158.6 96 112 142.6 112 200V233.4C112 281.3 98.12 328 72.31 368H375.7C349.9 328 336 281.3 336 233.4V200C336 142.6 289.4 96 232 96H216zM288 448C288 464.1 281.3 481.3 269.3 493.3C257.3 505.3 240.1 512 224 512C207 512 190.7 505.3 178.7 493.3C166.7 481.3 160 464.1 160 448H288z"/></Bell></Notification>
       </InnerRightContainer>
       </RightContainer>
@@ -529,8 +528,7 @@ function Properties() {
       </NavItemsContainer>
        </SideBarContainer>
        )}
-       <BodyGrid item lg={sidebar ? 10 : 12} md={sidebar ? 10 : 12} sm={sidebar ? 8 : 12} xs={sidebar ? 8 : 12}>
-         
+       <BodyGrid item lg={sidebar ? 10 : 12} md={sidebar ? 10 : 12} sm={sidebar ? 8 : 12} xs={sidebar ? 8 : 12} onClick={() => setSidebar(false)}> 
        { !data?
        <Grid container>
        <Grid item lg={6} md={6} sm={12} xs={12}>
@@ -550,12 +548,12 @@ function Properties() {
      </Grid>
        : 
        <>
-       <Grid container>
+       <Grid container style={{width: '100%'}}>
         <Grid item lg={2} md={2} sm={3} xs={6}>
         <AllProperties>All Properties</AllProperties>
         </Grid>
        </Grid>
-       <ItemsContainer>
+       {/* <ItemsContainer>
         <Items>
         <ItemsSvg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32"><path fill="currentColor" d="M8.5 5A3.5 3.5 0 0 0 5 8.5v15A3.5 3.5 0 0 0 8.5 27h15a3.5 3.5 0 0 0 3.5-3.5V19a1 1 0 1 1 2 0v4.5a5.5 5.5 0 0 1-5.5 5.5h-15A5.5 5.5 0 0 1 3 23.5v-15A5.5 5.5 0 0 1 8.5 3H13a1 1 0 1 1 0 2H8.5ZM18 4a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v9a1 1 0 1 1-2 0V6.414l-7.293 7.293a1 1 0 0 1-1.414-1.414L25.586 5H19a1 1 0 0 1-1-1Z"/></ItemsSvg>
           open
@@ -576,9 +574,9 @@ function Properties() {
         <ItemsSvg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024"><path fill="currentColor" d="M360 184h-8c4.4 0 8-3.6 8-8v8h304v-8c0 4.4 3.6 8 8 8h-8v72h72v-80c0-35.3-28.7-64-64-64H352c-35.3 0-64 28.7-64 64v80h72v-72zm504 72H160c-17.7 0-32 14.3-32 32v32c0 4.4 3.6 8 8 8h60.4l24.7 523c1.6 34.1 29.8 61 63.9 61h454c34.2 0 62.3-26.8 63.9-61l24.7-523H888c4.4 0 8-3.6 8-8v-32c0-17.7-14.3-32-32-32zM731.3 840H292.7l-24.2-512h487l-24.2 512z"/></ItemsSvg>
           delete
           </Items>
-       </ItemsContainer>
+       </ItemsContainer> */}
        <PropertyBodyContainer>
-        <Grid container>
+        <Grid container style={{width: '100%'}}>
           <Grid item lg={2.4} md={2.4} sm={2.4} xs={3}>
            <SelectBtn onClick={handleAll} style={{ borderRadius: '5px 0 0 0 ', borderBottom: '3px solid #191970', backgroundColor: all ? '#191970': '', color: all ? '#fff': ''}}>ALL</SelectBtn>
           </Grid>  
@@ -732,7 +730,7 @@ function Properties() {
             </Grid>
             <Grid item lg={0.5} md={0.5} sm={0.5} xs={0.5}>
          <InnerActivityContainer>
-          <PropertDetailContainer style={{borderRight: '0.2px solid #c4c4c4', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 0, width: 50, height:50}}>
+          <PropertDetailContainer style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 0, width: '100%', height:50}}>
           <StyledLink to={`/propertyEditPage/${result._id}`}>
            <EditOutlinedIcon sx={{color: '#4682B4'}} />
            </StyledLink>
@@ -741,8 +739,8 @@ function Properties() {
             </Grid>
             <Grid item lg={0.5} md={0.5} sm={0.5} xs={0.5}>
             <InnerActivityContainer>
-            <PropertDetailContainer style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 0, width: 50, height:50}}>
-             <DeleteForeverOutlinedIcon sx={{color: '#FF6347'}} onClick={() => deleteProperty(result._id)} />
+            <PropertDetailContainer style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 0, width: '100%', height:50}}>
+             <DeleteForeverOutlinedIcon  sx={{color: '#FF6347'}} onClick={() => deleteProperty(result._id)} />
             </PropertDetailContainer>
           </InnerActivityContainer> 
             </Grid>
@@ -752,7 +750,7 @@ function Properties() {
        </PropertyBodyContainer>
        </>
        }
-       <Paper elevation={2} sx={{ background: 'inherit', width: '100%', marginTop: 2, marginBottom: 2, display: 'flex', justifyContent: 'center'}}>
+       <Paper elevation={1} sx={{ background: 'inherit', minWidth: '900px', marginTop: 2, marginBottom: 2, display: 'flex', justifyContent: 'center'}}>
       <AgentPropertyPaginate page={page} />
      </Paper>
       </BodyGrid>

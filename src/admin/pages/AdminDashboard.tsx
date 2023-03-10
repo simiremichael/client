@@ -8,7 +8,6 @@ import TotalProperties from "../components/TotalProperties";
 import PropertyForSale from "../components/PropertyForSale";
 import TotalAgent from "../components/TotalAgent";
 import PropertyChart from "../components/PropertyChart";
-
 import RevenueChart from "../components/RevenueChart";
 import PropertyForRent from "../components/PropertyForRent";
 import {ToastContainer } from "react-toastify";

@@ -7,7 +7,6 @@ interface CompanyAuthState {
 
   company:  undefined | string | CompanyModel | null | [] | {} ;   
   companyToken : string | null | undefined;
-  // refreshToken: string | null | string | undefined | {} ;
 }
 
 const initialState: CompanyAuthState = { 

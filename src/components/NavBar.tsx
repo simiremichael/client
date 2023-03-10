@@ -343,7 +343,7 @@ function NavBar() {
       }
       useEffect(() => {
         if(isSuccess) {
-          dispatch(setUsers({ user: data, token: data?.token , refreshToken: data?.refreshToken}));
+          dispatch(setUsers({ user: data, token: data?.token}));
           toast.success('Login successfully....')
         setShowPassword(false);
         setIsSignup(false);
@@ -353,7 +353,7 @@ function NavBar() {
         setAnchorElUser(null)
         };
         if(isSuccess1) {
-          localStorage.setItem('my-property-finder-user', JSON.stringify({ user: data1, token: data1?.token , refreshToken: data1?.refreshToken }))
+          localStorage.setItem('my-property-finder-user', JSON.stringify({ user: data1, token: data1?.token }))
           setShowPassword(false);
           setIsSignup(false);
           toast.success('Login successfully....')
@@ -416,8 +416,6 @@ function NavBar() {
         setOpen(false);
       };
     
-     
-       
       const clear = () => {
         setUserFormData(initialState)
           }

@@ -2,8 +2,7 @@ import React from "react";
 import styled from '@emotion/styled';
 import VillaOutlinedIcon from '@mui/icons-material/VillaOutlined';
 import { selectCurrentCompany } from "../../services/features/companySlice";
-import { useNavigate } from "react-router-dom";
-import { useCompanyPropertySearchQuery } from "../../services/api/propertyAPI";
+import { useGetCompanyPropertyQuery } from "../../services/api/propertyAPI";
 import { useAppSelector } from '../../app/hooks';
 
 
@@ -13,8 +12,8 @@ function TotalProperties() {
     {/* @ts-ignore:next-line */}
    const companyId = company?.result?._id;
    //let navigate = useNavigate();
-   const { data} = useCompanyPropertySearchQuery(companyId);
-
+   const { data} = useGetCompanyPropertyQuery(companyId);
+   
   return (
     <>
     <EarningsCard>

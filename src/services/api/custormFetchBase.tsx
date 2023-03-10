@@ -5,23 +5,24 @@ import { setUsers, logoutUsers } from '../features/userSlice';
 import { setCompanies, companyLogout } from '../features/companySlice';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: process.env.REACT_APP_SERVER_URL || 'http://localhost:5000',
+  baseUrl: process.env.REACT_APP_SERVER_URL || 'http://localhost:3000',
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     const agentToken = ( getState() as RootState).agentState.agentToken
     const companyToken = ( getState() as RootState).companyState.companyToken
     const token = ( getState() as RootState).userState.token
-    // console.log('states: ', agentToken);
-    // console.log('states: ', companyToken);
-    // console.log('states: ', token);
+   // console.log('states: ', agentToken);
+    //console.log('states: ', companyToken);
+    //console.log('states: ', token);
     // let currentDate = new Date();
+    
     if (agentToken) {
       headers.set('authorization', `Bearer ${agentToken}`);
     } else if (companyToken) {
-      headers.set('authorization', `Bearer ${companyToken}` );
+      headers.set('comAuthorization', `Bearer ${companyToken}`);
       
-    } else if (token) {
-      headers.set('authorization', `Bearer ${token}` );
+    } else {
+      headers.set('userAuthorization', `Bearer ${token}`);
     } 
 
       return headers;
@@ -32,8 +33,9 @@ const baseQuery = fetchBaseQuery({
    const customFetchBase = async (args: any, api: any, extraOptions: any) => {
    
     let result = await baseQuery(args, api, extraOptions);
+  
     //console.log(result.error);
-//console.log(result);
+    console.log(result);
     // If you want, handle other status codes, too
     //result?.error?.status === 403
     {/* @ts-ignore:next-line */}
@@ -42,13 +44,13 @@ const baseQuery = fetchBaseQuery({
 
         // send refresh token to get new access token 
         const refreshResult = await baseQuery('/users/refresh', api, extraOptions)
-  console.log(refreshResult)
+         console.log(refreshResult)
         if (refreshResult?.data) {
        const user = ( api.getState() as RootState).userState.user
             // store the new token 
              // console.log(user)
               {/* @ts-ignore:next-line */}
-            api.dispatch(setUsers({ token: refreshResult?.data?.data?.token, user, refreshToken: undefined }))
+            api.dispatch(setUsers({ token: refreshResult?.data?.token, user }))
 
             // retry original query with new access token
             result = await baseQuery(args, api, extraOptions)
@@ -58,7 +60,7 @@ const baseQuery = fetchBaseQuery({
       //       }
       //       return refreshResult
       // }
-      api.dispatch(logoutUsers())
+        api.dispatch(logoutUsers())
         }
     };
 
@@ -69,18 +71,18 @@ const baseQuery = fetchBaseQuery({
 
       // send refresh token to get new access token 
       const companyRefreshResult = await baseQuery('/companies/refresh', api, extraOptions)
-//console.log(companyRefreshResult)
+      //console.log(companyRefreshResult)
       if (companyRefreshResult?.data) {
      const company = ( api.getState() as RootState).companyState.company
           // store the new token 
-           // console.log(company)
+           //console.log(company)
             {/* @ts-ignore:next-line */}
           api.dispatch(setCompanies({ companyToken: companyRefreshResult?.data?.companyToken, company}))
 
           // retry original query with new access token
           result = await baseQuery(args, api, extraOptions)
       } else {
-        api.dispatch(companyLogout())
+         api.dispatch(companyLogout())
 
           // if (companyRefreshResult?.error?.status === 403) {
           //  // agentRefreshResult?.error?.data?.message = "Your login has expired. "
@@ -99,15 +101,15 @@ const baseQuery = fetchBaseQuery({
     if (agentRefreshResult?.data) {
    const agent = ( api.getState() as RootState).agentState.agent
         // store the new token 
-          //console.log(agent)
+          console.log(agent)
           {/* @ts-ignore:next-line */}
-        api.dispatch(setAgents({ agentToken: agentRefreshResult?.data?.agentToken, agent, refreshToken: undefined }))
+        api.dispatch(setAgents({ agentToken: agentRefreshResult?.data?.agentToken, agent }))
 
         // retry original query with new access token
         result = await baseQuery(args, api, extraOptions)
     } else {
 
-      api.dispatch(logout())
+         api.dispatch(logout())
         // if (agentRefreshResult?.error?.status === 403) {
         //  // agentRefreshResult?.error?.data?.message = "Your login has expired. "
         // }
@@ -121,6 +123,4 @@ const baseQuery = fetchBaseQuery({
   };
   
   export default customFetchBase;
-  
-
   

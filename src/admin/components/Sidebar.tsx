@@ -125,19 +125,26 @@ const Links = styled.ul`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: start;
+  padding: 0;
+  margin-left: 15%;
+  @media screen and (max-width: 900px) { 
+   margin-left: 43%;
+  }
+  @media screen and (max-width: 560px) { 
+    margin-left: 36%;
+   }
 `;
 
 const List = styled.li`
   margin-bottom: 2rem;
   display: flex;
-  width: 100%;
-  text-align: center;
+  width: auto;
   align-items: center;
-  justify-content: start;
+  justify-content: center;
   gap: 0.5rem;
   color: #e4e4e4;
   cursor: pointer;
-  margin-left: -5%;
   h3 {
     font-weight: 300;
   }
@@ -163,7 +170,6 @@ const ContactContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1rem;
-
   a {
     color: white;
     text-decoration: none;

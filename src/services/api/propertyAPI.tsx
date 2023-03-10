@@ -316,7 +316,6 @@ tagTypes: ['Properties', 'Users', 'Agents', 'Companies'],
               }
              }),
              
-
              updateCompany: builder.mutation<CompanyModel, Partial<CompanyModel>>({
               query(data) {
                 const { id, ...body} = data;
@@ -447,7 +446,11 @@ tagTypes: ['Properties', 'Users', 'Agents', 'Companies'],
                    companyPropertySearch: builder.query<PropertyModel, any>({
                     query: ({companyId, searchQuery, page, search})  => `/properties/adminHomepage/propertyList/${companyId}?searchQuery=${searchQuery || 'i'}&page=${page}`,
                     providesTags: (result, error, id: any) =>  [{ type:'Properties', id: 'PROP' }],  
-                  }),       
+                  }),  
+                  getCompanyProperty: builder.query<PropertyModel, any>({
+                    query: (companyId) => `/properties/companyProperties/${companyId}`,
+                    providesTags: (result, error, id: any) =>  [{ type:'Properties', id: 'PROP'  }],  
+                  }),     
        }), 
 })
 
@@ -492,5 +495,6 @@ export const {
     useCompanyPropertySearchQuery,
     useSearchPropertiesQuery,
     useGoogleSignInMutation,
+    useGetCompanyPropertyQuery
  } = propertyAPI
 
