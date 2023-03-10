@@ -20,13 +20,10 @@ const baseQuery = fetchBaseQuery({
       headers.set('authorization', `Bearer ${agentToken}`);
     } else if (companyToken) {
       headers.set('comAuthorization', `Bearer ${companyToken}`);
-      
     } else {
       headers.set('userAuthorization', `Bearer ${token}`);
     } 
-
       return headers;
-    
 }
 })
 // BaseQueryFn< string | FetchArgs, unknown, FetchBaseQueryError>
