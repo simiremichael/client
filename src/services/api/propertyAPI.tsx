@@ -169,7 +169,6 @@ tagTypes: ['Properties', 'Users', 'Agents', 'Companies'],
           query: (compId) => `/agents/agentCompany/${compId}`,
           providesTags: (result, error, id: any) =>  [{ type:'Agents', id: 'AGENT' }],  
         }),
-
          logoutAgent:builder.mutation({
           query:(body) => ({
             url: '/agents/logout',
