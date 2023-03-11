@@ -5,9 +5,8 @@ import { setUsers, logoutUsers } from '../features/userSlice';
 import { setCompanies, companyLogout } from '../features/companySlice';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl:  process.env.REACT_APP_SERVER_URL || 'http://localhost:3000',
-  credentials: 'include',
- // mode: 'no-cors',
+  baseUrl: 'https://server-beige-nine.vercel.app',
+  //credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     const agentToken = ( getState() as RootState).agentState.agentToken
     const companyToken = ( getState() as RootState).companyState.companyToken
@@ -33,7 +32,7 @@ const baseQuery = fetchBaseQuery({
     let result = await baseQuery(args, api, extraOptions);
   
     //console.log(result.error);
-    console.log(result);
+    //console.log(result);
     // If you want, handle other status codes, too
     //result?.error?.status === 403
     {/* @ts-ignore:next-line */}
