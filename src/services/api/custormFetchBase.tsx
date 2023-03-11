@@ -42,7 +42,7 @@ const baseQuery = fetchBaseQuery({
 
         // send refresh token to get new access token 
         const refreshResult = await baseQuery('/users/refresh', api, extraOptions)
-         console.log(refreshResult)
+        // console.log(refreshResult)
         if (refreshResult?.data) {
        const user = ( api.getState() as RootState).userState.user
             // store the new token 
