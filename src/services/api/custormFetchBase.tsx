@@ -88,9 +88,9 @@ const baseQuery = fetchBaseQuery({
           // return companyRefreshResult
     }
   };
-
+//result?.data?.agentToken
   {/* @ts-ignore:next-line */}
-  if (!result?.data?.agentToken) {
+  if (!result?.error?.status === 401) {
     //console.log('sending agent refresh token')
 
     // send refresh token to get new access token 
