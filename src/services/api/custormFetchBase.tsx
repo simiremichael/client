@@ -7,7 +7,7 @@ import { setCompanies, companyLogout } from '../features/companySlice';
 const baseQuery = fetchBaseQuery({
   baseUrl:  'https://server-beige-nine.vercel.app',
   credentials: 'include',
-  prepareHeaders: (headers, { getState }) => {
+  prepareHeaders: (headers: Headers, { getState }) => {
     const agentToken = ( getState() as RootState).agentState.agentToken
     const companyToken = ( getState() as RootState).companyState.companyToken
     const token = ( getState() as RootState).userState.token
