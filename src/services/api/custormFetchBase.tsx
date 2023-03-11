@@ -7,7 +7,7 @@ import { setCompanies, companyLogout } from '../features/companySlice';
 const baseQuery = fetchBaseQuery({
   baseUrl:  process.env.REACT_APP_SERVER_URL || 'http://localhost:5000' || 'http://localhost:3000',
   credentials: 'include',
-  mode: 'no-cors',
+ // mode: 'no-cors',
   prepareHeaders: (headers, { getState }) => {
     const agentToken = ( getState() as RootState).agentState.agentToken
     const companyToken = ( getState() as RootState).companyState.companyToken
