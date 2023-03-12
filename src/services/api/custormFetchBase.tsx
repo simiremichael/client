@@ -31,7 +31,6 @@ const baseQuery = fetchBaseQuery({
    const customFetchBase = async (args: any, api: any, extraOptions: any) => {
    
     let result = await baseQuery(args, api, extraOptions);
-  
     //console.log(result.error);
     //console.log(result);
     // If you want, handle other status codes, too
