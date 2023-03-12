@@ -5,8 +5,8 @@ import { setUsers, logoutUsers } from '../features/userSlice';
 import { setCompanies, companyLogout } from '../features/companySlice';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://server-beige-nine.vercel.app',
-  credentials: 'include',
+  baseUrl: "https://server-beige-nine.vercel.app",
+  credentials: "same-origin",
   //mode: "no-cors",
   prepareHeaders: (headers, { getState }) => {
     const agentToken = ( getState() as RootState).agentState.agentToken
@@ -24,6 +24,7 @@ const baseQuery = fetchBaseQuery({
     } else {
       headers.set('userAuthorization', `Bearer ${token}`);
     } 
+    headers.set("Content-Type", "text/plain");
       return headers;
 }
 })
