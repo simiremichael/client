@@ -24,6 +24,7 @@ const baseQuery = fetchBaseQuery({
       headers.set('userAuthorization', `Bearer ${token}`);
     } 
       headers.set("Content-Type", "text/plain");
+      headers.set("Access-Control-Allow-Credentials", "true");
 
       return headers;
 }
