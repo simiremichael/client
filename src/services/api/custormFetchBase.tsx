@@ -5,9 +5,9 @@ import { setUsers, logoutUsers } from '../features/userSlice';
 import { setCompanies, companyLogout } from '../features/companySlice';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://server-beige-nine.vercel.app", 
+  baseUrl: process.env.REACT_APP_SERVER_URL || 'http://localhost:5000', 
  // mode: "cors",
-  credentials: "include",
+  //credentials: "include",
 
   prepareHeaders: (headers, { getState }) => {
     const agentToken = ( getState() as RootState).agentState.agentToken
