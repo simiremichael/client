@@ -23,7 +23,8 @@ const baseQuery = fetchBaseQuery({
     } else {
       headers.set('userAuthorization', `Bearer ${token}`);
     } 
-      // headers.set("Content-Type", "text/plain");
+      headers.set("Content-Type", "text/plain");
+      headers.set("Content-Type", "application/json");
       headers.set("Access-Control-Allow-Credentials", "true");
       headers.set("Access-Control-Allow-Origin", "https://my-property-finder.vercel.app")
 
