@@ -23,7 +23,7 @@ const baseQuery = fetchBaseQuery({
     } else {
       headers.set('userAuthorization', `Bearer ${token}`);
     } 
-    headers.set("Content-Type", "text/plain");
+      headers.set("Content-Type", "text/plain");
 
       return headers;
 }
