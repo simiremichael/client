@@ -16,7 +16,6 @@ const baseQuery = fetchBaseQuery({
     //console.log('states: ', companyToken);
     //console.log('states: ', token);
     // let currentDate = new Date();
-    
     if (agentToken) {
       headers.set('authorization', `Bearer ${agentToken}`);
     } else if (companyToken) {
