@@ -161,8 +161,10 @@ function NewForRent () {
         speed: 2000,
         breakpoints: {
         1200: {  },
-          800 : { perPage: 3 },
-          640 : { perPage: 2 },
+          992: { perPage: 4 },
+          768: {perPage: 3},
+          600 : { perPage: 2 },
+          300 : { perPage: 1 },
         },
         
       } }>
@@ -278,7 +280,7 @@ function NewForRent () {
         <CardText>78 new properties for rent</CardText>
       </CardTextContainer>
     </Card>
-    <NavLink to='http://localhost:3000/rent?search=surulere&category=rent&type=apartment&bed=4&bath=4&minPrice=100000&maxPrice=200000&sort=&buy=5000000'>
+    {/* <NavLink to='http://localhost:3000/rent?search=surulere&category=rent&type=apartment&bed=4&bath=4&minPrice=100000&maxPrice=200000&sort=&buy=5000000'> */}
     <Card>
       <CardMedia9>
         <TopContainer>
@@ -292,7 +294,7 @@ function NewForRent () {
         <CardText>78 new properties for rent</CardText>
       </CardTextContainer>
     </Card>
-    </NavLink>
+    {/* </NavLink> */}
     <Card>
       <CardMedia10>
         <TopContainer>
