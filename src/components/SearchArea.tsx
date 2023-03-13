@@ -58,7 +58,7 @@ display: none;
 const Label = styled.label`
 position: relative;
 color: #008080;
-height: 46px;
+height: 44px;
 font-size: 15px;
 border: 1px solid #008080;
 border-radius: 5px;
@@ -68,7 +68,7 @@ cursor: pointer;
 padding: 10px 12px 10px;
 `
 const SearchInputContainer = styled.div`
-height: 46px;
+height: 44px;
 background-color: #ffffff;
 border: 1px solid gray;
 width: 100%;
