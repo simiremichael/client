@@ -143,7 +143,7 @@ function NewForSale () {
       <Splide
       options={ {
         gap : '1rem',
-        perPage: 6,
+        perPage: 5,
         speed: 2000,
         breakpoints: {
         1200: {  },
