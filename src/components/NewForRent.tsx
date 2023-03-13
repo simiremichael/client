@@ -24,6 +24,7 @@ text-align: start;
 margin: 30px 0 10px 0;
 color: #494949;
 font-family: Sans-serif;
+font-size: 1.9rem;
 `
 const PropertyType = styled.p`
 text-align: start;
@@ -159,15 +160,15 @@ function NewForRent () {
       options={ {
         gap : '1rem',
         perPage: 6,
-        speed: 5000,
+        speed: 2000,
         breakpoints: {
         1200: {  },
           800 : { perPage: 3 },
-          640 : { perPage: 3 },
+          640 : { perPage: 4 },
         },
         
       } }>
-        <Link to='rent?search=lekki&category=rent&type=apartment&bath=4&bed=4&minPrice=100000&maxPrice=5000000&sort= '>
+        {/* <Link to='rent?search=lekki&category=rent&type=apartment&bath=4&bed=4&minPrice=100000&maxPrice=5000000&sort= '> */}
     <Card>
       <CardMedia>
         <TopContainer>
@@ -181,9 +182,10 @@ function NewForRent () {
         <CardText>78 new properties for rent</CardText>
       </CardTextContainer>
     </Card>
-    </Link>
+    {/* </Link>
     <Link to='rent?search=victoria%20island&category=rent&type=apartment&bath=4&bed=4&minPrice=100000&maxPrice=5000000&sort='>
-    <Card>
+   */}
+    <Card> 
       <CardMedia2>
         <TopContainer>
         <PlaceDiv>
@@ -196,8 +198,9 @@ function NewForRent () {
         <CardText>78 new properties for rent</CardText>
       </CardTextContainer>
     </Card>
-    </Link>
+    {/* </Link>
     <Link to='rent?search=banana%20island&category=rent&type=apartment&bath=4&bed=4&minPrice=100000&maxPrice=5000000&sort='>
+      */}
      <Card>
       <CardMedia8>
         <TopContainer>
@@ -211,7 +214,7 @@ function NewForRent () {
         <CardText>78 new properties for rent</CardText>
       </CardTextContainer>
     </Card>
-    </Link>
+    {/* </Link> */}
     <Card>
       <CardMedia4>
         <TopContainer>

@@ -146,11 +146,11 @@ function NewForSale () {
       options={ {
         gap : '1rem',
         perPage: 6,
-        speed: 5000,
+        speed: 4000,
         breakpoints: {
         1200: {  },
           800 : { perPage: 3 },
-          640 : { perPage: 3 },
+          640 : { perPage: 4 },
         },
         
       } }>

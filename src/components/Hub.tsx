@@ -32,6 +32,7 @@ flex-direction: column;
 justify-content: start;
 `
 const Title = styled.h1`
+font-size: 1.9rem;
 text-align: start;
 margin: 10px 0 30px 0;
 color: #494949;
@@ -102,7 +103,7 @@ function Hub() {
   return (
     
       <StyledContainer>
-        <Title>Home Search Made Easy</Title>
+        <Title>Home search made easy</Title>
         <StyledGrid container  spacing={2}>
         <Grid item lg={6} xs={12} sm={12} md={6}>
         <InnerContainer>
