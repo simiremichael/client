@@ -9,7 +9,6 @@ import '@splidejs/react-splide/css';
 
 
 const StyledBox = styled(Box)`
-
 overflow: hidden;
 `
 const StyledContainer = styled(Container)`
@@ -34,8 +33,7 @@ color: #383838;
 font-weight: 400;
 `
 const CardContainer = styled.div`
-display: flex;
-justify-content: center;
+
 `
 
 const Card = styled(SplideSlide)`
@@ -164,7 +162,7 @@ function NewForRent () {
         breakpoints: {
         1200: {  },
           800 : { perPage: 3 },
-          640 : { perPage: 4 },
+          640 : { perPage: 2 },
         },
         
       } }>

@@ -22,9 +22,7 @@ color: #383838;
 font-weight: 400;
 `
 const CardContainer = styled.div`
-display: flex;
-justify-content: center;
-flex-wrap: wrap;
+
 `
 
 const Card = styled(SplideSlide)`
@@ -146,11 +144,11 @@ function NewForSale () {
       options={ {
         gap : '1rem',
         perPage: 6,
-        speed: 4000,
+        speed: 2000,
         breakpoints: {
         1200: {  },
-          800 : { perPage: 3 },
-          640 : { perPage: 4 },
+          800 : { perPage: 4 },
+          640 : { perPage: 3 },
         },
         
       } }>
