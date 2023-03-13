@@ -708,7 +708,7 @@ const handleSearch = () => {
       {/* <SelectContainer> */}
       <Grid item lg={2} md={2} sm={3} xs={12}>
       <Select1 name='type' value={searchData.type} onChange={handleChange}>
-      <Options defaultValue='Property type'>Property type</Options>
+      <Options>Select Property</Options>
       <Options value='apartment'>Apartment</Options>
       <Options value='office'>Office</Options> 
       <Options value='flat'>Flat</Options>
