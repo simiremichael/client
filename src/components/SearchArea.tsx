@@ -706,7 +706,7 @@ const handleSearch = () => {
       </SearchInputContainer>
       </Grid>
       {/* <SelectContainer> */}
-      <Grid item lg={2} md={2} sm={3} xs={3}>
+      <Grid item lg={2} md={2} sm={3} xs={12}>
       <Select1 name='type' value={searchData.type} onChange={handleChange}>
       <Options defaultValue='Property type'>Property type</Options>
       <Options value='apartment'>Apartment</Options>
@@ -726,7 +726,7 @@ const handleSearch = () => {
       <Options value='self-contain'>Self Contain</Options>
       </Select1>
       </Grid>
-      <Grid item lg={1.5} md={1.5} sm={3} xs={3}>
+      <Grid item lg={1.5} md={1.5} sm={3} xs={6}>
       <ClickAwayListener onClickAway={handleClickAway}>
         <Div style={{ position: 'relative', display: 'flex', flexDirection: 'column'}} >
           <BedContainer onClick={makeVisble}>
@@ -821,7 +821,7 @@ const handleSearch = () => {
  }  </Div>
  </ClickAwayListener>
  </Grid>
- <Grid item lg={1.5} md={1.5} sm={3} xs={3}>
+ <Grid item lg={1.5} md={1.5} sm={3} xs={6}>
  <ClickAwayListener onClickAway={handleClickAway1}>
         <Div style={{ position: 'relative', display: 'flex', flexDirection: 'column'}} >
         <PriceContainer onClick={priceReveal}>
@@ -951,7 +951,7 @@ const handleSearch = () => {
      }</Div>
      </ClickAwayListener>
      </Grid>
- <Grid item lg={1} md={1} sm={2} xs={3}>
+ <Grid item lg={1} md={1} sm={2} xs={12}>
       <SearchButton type='button' onClick={handleSearch}><Svg2 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M500.3 443.7l-119.7-119.7c27.22-40.41 40.65-90.9 33.46-144.7C401.8 87.79 326.8 13.32 235.2 1.723C99.01-15.51-15.51 99.01 1.724 235.2c11.6 91.64 86.08 166.7 177.6 178.9c53.8 7.189 104.3-6.236 144.7-33.46l119.7 119.7c15.62 15.62 40.95 15.62 56.57 0C515.9 484.7 515.9 459.3 500.3 443.7zM79.1 208c0-70.58 57.42-128 128-128s128 57.42 128 128c0 70.58-57.42 128-128 128S79.1 278.6 79.1 208z"/></Svg2></SearchButton>
       {/* </SelectContainer> */}
       </Grid>
