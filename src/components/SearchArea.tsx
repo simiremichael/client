@@ -19,7 +19,7 @@ import { useAppDispatch, useAppSelector } from '../app/hooks';
 const StyledBox = styled(Box)`
 justify-content: center;
 background-image: url("../images/back1.jpg");
-height: 350px;
+height: 440px;
 padding: 1rem 0;
 width: 100%;
   background-attachment: fixed;
