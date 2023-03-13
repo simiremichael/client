@@ -76,7 +76,7 @@ align-items: center;
 `
 const MenuItems = styled.li`
 cursor: pointer;
-margin: 15px 0;
+margin: 0 15px;
 `
 const NavMenuItems = styled.li`
 margin: 10px 0;
@@ -595,7 +595,6 @@ const handleCloseUserMenu = () => {
           </StyledLink>
         </LogoContainer>
         <MenuItemsContainer>
-        
           <UL>
             <MenuItems><StyledLink to='/buy' >Buy</StyledLink></MenuItems>
            <MenuItems><StyledLink to='/rent'>Rent</StyledLink></MenuItems>
