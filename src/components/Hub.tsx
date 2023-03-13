@@ -89,26 +89,13 @@ color: #ffffff;
 text-decoration: none;
 margin-top: 10px;
 `
+const AnimationContainer = styled.div`
+display: flex;
+justify-content: space-between;
+`
 const Animate = styled.img`
-position: absolute;
-height: 150px;
-margin-left: 380px;
-margin-top: 130px;
-@media screen and (max-width: 600px) {
-  margin-left: 300px;
-margin-top: 135px;
-height: 130px;
-}
-@media screen and (min-width: 900px) {
-  margin-left: 250px;
-margin-top: 135px;
-height: 130px;
-}
-@media screen and (min-width: 1100px) {
-  margin-left: 350px;
-margin-top: 135px;
-height: 130px;
-}
+height: 100px;
+margin-right: 10px;
 `
 
 function Hub() {
@@ -129,8 +116,10 @@ function Hub() {
         <InnerContainer2>
          <GradTitle>Explore your future home with detail videos</GradTitle>
          <AgentListing>View your dream home online</AgentListing>
+         <AnimationContainer>
          <Button><strong>View now</strong></Button>
          <Animate src='../images/animate2.svg' />
+         </AnimationContainer>
         </InnerContainer2>
         </Grid>
         </StyledGrid>
