@@ -64,7 +64,7 @@ border-radius: 5px;
 margin-right: 5px;
 align-items: center;
 cursor: pointer;
-padding: 10px 12px;
+padding: 10px 12px 0;
 `
 const SearchInputContainer = styled.div`
 height: 44px;
