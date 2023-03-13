@@ -73,7 +73,7 @@ border: 1px solid gray;
 width: 100%;
 display: flex;
 border-radius: 5px;
-align-content: center;
+align-items: center;
 `
 const SearchInput = styled.input`
 border: none;
