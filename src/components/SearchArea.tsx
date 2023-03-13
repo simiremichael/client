@@ -65,6 +65,7 @@ border-radius: 5px;
 margin-right: 5px;
 align-items: center;
 cursor: pointer;
+padding: 10px 12px;
 `
 const SearchInputContainer = styled.div`
 height: 44px;
@@ -84,7 +85,7 @@ outline: none;
 const Select1 = styled.select`
 width: 100%;
 border-radius: 5px;
-height: 42px;
+height: 44px;
 cursor: pointer;
 outline: none;
 color: gray;
@@ -95,7 +96,7 @@ color: gray;
 const SearchButton = styled.button`
 background-color: #008080;
 width: 100%;
-height: 42px;
+height: 44px;
 cursor: pointer;
 border: none;
 border-radius: 5px;
@@ -115,7 +116,7 @@ margin: 10px 3px 0 8px;
 `
 const BedContainer = styled.div`
 width: 100%;
-height: 40px;
+height: 44px;
 position: relative;
 border: 1px solid gray;
 border-radius: 5px;
@@ -213,7 +214,7 @@ display:flex;
 border: 1px solid gray;
 width: 100%;
 justify-content: space-between;
-height: 40px;
+height: 44px;
 align-items: center;
 border-radius: 5px;
 cursor: pointer;
