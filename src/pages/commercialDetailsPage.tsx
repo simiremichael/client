@@ -655,7 +655,6 @@ function CommercialDetailsPage() {
               </RightContainer>
             </Grid>
           </Grid>
-
           <GridPrice item lg={4} sm={12} md={4} xs={12}>
             <Price>{propertyDetail?.price.toLocaleString()} NGN / yearly</Price>
             <ContactTopContainer>
