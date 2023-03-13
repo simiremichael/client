@@ -75,11 +75,11 @@ align-items: center;
 }
 `
 const MenuItems = styled.li`
-margin: 0 15px;
 cursor: pointer;
+margin: 15px 0;
 `
 const NavMenuItems = styled.li`
-margin: 10px;
+margin: 10px 0;
 cursor: pointer;
 font-size: 1rem;
 :hover {
@@ -120,7 +120,7 @@ font-weight: bold;
 
 `
 const NavLoginButton = styled.button`
-margin-left: 10px;
+margin: 10px 0 10px -1px;
 border: 1px solid;
 width: 120px;
 padding: 10px 18px;
@@ -304,8 +304,8 @@ outline: none;
 border-radius: 5px;
 cursor: pointer;
 `
-const BoxInnerContainer = styled.div`
-margin: 0 0 10px 0;
+const BoxInnerContainer = styled(Container)`
+margin-bottom: 10px;
 border-top: 0.5px solid gray;
 @media screen and (min-width: 901px) {
   display: none;
@@ -654,7 +654,7 @@ const handleCloseUserMenu = () => {
     </StyledBox>
      {open && ( 
               <BoxInnerContainer >
-                <NUL>
+                <NUL style={{ padding: 0, alignItems: 'start'}}>
                 {/* style={{ height: open? 'auto' : 0, transition: 'ease-in-out', transitionDuration: '0.5s', transitionProperty: 'height'}} */}
                   {user ?
                     <>

@@ -74,18 +74,24 @@ margin: 10px 10px 10px 0;
 `
  const RightContainer = styled.div`
  display: flex;
- @media screen and (max-width: 780px) {
+ @media screen and (max-width: 768px) {
   justify-content: start;
 }
 `
 const Img = styled.img`
-max-width: 7rem;
+max-width: 10rem;
 cursor: pointer;
+@media screen and (max-width: 768px) {
+  max-width: 10rem;
+}
 ` 
 const Img1 = styled.img`
-max-width: 9rem;
+max-width: 13rem;
 cursor: pointer;
 margin-left: -16px;
+@media screen and (max-width: 768px) {
+  max-width: 13rem;
+}
 ` 
 const   StyledLink = styled(NavLink)`
 text-decoration: none;

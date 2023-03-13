@@ -32,7 +32,7 @@ flex-direction: column;
 justify-content: start;
 `
 const Title = styled.h1`
-font-size: 1.9rem;
+font-size: 1.8rem;
 text-align: start;
 margin: 10px 0 30px 0;
 color: #494949;

@@ -23,7 +23,7 @@ text-align: start;
 margin: 30px 0 10px 0;
 color: #494949;
 font-family: Sans-serif;
-font-size: 1.9rem;
+font-size: 1.8rem;
 `
 const PropertyType = styled.p`
 text-align: start;

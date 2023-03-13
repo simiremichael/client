@@ -29,7 +29,7 @@ text-align: start;
 display: inline;
 list-style-type: none;
 font-size: 0.9rem;
-line-height: 1.6;
+line-height: 1.6rem;
 cursor: pointer;
 font-family:   Open Sans;
 :hover {
