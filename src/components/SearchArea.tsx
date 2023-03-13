@@ -83,10 +83,12 @@ border: none;
 height: 95%;
 width: 90%;
 outline: none;
+font-size: 14px;
 `
 const Select1 = styled.select`
 width: 100%;
 border-radius: 5px;
+background-color: #fff;
 height: 44px;
 cursor: pointer;
 outline: none;
@@ -108,7 +110,7 @@ width: 15px;
 fill: #ffffff;
 `
 const Svg1 = styled.svg`
-width: 15px;
+width: 18px;
 fill: gray;
 align-self: center;
 `
@@ -591,7 +593,7 @@ const priceState = 'Prices'
   const [bath, setBath] = useState('');
   const [value1, setValue1] = useState(priceState);
   const [value2, setValue2] = useState('');
-  const initialData = {toggle: '', search: '', type: '', select_bed: '', page: '', select_bath: '', MinPrice: '', MaxPrice: '', duration: ''  }
+  const initialData = {toggle: 'rent', search: '', type: '', select_bed: '', page: '', select_bath: '', MinPrice: '', MaxPrice: '', duration: ''  }
   const [searchData, setSearchData] = useState(initialData)
    let [searchParams, setSearchParams] = useSearchParams();
  
@@ -609,6 +611,7 @@ const priceState = 'Prices'
 
   const clear = () => {
     setInput(initialInput);
+    setSearchData(initialData);
     setBath('')
   }
 
@@ -625,6 +628,7 @@ const priceState = 'Prices'
    const dispatch = useAppDispatch();
   const clearPrice = () => {
     setValue1(priceState);
+    setSearchData(initialData);
     setValue2('')
   }
  
@@ -692,7 +696,7 @@ const handleSearch = () => {
           <TopContainer>
           <BtnInput type='radio' name='toggle' id='buy' value='sale' onChange={handleChange}/>
           <Label htmlFor='buy'>Buy</Label>
-          <BtnInput type='radio' name='toggle' id='rent' value='rent' onChange={handleChange} />
+          <BtnInput type='radio' name='toggle' id='rent' value='rent' defaultChecked onChange={handleChange} />
           <Label htmlFor='rent'>Rent</Label>  
           </TopContainer>
           </Grid>
@@ -733,7 +737,7 @@ const handleSearch = () => {
       <ClickAwayListener onClickAway={handleClickAway}>
         <Div style={{ position: 'relative', display: 'flex', flexDirection: 'column'}} >
           <BedContainer onClick={makeVisble}>
-            <BedP>{!searchData.select_bed ? input : searchData.select_bed} {searchData.select_bed? 'bed' : ''}{searchData.select_bath? ',' : ''} {bath? '&' : ''} {!searchData.select_bed ? bath : searchData.select_bath} {searchData.select_bath? 'bath' : ''}</BedP>
+            <BedP>{!searchData.select_bed ? input : searchData.select_bed} {searchData.select_bed !== 'studio' && searchData.select_bed !== 'shop' ? 'bed' : ''}{searchData.select_bed !== 'studio' && searchData.select_bed !== 'shop' && searchData.select_bed > '1' ? 's' : ''}{searchData.select_bath? ',' : ''} {bath? '&' : ''} {!searchData.select_bed ? bath : searchData.select_bath} {searchData.select_bath? 'bath' : ''}{searchData.select_bath > '1' ? 's' : ''}</BedP>
         <StyledSvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M192 384c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L192 306.8l137.4-137.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-160 160C208.4 380.9 200.2 384 192 384z"/></StyledSvg>
       </BedContainer>
   
