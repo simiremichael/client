@@ -19,13 +19,13 @@ import { useAppDispatch, useAppSelector } from '../app/hooks';
 const StyledBox = styled(Box)`
 justify-content: center;
 background-image: url("../images/back1.jpg");
-min-height: 500px;
+min-height: 440px;
 padding: 1rem 0;
 width: 100%;
   background-attachment: fixed;
   background-position: center;
   background-size: 100% 100%; 
-  @media screen and (min-width: 760px) {
+  @media screen and (min-width: 800px) {
     min-height: 400px;
   }
 `
