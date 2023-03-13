@@ -147,8 +147,8 @@ function NewForSale () {
         speed: 2000,
         breakpoints: {
         1200: {  },
-          800 : { perPage: 4 },
-          640 : { perPage: 3 },
+          800 : { perPage: 3 },
+          640 : { perPage: 2 },
         },
         
       } }>
