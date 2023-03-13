@@ -58,7 +58,6 @@ display: none;
 const Label = styled.label`
 position: relative;
 color: #008080;
-height: 44px;
 font-size: 15px;
 border: 1px solid #008080;
 border-radius: 5px;
