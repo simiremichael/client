@@ -575,7 +575,7 @@ function DetailsPage() {
         options={ {
           rewind: false,
           width : '100%',
-          height: '88vh',
+          height: '100vh',
         } }
       >
           {/* @ts-ignore:next-line */}

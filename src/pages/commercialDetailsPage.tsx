@@ -585,7 +585,7 @@ function CommercialDetailsPage() {
         options={ {
           rewind: false,
           width : '100%',
-          height: '80vh',
+          height: 100vh',
         } }
       >
           {/* @ts-ignore:next-line */}

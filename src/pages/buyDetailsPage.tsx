@@ -558,7 +558,7 @@ function BuyDetailsPage() {
         zoom: 14
         }}
         style={{width: '100%', 
-        height: '80vh',
+        height: '100vh',
         }}
      //mapStyle="mapbox://styles/mapbox/streets-v9"
     mapStyle="mapbox://styles/simiremichael/clcz22d6e00l814qni4m9qxaq"

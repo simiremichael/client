@@ -558,7 +558,7 @@ const [viewState, setViewState] = useState(initial)
       zoom: 14
     }}
     style={{width: '100%', 
-    height: '80vh',
+    height: '100vh',
      }}
     mapStyle="mapbox://styles/simiremichael/clcz22d6e00l814qni4m9qxaq"
     mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
