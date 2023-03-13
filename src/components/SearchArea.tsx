@@ -67,7 +67,7 @@ cursor: pointer;
 padding: 10px 12px 10px;
 `
 const SearchInputContainer = styled.div`
-height: 40px;
+height: 50px;
 background-color: #ffffff;
 border: 1px solid gray;
 width: 100%;
