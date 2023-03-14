@@ -102,7 +102,7 @@ background-size: 100% 100%;
 height: 10rem;
 `
 const CardMedia5 = styled.div`
-background-image: url("../images/lagos_island.jpg");
+background-image: url("../images/lagos_Island.jpg");
 border-radius: 10px 10px 0 0;
 background-size: 100% 100%;
 height: 10rem;
@@ -132,7 +132,7 @@ background-size: 100% 100%;
 height: 10rem;
 `
 const CardMedia10 = styled.div`
-background-image: url("../images/sangotedo.jpg");
+background-image: url("../images/Sangotedo.jpg");
 border-radius: 10px 10px 0 0;
 background-size: 100% 100%;
 height: 10rem;
