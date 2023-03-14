@@ -237,7 +237,7 @@ color: #494949;
 const StyledGrid = styled(Grid)`
 margin: 15px 0;
 `
-const StyledContainers = styled(Container)`
+const StyledContainers = styled.div`
 margin: 10px 0;
 `
 const CardImg = styled(Grid)`
