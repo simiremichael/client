@@ -668,13 +668,13 @@ useEffect(() => {
                     rewind: false,
                     gap: 0,
                     width: 'cover',
-                    height: 300,
+                    height: 240,
                   }}
                   aria-label="My Favorite Images"
                 >
                   {/* @ts-ignore:next-line */}
                    {result?.images.map((item: any, index: any) => (
-                  <SplideSlide key={index} style={{height: '100%', width: '100%'}} > 
+                  <SplideSlide key={index} style={{height: '100%', width: '100%', padding: 0, margin: 0}} > 
                     <Img src={item?.img} style={{height: '100%', width: '100%'}} />
                   </SplideSlide>   
                    ))}
