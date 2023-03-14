@@ -322,7 +322,7 @@ const StyledGrid = styled(Grid)`
 margin-bottom: 15px;
 margin-top: 15px;
 `
-const StyledContainer = styled(Container)`
+const StyledContainer = styled.div`
 margin: 10px 0;
 `
 const CardImg = styled(Grid)`
@@ -986,13 +986,15 @@ const handleSearch = () => {
                     rewind: true,
                     gap: 0,
                     width: 'cover',
+                    height: 220,
+                    padding: 0
                   }}
                   aria-label="My Favorite Images"
                 >
                   {/* @ts-ignore:next-line */}
                    {result?.images.map((item: any, index: any) => (
-                  <SplideSlide key={index}> 
-                    <Img src={item?.img} />
+                  <SplideSlide key={index} style={{height: '100%', width: '100%', padding: 0, margin: 0}}> 
+                    <Img src={item?.img} style={{height: '100%', width: '100%', padding: 0, margin: 0}} />
                   </SplideSlide>   
                    ))}
                 </Splide>
@@ -1027,12 +1029,12 @@ const handleSearch = () => {
                       <Detail>{result?.address1}</Detail>
                     </DetailContainer>
                   </LeftContainer>
+                  </StyledLink>
                   <RightContainer>
                     <Featured>FEATURED</Featured>
                     <Premium>PREMIUM</Premium>
                     <LogoImg src={result.logo} />
                   </RightContainer>
-                  </StyledLink>
                 </CardDetails>
                 <BottomContainer>
                 <Links href={`tel:${result?.phone}`}>
