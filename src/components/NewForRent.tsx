@@ -28,8 +28,8 @@ font-size: 1.8rem;
 const PropertyType = styled.p`
 text-align: start;
 margin: 20px 0 15px 0;
-font-family: Sans-serif;
 color: #383838;
+font-family: Sans-serif;
 font-weight: 400;
 `
 const CardContainer = styled.div`
@@ -78,7 +78,7 @@ margin: 0 10px;
 text-align: start;
 `
 const CardText = styled.p`
-font-family:    Sans-serif;
+font-family: Sans-serif;
 letter-spacing: 0.8px;
 font-size: 0.9rem;
 color: #494949;

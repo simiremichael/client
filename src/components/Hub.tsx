@@ -8,7 +8,6 @@ import Grid from '@mui/material/Grid';
 
 const StyledContainer = styled(Container)`
 margin-top: 30px;
-
 `
 const StyledGrid = styled(Grid)`
 justify-content: space-between;
@@ -35,8 +34,8 @@ const Title = styled.h1`
 font-size: 1.8rem;
 text-align: start;
 margin: 10px 0 30px 0;
-color: #494949;
 font-family: Sans-serif;
+color: #494949;
 `
 const AgentListing = styled.h4`
 color: #ffffff;
@@ -61,6 +60,7 @@ text-align: start;
 color: #ffffff;
 font-size: 2rem;
 margin-left: 10px;
+font-family: Sans-serif;
 `
 const P = styled.p`
 text-align: start;
@@ -69,6 +69,7 @@ font-size: 1rem;
 font-weight: 700;
 margin-left: 10px;
 margin-top: 10px;
+font-family: Sans-serif;
 `
 const GradButton = styled.div`
 background-color: #ffffff;
