@@ -669,6 +669,7 @@ useEffect(() => {
                     gap: 0,
                     width: 'cover',
                     height: 240,
+                    padding: 0
                   }}
                   aria-label="My Favorite Images"
                 >
