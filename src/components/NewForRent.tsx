@@ -102,7 +102,7 @@ background-size: 100% 100%;
 height: 10rem;
 `
 const CardMedia5 = styled.div`
-background-image: url("../images/lagos_Island.jpg");
+background-image: url("../images/Lagos_Island.jpg");
 border-radius: 10px 10px 0 0;
 background-size: 100% 100%;
 height: 10rem;
@@ -126,13 +126,13 @@ background-size: 100% 100%;
 height: 10rem;
 `
 const CardMedia9 = styled.div`
-background-image: url("../images/surulere.jpg");
+background-image: url("../images/Surulere.jpg");
 border-radius: 10px 10px 0 0;
 background-size: 100% 100%;
 height: 10rem;
 `
 const CardMedia10 = styled.div`
-background-image: url("../images/Sangotedo.jpg");
+background-image: url("../images/sangotedo.jpg");
 border-radius: 10px 10px 0 0;
 background-size: 100% 100%;
 height: 10rem;
