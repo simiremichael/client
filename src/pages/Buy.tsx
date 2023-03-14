@@ -652,7 +652,7 @@ useEffect(() => {
           <RightContainer>
             <Sort>Sort by:</Sort>
             <FormControl sx={{ marginLeft: '5px', minWidth: 100, }} size="small">
-           <InputLabel id="demo-simple-select-autowidth-label">Search</InputLabel>
+           <InputLabel id="demo-simple-select-autowidth-label">Select</InputLabel>
         <Select
           labelId="demo-simple-select-autowidth-label"
           id="demo-simple-select-autowidth"

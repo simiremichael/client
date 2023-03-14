@@ -27,7 +27,8 @@ justify-content: start;
 flex-wrap: wrap;
 `
 const StyledButton = styled(Button)`
-height: 38px;
+height: 54px;
+width: 100%;
 background-color: #008080;
 :hover{
   background-color: #008080;
@@ -239,10 +240,14 @@ const dispatch = useAppDispatch();
       <NavBar />
       <Form onSubmit={handleSearch}>
     <StyledContainer>
-    <FormControl sx={{ m: 1, minWidth: 300 }} >
-    <TextField  id="City" size="small" label="City, community or building" variant="outlined" name='search' value={searchData.search} onChange={handleChange} />
+    <Grid container spacing={1}>
+    <Grid item lg={5} md={7} sm={9} xs={12}>
+    <FormControl  sx={{ width: '100%'}}>
+    <TextField  id="City" size="medium" label="City, community or building" variant="outlined" name='search' value={searchData.search} onChange={handleChange} />
     </FormControl>
-        <FormControl sx={{ m: 1, minWidth: 125 }} size="small">
+    </Grid>
+    <Grid item lg={1.2} md={2.5} sm={3} xs={6}>
+    <FormControl sx={{width: '100%'}} size="medium">
     <InputLabel id="demo-simple-select-autowidth-label">Project type</InputLabel>
         <Select
           labelId="demo-simple-select-autowidth-label"
@@ -271,13 +276,15 @@ const dispatch = useAppDispatch();
           <MenuItem value='others'>Others</MenuItem>
         </Select>
         </FormControl>
-        <FormControl sx={{ m: 1, minWidth: 108 }} size="small">
-        <InputLabel id="demo-simple-select-autowidth-label">Min-Beds</InputLabel>
+        </Grid>
+        <Grid item lg={0.93} md={2.5} sm={4} xs={6}>
+         <FormControl sx={{width: '100%'}} size="medium">
+    <InputLabel id="demo-simple-select-autowidth-label">Min-Beds</InputLabel>
         <Select
           labelId="demo-simple-select-autowidth-label"
           id="demo-simple-select-autowidth"
           name='bed'
-          value={searchData.maxBed}
+          value={searchData.minBed}
           label='Beds'
           autoWidth
           onChange={handleChange}
@@ -291,13 +298,15 @@ const dispatch = useAppDispatch();
           <MenuItem value='7+'>7+</MenuItem>
         </Select>
         </FormControl>
-        <FormControl sx={{ m: 1, minWidth: 110 }} size="small">
+        </Grid>
+        <Grid item lg={0.93} md={2} sm={4} xs={6}>
+         <FormControl sx={{width: '100%'}} size="medium">
     <InputLabel id="demo-simple-select-autowidth-label">Max-Beds</InputLabel>
         <Select
           labelId="demo-simple-select-autowidth-label"
           id="demo-simple-select-autowidth"
           name='bath'
-          value={searchData.minBed}
+          value={searchData.maxBed}
           label='Baths'
           autoWidth
           onChange={handleChange}
@@ -311,8 +320,9 @@ const dispatch = useAppDispatch();
           <MenuItem value='7+'>7+</MenuItem>
         </Select>
         </FormControl>
-
-        <FormControl sx={{ m: 1, minWidth: 110 }} size="small">
+        </Grid>
+        <Grid item lg={1.2} md={2} sm={4} xs={6}>
+         <FormControl sx={{width: '100%'}} size="medium">
     <InputLabel id="demo-simple-select-autowidth-label">Possession date</InputLabel>
         <Select
           labelId="demo-simple-select-autowidth-label"
@@ -335,7 +345,9 @@ const dispatch = useAppDispatch();
           <MenuItem value='from-2030'>From 2030</MenuItem>
         </Select>
         </FormControl>
-        <FormControl sx={{ m: 1, minWidth: 110 }} size="small">
+        </Grid>
+        <Grid item lg={1} md={3} sm={4} xs={6}>
+         <FormControl sx={{width: '100%'}} size="medium">
     <InputLabel id="demo-simple-select-autowidth-label">Min-price</InputLabel>
         <Select
           labelId="demo-simple-select-autowidth-label"
@@ -375,8 +387,9 @@ const dispatch = useAppDispatch();
           <MenuItem value='5,000,000,000'>₦5,000,000,000</MenuItem>
         </Select>
         </FormControl>
-
-        <FormControl sx={{ m: 1, minWidth: 110 }} size="small">
+        </Grid>
+        <Grid item lg={1} md={3} sm={4} xs={6}>
+         <FormControl sx={{width: '100%'}} size="medium">
     <InputLabel id="demo-simple-select-autowidth-label">Max-price</InputLabel>
         <Select
           labelId="demo-simple-select-autowidth-label"
@@ -416,7 +429,11 @@ const dispatch = useAppDispatch();
           <MenuItem value='5,000,000,000'>₦5,000,000,000</MenuItem>
         </Select>
         </FormControl>
-        <StyledButton type='submit' variant="contained"><strong>Find</strong></StyledButton>
+        </Grid>
+        <Grid item lg={0.6} md={2} sm={4} xs={12}>
+        <StyledButton type='button' variant="contained" onClick={handleSearch}><strong>Find</strong></StyledButton>
+        </Grid>
+        </Grid>
     </StyledContainer>
     </Form>
     <StyledBox>
