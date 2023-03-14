@@ -414,6 +414,7 @@ height: 30px;
 font-size: 15px;
 margin-right: 5px;
 margin-top: 15px;
+margin-left: 15px;
 border-radius: 3px;
 cursor: pointer;
 :hover{
