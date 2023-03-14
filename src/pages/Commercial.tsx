@@ -235,7 +235,7 @@ color: #494949;
 const StyledGrid = styled(Grid)`
 margin: 15px 0;
 `
-const StyledContainers = styled(Container)`
+const StyledContainers = styled.div`
 margin: 10px 0;
 `
 const CardImg = styled(Grid)`
@@ -670,13 +670,15 @@ function Commercial() {
                     rewind: false,
                     gap: 0,
                     width: 'cover',
+                    height: 220,
+                    padding: 0
                   }}
                   aria-label="My Favorite Images"
                 >
                   {/* @ts-ignore:next-line */}
                    {result?.images.map((item: any, index: any) => (
-                  <SplideSlide key={index}> 
-                    <Img src={item?.img} />
+                  <SplideSlide key={index} style={{height: '100%', width: '100%', padding: 0, margin: 0}} > 
+                  <Img src={item?.img} style={{height: '100%', width: '100%', padding: 0, margin: 0}} />
                   </SplideSlide>   
                    ))}
                 </Splide>

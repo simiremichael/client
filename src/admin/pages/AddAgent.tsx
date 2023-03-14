@@ -116,8 +116,9 @@ let navigate = useNavigate();
    for ( const file of image) {
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('upload_preset', 'profileImg');
-   await fetch('https://api.cloudinary.com/v1_1/do2u3zzko/image/upload', {
+     {/* @ts-ignore:next-line */}
+    formData.append(process.env.REACT_APP_CLOUD_PRESET, 'profileImg');
+   await fetch(`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_KEY}/image/upload`, {
     method: 'POST',
     body: formData,
   })

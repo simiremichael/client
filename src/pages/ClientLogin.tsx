@@ -278,8 +278,9 @@ const handleUpload = async () => {
   for ( const file of logo) {
    const formData = new FormData();
    formData.append('file', file);
-   formData.append('upload_preset', 'CompanyLogo');
-  await fetch('https://api.cloudinary.com/v1_1/do2u3zzko/image/upload', {
+    {/* @ts-ignore:next-line */}
+   formData.append(process.env.REACT_APP_CLOUD_PRESET, 'CompanyLogo');
+  await fetch(`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_KEY}/image/upload`, {
    method: 'POST',
    body: formData,
  })
