@@ -13,7 +13,7 @@ const StyledContainer = styled(Container)`
 const Title = styled.h1`
 color: #494949;
 margin-bottom: 30px;
-font-size: 1.8rem;
+font-size: 6vmin;
 `
 const Slide1 = styled.div`
 margin: 15px;

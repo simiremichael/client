@@ -31,7 +31,7 @@ flex-direction: column;
 justify-content: start;
 `
 const Title = styled.h1`
-font-size: 1.8rem;
+font-size: 6vmin;
 text-align: start;
 margin: 10px 0 30px 0;
 font-family: Sans-serif;
@@ -58,7 +58,8 @@ font-size: 1rem;
 const GradTitle = styled.h2`
 text-align: start;
 color: #ffffff;
-font-size: 2rem;
+font-size: 7vmin;
+font-family: Sans-serif;
 margin-left: 10px;
 `
 const P = styled.p`
