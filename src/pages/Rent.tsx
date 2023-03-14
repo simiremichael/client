@@ -167,7 +167,7 @@ padding: 0 15px;
 border: 1.5px solid #e3e3e3;
 height: 30px;
 font-size: 15px;
-margin-right: 5px;
+margin: 15px 5px 0 15px;
 border-radius: 3px;
 cursor: pointer;
 :hover{
@@ -258,6 +258,7 @@ padding: 0 15px;
 height: 30px;
 font-size: 15px;
 margin-right: 5px;
+margin-top: 15px;
 border-radius: 3px;
 cursor: pointer;
 :hover{
@@ -277,6 +278,7 @@ display: flex;
 align-items: center;
 padding: 0 15px;
 margin-right: 5px;
+margin-top: 15px;
 border-radius: 3px;
 cursor: pointer;
 :hover{
