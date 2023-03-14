@@ -674,7 +674,7 @@ useEffect(() => {
                 >
                   {/* @ts-ignore:next-line */}
                    {result?.images.map((item: any, index: any) => (
-                  <SplideSlide key={index}> 
+                  <SplideSlide key={index} style={{height: '100%', width: '100%'}} > 
                     <Img src={item?.img} style={{height: '100%', width: '100%'}} />
                   </SplideSlide>   
                    ))}
