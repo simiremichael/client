@@ -15,6 +15,7 @@ import { useSearchPropertiesByBuyQuery } from '../services/api/propertyAPI';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Grid, Tooltip } from '@mui/material';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
+import '@splidejs/react-splide/css';
 import { useAppDispatch, useAppSelector  } from '../app/hooks';
 import { selectCurrentBuyProperty, setBuyProperty } from '../services/features/buyPropertySlice';
 import BuyPaginate from '../components/BuyPagination';
@@ -667,6 +668,7 @@ useEffect(() => {
                     rewind: false,
                     gap: 0,
                     width: 'cover',
+                    height: 300,
                   }}
                   aria-label="My Favorite Images"
                 >
