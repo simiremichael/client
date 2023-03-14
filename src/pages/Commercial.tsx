@@ -171,7 +171,7 @@ padding: 0 15px;
 border: 1.5px solid #e3e3e3;
 height: 30px;
 font-size: 15px;
-margin-right: 5px;
+margin: 15px 5px 0 10px;
 border-radius: 3px;
 cursor: pointer;
 :hover{
@@ -312,7 +312,6 @@ fill: #494949;
 `
 const VideoContainer = styled.div`
 z-index: 1001;
-
 height:30px;
 width: 30px;
 display: flex;
@@ -335,7 +334,6 @@ margin: 5px 5px 15px 0;
 `
 const ImgContainer = styled.div`
 z-index: 1001;
-
 height:30px;
 width: 30px;
 display: flex;
