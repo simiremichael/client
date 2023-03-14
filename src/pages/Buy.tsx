@@ -69,7 +69,6 @@ const SortContainer = styled(Container)`
 display:flex;
 justify-content: space-between;
 align-items: center;
-flex-wrap: wrap;
 `
 const LeftContainer = styled.div`
 display: flex;
@@ -117,10 +116,11 @@ display: flex;
 align-items: center;
 `
 const Sort = styled.p`
-
+text-align: start;
 `
 const StyledButton = styled(Button)`
-height: 38px;
+height: 54px;
+width: 100%;
 background-color: #008080;
 :hover{
   background-color: #008080;
@@ -438,10 +438,14 @@ useEffect(() => {
         <Form> 
         <SearchStyledBox>
         <SearchStyledContainer>
-    <FormControl sx={{ m: 1, minWidth: 300 }} >
-    <TextField  id="City" size="small" label="City, community or building" variant="outlined" name='search' value={searchData.search} onChange={handleChange} />
+        <Grid container spacing={1}>
+        <Grid item lg={5} md={7} sm={9} xs={12}>
+    <FormControl  sx={{ width: '100%'}}>
+    <TextField  id="City" size="medium" label="City, community or building" variant="outlined" name='search' value={searchData.search} onChange={handleChange} />
     </FormControl>
-    <FormControl sx={{m: 1,  minWidth: 105}} size="small">
+    </Grid>
+    <Grid item lg={1.2} md={2.5} sm={3} xs={6}>
+    <FormControl sx={{width: '100%'}} size="medium">
     <InputLabel id="demo-simple-select-label">Buy/Rent</InputLabel>
         <Select
           labelId="demo-simple-select-autowidth-label"
@@ -458,7 +462,9 @@ useEffect(() => {
           {/* <MenuItem value='commercial-rent'>Commercial rent</MenuItem> */}
         </Select>
         </FormControl>
-        <FormControl sx={{ m: 1, minWidth: 125 }} size="small">
+        </Grid>
+        <Grid item lg={1.2} md={2.5} sm={4} xs={6}>
+         <FormControl sx={{width: '100%'}} size="medium">
         <InputLabel id="demo-simple-select-autowidth-label">Project type</InputLabel>
         <Select
           labelId="demo-simple-select-autowidth-label"
@@ -484,7 +490,9 @@ useEffect(() => {
           <MenuItem value='self-contain'>Self Contain</MenuItem>
         </Select>
         </FormControl>
-        <FormControl sx={{ m: 1, minWidth: 80 }} size="small">
+        </Grid>
+        <Grid item lg={0.93} md={2} sm={4} xs={6}>
+         <FormControl sx={{width: '100%'}} size="medium">
         <InputLabel id="demo-simple-select-autowidth-label">Beds</InputLabel>
         <Select
           labelId="demo-simple-select-autowidth-label"
@@ -504,7 +512,9 @@ useEffect(() => {
           <MenuItem value='7+'>7+</MenuItem>
         </Select>
         </FormControl>
-        <FormControl sx={{ m: 1, minWidth: 80 }} size="small">
+        </Grid>
+        <Grid item lg={0.93} md={2} sm={4} xs={6}>
+         <FormControl sx={{width: '100%'}} size="medium">
         <InputLabel id="demo-simple-select-autowidth-label">Baths</InputLabel>
         <Select
           labelId="demo-simple-select-autowidth-label"
@@ -524,9 +534,10 @@ useEffect(() => {
           <MenuItem value='7+'>7+</MenuItem>
         </Select>
         </FormControl>
-
-        <FormControl sx={{ m: 1, minWidth: 110 }} size="small">
-    <InputLabel id="demo-simple-select-autowidth-label">Min-price</InputLabel>
+        </Grid>
+        <Grid item lg={1} md={3} sm={4} xs={6}>
+         <FormControl sx={{width: '100%'}} size="medium">
+         <InputLabel id="demo-simple-select-autowidth-label">Min-price</InputLabel>
         <Select
           labelId="demo-simple-select-autowidth-label"
           id="demo-simple-select-autowidth"
@@ -565,7 +576,9 @@ useEffect(() => {
           <MenuItem value='5000000000'>₦5,000,000,000</MenuItem>
         </Select>
         </FormControl>
-        <FormControl sx={{ m: 1, minWidth: 110 }} size="small">
+        </Grid>
+        <Grid item lg={1} md={3} sm={4} xs={6}>
+         <FormControl sx={{width: '100%'}} size="medium">
         <InputLabel id="demo-simple-select-autowidth-label">Max-price</InputLabel>
         <Select
           labelId="demo-simple-select-autowidth-label"
@@ -605,7 +618,11 @@ useEffect(() => {
           <MenuItem value='5000000000'>₦5,000,000,000</MenuItem>
         </Select>
         </FormControl>
+        </Grid>
+        <Grid item lg={0.6} md={2} sm={4} xs={12}>
         <StyledButton type='button' variant="contained" onClick={handleSearch}><strong>Find</strong></StyledButton>
+        </Grid>
+        </Grid>
     </SearchStyledContainer>
     </SearchStyledBox>
     </Form>
@@ -629,12 +646,12 @@ useEffect(() => {
             </MapContainer>
             <SaveContainer>
             <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 474.7C465.1 486.7 460.2 498.9 450.2 506C440.3 513.1 427.2 514 416.5 508.3L288.1 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.954 275.9-.0391 288.1-.0391C300.4-.0391 311.6 6.954 316.9 17.97L381.2 150.3z"/></Svg>
-            <Save>Save Search</Save>
+            <Save>Save</Save>
             </SaveContainer>
           </LeftContainer>
           <RightContainer>
             <Sort>Sort by:</Sort>
-            <FormControl sx={{ m: 1, minWidth: 150, }} size="small">
+            <FormControl sx={{ marginLeft: '5px', minWidth: 100, }} size="small">
            <InputLabel id="demo-simple-select-autowidth-label">Search</InputLabel>
         <Select
           labelId="demo-simple-select-autowidth-label"
