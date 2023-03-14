@@ -39,8 +39,9 @@ function GeoMap() {
     height: '100vh',
      
      }}
-    mapStyle="mapbox://styles/simiremichael/clcz22d6e00l814qni4m9qxaq"
-    mapboxAccessToken="pk.eyJ1Ijoic2ltaXJlbWljaGFlbCIsImEiOiJjbDhtMWZza3owOGM5M290aGdkdXNzbnhyIn0.cZ53EbJgw_QlQEq2-bRpWw"
+     mapStyle="mapbox://styles/mapbox/streets-v9"
+    //mapStyle="mapbox://styles/simiremichael/clcz22d6e00l814qni4m9qxaq"
+    mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
     onMove={(nextViewPort: any) => setViewState(nextViewPort)}
     >
    

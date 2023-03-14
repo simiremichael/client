@@ -560,7 +560,8 @@ const [viewState, setViewState] = useState(initial)
     style={{width: '100%', 
     height: '100vh',
      }}
-    mapStyle="mapbox://styles/simiremichael/clcz22d6e00l814qni4m9qxaq"
+     mapStyle="mapbox://styles/mapbox/streets-v9"
+   // mapStyle="mapbox://styles/simiremichael/clcz22d6e00l814qni4m9qxaq"
     mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
     onMove={((evt: any) => setViewState(evt))}
     >
