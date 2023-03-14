@@ -615,7 +615,7 @@ function Commercial() {
     </SearchStyledBox>
     </Form>
 
-        <StyledContainers>
+        <StyledContainer>
         <TopContainer>
           <Title>Commercial properties for rent in Nigeria</Title>
           <SalesContainer>
@@ -766,7 +766,7 @@ function Commercial() {
         <Paper elevation={2} sx={{ background: 'inherit', marginTop: 2, marginBottom: 2, display: 'flex', justifyContent: 'center'}}>
       <CommercialPaginate page={page} />
      </Paper>
-        </StyledContainers>
+        </StyledContainer>
       <Footer />
       </StyledBox>
   )
