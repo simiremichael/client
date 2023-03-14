@@ -58,7 +58,7 @@ font-size: 1rem;
 const GradTitle = styled.h2`
 text-align: start;
 color: #ffffff;
-font-size: 7vmin;
+font-size: 6vmin;
 font-family: Sans-serif;
 margin-left: 10px;
 `
