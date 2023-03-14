@@ -60,7 +60,6 @@ text-align: start;
 color: #ffffff;
 font-size: 2rem;
 margin-left: 10px;
-font-family: Sans-serif;
 `
 const P = styled.p`
 text-align: start;
@@ -69,7 +68,6 @@ font-size: 1rem;
 font-weight: 700;
 margin-left: 10px;
 margin-top: 10px;
-font-family: Sans-serif;
 `
 const GradButton = styled.div`
 background-color: #ffffff;
