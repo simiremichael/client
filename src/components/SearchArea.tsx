@@ -413,6 +413,7 @@ border: 1px solid gray;
 height: 30px;
 font-size: 15px;
 margin-right: 5px;
+margin-top: 15px;
 border-radius: 3px;
 cursor: pointer;
 :hover{
@@ -449,6 +450,7 @@ padding: 0 15px;
 height: 30px;
 font-size: 15px;
 margin-right: 5px;
+margin-top: 15px;
 border-radius: 3px;
 cursor: pointer;
 :hover{
@@ -469,6 +471,7 @@ align-items: center;
 padding: 0 15px;
 margin-right: 5px;
 border-radius: 3px;
+margin-top: 15px;
 cursor: pointer;
 :hover{
   background: #F5F5F5;
